@@ -1,0 +1,127 @@
+---
+import { Icon } from "astro-icon";
+
+interface Frontmatter {
+    [x: string]: any;
+    order: number;
+    name: string;
+    description: string;
+    image: {
+        src: string;
+        alt: string;
+    };
+    stack: {
+        frontend?: string[];
+        backend?: string[];
+        project?: string[];
+    };
+    links: {
+        frontend?: string;
+        backend?: string;
+        extensionStore?: string;
+        project?: string;
+        website?: string;
+        extension?: string;
+    };
+    link: string;
+    tag: string[];
+}
+
+const projects = await Astro.glob<Frontmatter>("../content/project/*.mdx");
+
+const images = await Astro.glob("../assets/project/*").then((files) => {
+    return files.map((file) => file.default);
+});
+const imagesObj = images.reduce((imageCollection, image) => {
+    const parts = image.src.split("/");
+    const fileNameWithExtension = parts[parts.length - 1];
+    const fileNameWithoutExtension = fileNameWithExtension.split(".")[0];
+
+    imageCollection[fileNameWithoutExtension] = {
+        ...image,
+        id: fileNameWithoutExtension,
+    };
+
+    return imageCollection;
+}, {});
+
+projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
+---
+
+<div id="projects-section" class="mt-24 px-5">
+    <h2 class="text-3xl text-sky-700 font-bold mb-2">PROJETS</h2>
+    {
+        projects.map((item) => (
+            <div class="">
+                <div class="flex flex-col m-auto sm:w-auto sm:m-0 lg:flex-row lg:my-8 sm:py-2 py-8">
+                    <div class="overflow-hidden min-w-0 sm:min-w-[480px] h-[280px] border-2 border-zinc-600">
+                        <a href={item.frontmatter.link}>
+                            <img
+                                src={imagesObj[item.frontmatter.image.src].src}
+                                alt={item.frontmatter.image.alt}
+                                class="block w-full h-full cursor-pointer object-top object-cover transition-all duration-1000 transform hover:scale-110"
+                            />
+                        </a>
+                    </div>
+                    <div class="my-4 lg:px-8 flex flex-col">
+                        <a href={item.frontmatter.link}>
+                            <h3 class="flex items-center text-zinc-800 font-semibold text-3xl tracking-tight">
+                                {item.frontmatter.name}
+                            </h3>
+                        </a>
+                        <p class="mt-3 text-zinc-800 text-justify">{item.frontmatter.description}</p>
+                        <div class="flex mt-7 mb-5">
+                            {item.frontmatter.links.website && (
+                                <div class="mr-4">
+                                    <a
+                                        href={item.frontmatter.links.website}
+                                        class="underline"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Lien vers le site web du projet"
+                                        title="Cliquez pour voir le site web "
+                                    >
+                                        Site web ↗︎
+                                    </a>
+                                </div>
+                            )}
+                            {item.frontmatter.links.project && (
+                                <div>
+                                    <a
+                                        href={item.frontmatter.links.project}
+                                        class="underline"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Lien vers le dépôt Git"
+                                    >
+                                        Git Repos ↗︎
+                                    </a>
+                                </div>
+                            )}
+                            {!item.frontmatter.links.project && (
+                                <div>
+                                    <a
+                                        href={item.frontmatter.link}
+                                        class="underline"
+                                        aria-label="Lien vers la page du projet contenant les liens des différents dépôts Git"
+                                    >
+                                        Git Repos ↗︎
+                                    </a>
+                                </div>
+                            )}
+                        </div>
+                        <div class="flex mt-9 justify-end">
+                            <a
+                                href={item.frontmatter.link}
+                                aria-label="Lien vers la page du projet"
+                                title="Cliquez pour voir le projet"
+                            >
+                                <Icon class="h-10 w-10 text-zinc-800" name="mdi:arrow-right" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ))
+    }
+</div>
