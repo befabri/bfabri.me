@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bfabri.me/sitemap-0.xml
