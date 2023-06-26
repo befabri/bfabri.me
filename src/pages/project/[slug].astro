@@ -18,12 +18,14 @@ const { Content } = await entry.render();
 
 <Layout title={entry.data.name}>
     <Container>
-        <a href="/" class="text-2xl font-bold text-sky-700 tracking-tight">BFabri</a>
-        <div class="mx-auto prose prose-lg mt-6 max-w-3xl">
-            <Content />
-        </div>
-        <div class="text-center mt-8">
-            <Link style="muted" href="/" class="inline-block mt-4 py-2 px-4 rounded-sm">← Retour</Link>
+        <div class="px-5">
+            <a href="/" class="text-2xl font-bold text-sky-700 tracking-tight">BFabri</a>
+            <div class="mx-auto prose prose-lg mt-6 max-w-3xl text-base">
+                <Content />
+            </div>
+            <div class="text-center mt-8">
+                <Link style="muted" href="/" class="inline-block mt-4 py-2 px-4 rounded-sm">← Retour</Link>
+            </div>
         </div>
     </Container>
 </Layout>
