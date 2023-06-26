@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+import Link from "@components/ui/link.astro";
+
+export async function getStaticPaths() {
+    const projectEntries = await getCollection("project");
+    return projectEntries.map((entry) => ({
+        params: { slug: entry.slug },
+        props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout title={entry.data.name}>
+    <Container>
+        <a href="/" class="text-2xl font-bold text-sky-700 tracking-tight">BFabri</a>
+        <div class="mx-auto prose prose-lg mt-6 max-w-3xl">
+            <Content />
+        </div>
+        <div class="text-center mt-8">
+            <Link style="muted" href="/" class="inline-block mt-4 py-2 px-4 rounded-sm">← Retour</Link>
+        </div>
+    </Container>
+</Layout>

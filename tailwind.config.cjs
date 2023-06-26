@@ -13,6 +13,9 @@ module.exports = {
         },
       },
     },
+    fontFamily: {
+      sans: ["Changa", "sans-serif"],
+    },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };

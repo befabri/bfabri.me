@@ -54,7 +54,7 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
     {
         projects.map((item) => (
             <div class="">
-                <div class="flex flex-col m-auto sm:w-auto sm:m-0 lg:flex-row lg:my-8 sm:py-2 py-8">
+                <div class="flex flex-col lg:flex-row m-auto sm:w-auto sm:m-0 lg:my-8 sm:py-2 py-8">
                     <div class="overflow-hidden min-w-0 sm:min-w-[480px] h-[280px] border-2 border-zinc-600">
                         <a href={item.frontmatter.link}>
                             <img
@@ -102,7 +102,7 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
                             {!item.frontmatter.links.project && (
                                 <div>
                                     <a
-                                        href={item.frontmatter.link}
+                                        href=`${item.frontmatter.link}#liens`
                                         class="underline"
                                         aria-label="Lien vers la page du projet contenant les liens des différents dépôts Git"
                                     >

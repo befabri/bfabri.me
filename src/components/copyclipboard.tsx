@@ -9,7 +9,7 @@ export default function CopyClipboard({ text }) {
       .writeText(text)
       .then(() => {
         setIsCopied(true);
-        setTimeout(() => setIsCopied(false), 2000);
+        setTimeout(() => setIsCopied(false), 1250);
       })
       .catch((error) => {
         console.error("Could not copy text: ", error);
