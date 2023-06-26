@@ -18,7 +18,7 @@ export default function CopyClipboard({ text }) {
 
   return (
     <>
-      <button onClick={copyText}>
+      <button onClick={copyText} aria-label="Copy to clipboard">
         <div class="flex">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
             <path
