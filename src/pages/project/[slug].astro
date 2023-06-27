@@ -18,14 +18,13 @@ const { Content } = await entry.render();
 
 <Layout title={entry.data.name}>
     <Container>
-        <div class="px-5 mt-3">
+        <div class="mt-3 px-5">
             <div
-                class="mx-auto prose prose-lg mt-6 max-w-3xl text-base text-zinc-800 dark:text-zinc-300 dark:prose-invert"
-            >
+                class="prose prose-lg mx-auto mt-6 max-w-3xl text-base text-zinc-800 dark:prose-invert dark:text-zinc-300">
                 <Content />
             </div>
-            <div class="text-center mt-8">
-                <Link style="muted" href="/#project" class="inline-block mt-4 py-2 px-4 rounded">← Retour</Link>
+            <div class="mt-8 text-center">
+                <Link style="muted" href="/#project" class="mt-4 inline-block rounded px-4 py-2">← Retour</Link>
             </div>
         </div>
     </Container>

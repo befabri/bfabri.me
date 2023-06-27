@@ -50,28 +50,30 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
 ---
 
 <div id="project" class="mt-24 px-5">
-    <h2 class="text-3xl text-sky-700 dark:text-sky-500 font-bold mb-2">PROJETS</h2>
+    <h2 class="mb-2 text-3xl font-bold text-sky-700 dark:text-sky-500">PROJETS</h2>
     {
         projects.map((item) => (
             <div class="">
-                <div class="flex flex-col lg:flex-row m-auto sm:w-auto sm:m-0 lg:my-8 sm:py-2 py-8">
-                    <div class="overflow-hidden min-w-0 sm:min-w-[480px] h-[280px] border-2 border-zinc-600 dark:border-zinc-300">
+                <div class="m-auto flex flex-col py-8 sm:m-0 sm:w-auto sm:py-2 lg:my-8 lg:flex-row">
+                    <div class="h-[280px] min-w-0 overflow-hidden border-2 border-zinc-600 dark:border-zinc-300 sm:min-w-[480px]">
                         <a href={item.frontmatter.link}>
                             <img
                                 src={imagesObj[item.frontmatter.image.src].src}
                                 alt={item.frontmatter.image.alt}
-                                class="block w-full h-full cursor-pointer object-top object-cover transition-all duration-1000 transform hover:scale-110"
+                                class="block h-full w-full transform cursor-pointer object-cover object-top transition-all duration-1000 hover:scale-110"
                             />
                         </a>
                     </div>
-                    <div class="my-4 lg:px-8 flex flex-col">
+                    <div class="my-4 flex flex-col lg:px-8">
                         <a href={item.frontmatter.link}>
-                            <h3 class="flex items-center text-zinc-800 dark:text-zinc-200 font-semibold text-3xl tracking-tight">
+                            <h3 class="flex items-center text-3xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-200">
                                 {item.frontmatter.name}
                             </h3>
                         </a>
-                        <p class="mt-3 text-zinc-800 dark:text-zinc-200 text-justify">{item.frontmatter.description}</p>
-                        <div class="flex mt-7 mb-2 lg:mb-5">
+                        <p class="mt-3 text-justify text-zinc-800 dark:text-zinc-200">
+                            {item.frontmatter.description}
+                        </p>
+                        <div class="mb-2 mt-7 flex lg:mb-5">
                             {item.frontmatter.links.website && (
                                 <div class="mr-4">
                                     <a
@@ -80,8 +82,7 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         aria-label="Lien vers le site web du projet"
-                                        title="Cliquez pour voir le site web "
-                                    >
+                                        title="Cliquez pour voir le site web ">
                                         Site web ↗︎
                                     </a>
                                 </div>
@@ -93,8 +94,7 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
                                         class="underline dark:hover:text-sky-200"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        aria-label="Lien vers le dépôt Git"
-                                    >
+                                        aria-label="Lien vers le dépôt Git">
                                         Git Repos ↗︎
                                     </a>
                                 </div>
@@ -102,30 +102,30 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
                             {!item.frontmatter.links.project && (
                                 <div>
                                     <a
-                                        href=`${item.frontmatter.link}#liens`
+                                        href={`${item.frontmatter.link}#liens`}
                                         class="underline dark:hover:text-sky-200"
-                                        aria-label="Lien vers la page du projet contenant les liens des différents dépôts Git"
-                                    >
+                                        aria-label="Lien vers la page du projet contenant les liens des différents dépôts Git">
                                         Git Repos ↗︎
                                     </a>
                                 </div>
                             )}
                         </div>
-                        <div class="flex lg:mt-9 justify-center lg:justify-end">
+                        <div class="flex justify-center lg:mt-9 lg:justify-end">
                             <a
                                 href={item.frontmatter.link}
                                 aria-label="Lien vers la page du projet"
                                 title="Cliquez pour voir le projet"
-                                class="hidden lg:block "
-                            >
-                                <Icon class="h-10 w-10 text-zinc-800 dark:text-zinc-400 dark:hover:text-sky-200" name="mdi:arrow-right" />
+                                class="hidden lg:block ">
+                                <Icon
+                                    class="h-10 w-10 text-zinc-800 dark:text-zinc-400 dark:hover:text-sky-200"
+                                    name="mdi:arrow-right"
+                                />
                             </a>
-                            <div class="lg:hidden text-center">
+                            <div class="text-center lg:hidden">
                                 <Link
                                     style="muted"
                                     href={item.frontmatter.link}
-                                    class="inline-block mt-4 py-2 px-4 rounded"
-                                >
+                                    class="mt-4 inline-block rounded px-4 py-2">
                                     En savoir plus
                                 </Link>
                             </div>
