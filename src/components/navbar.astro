@@ -8,7 +8,7 @@ const isHomepage = currentPath === "";
 ---
 
 <Container>
-    <header class={`flex flex-row ${isHomepage ? "justify-end" : "justify-between"} my-5`}>
+    <header class={`flex flex-row items-center ${isHomepage ? "justify-end" : "justify-between"} my-5 px-5 `}>
         {
             !isHomepage && (
                 <a href="/" class="text-xl text-zinc-800 dark:text-zinc-300 tracking-tight">
