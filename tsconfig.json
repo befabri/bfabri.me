@@ -15,6 +15,9 @@
       ],
       "@pages/*": [
         "pages/*"
+      ],
+      "@utils/*": [
+        "utils/*"
       ]
     },
     "jsx": "react-jsx",

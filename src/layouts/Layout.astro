@@ -2,6 +2,8 @@
 import { SEO } from "astro-seo";
 import Navbar from "@components/navbar.astro";
 import Footer from "@components/footer.astro";
+import Script from "@components/common/script.astro";
+import { SITE } from "@utils/config.mjs";
 
 export interface Props {
     title: string;
@@ -13,10 +15,11 @@ const resolvedImageWithDomain = new URL("/opengraph.jpg", Astro.site).toString()
 
 const { title } = Astro.props;
 const makeTitle = title ? title + " | " + "Benjamin Fabri" : "Benjamin Fabri";
+const { language = "en" } = SITE;
 ---
 
 <!DOCTYPE html>
-<html class="scroll-smooth" lang="en">
+<html class="scroll-smooth" lang={language}>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
@@ -29,11 +32,6 @@ const makeTitle = title ? title + " | " + "Benjamin Fabri" : "Benjamin Fabri";
             title={makeTitle}
             description="Portfolio of Benjamin Fabri"
             canonical={canonicalURL}
-            twitter={{
-                creator: "@surjithctly",
-                site: "@web3templates",
-                card: "summary_large_image",
-            }}
             openGraph={{
                 basic: {
                     url: canonicalURL,
@@ -46,10 +44,12 @@ const makeTitle = title ? title + " | " + "Benjamin Fabri" : "Benjamin Fabri";
                 },
             }}
         />
-    </head><body>
-        <Navbar />
+    </head>
+    <body class="antialiased bg-white dark:bg-neutral-900 text-zinc-800 dark:text-zinc-300"
+        ><Navbar />
         <slot />
         <Footer />
+        <Script />
         <style is:global>
             /* Improve Page speed */
             /* https://css-tricks.com/almanac/properties/c/content-visibility/ */

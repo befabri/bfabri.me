@@ -1,5 +1,21 @@
 ---
 import Container from "@components/container.astro";
+import ToggleTheme from "./ui/toggleTheme.astro";
+const { showToggleTheme = true } = Astro.props;
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1);
+const isHomepage = currentPath === "";
 ---
 
-<Container />
+<Container>
+    <header class={`flex flex-row ${isHomepage ? "justify-end" : "justify-between"} my-5`}>
+        {
+            !isHomepage && (
+                <a href="/" class="text-xl text-zinc-800 dark:text-zinc-300 tracking-tight">
+                    Accueil
+                </a>
+            )
+        }
+        {showToggleTheme && <ToggleTheme iconClass="w-5 h-5" />}
+    </header>
+</Container>
