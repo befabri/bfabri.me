@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon";
 import Link from "@components/ui/link.astro";
+import Imagefull from "./ui/imagefull";
 
 interface Frontmatter {
     [x: string]: any;
@@ -56,13 +57,12 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
             <div class="">
                 <div class="m-auto flex flex-col py-8 sm:m-0 sm:w-auto sm:py-2 lg:my-8 lg:flex-row">
                     <div class="h-[280px] min-w-0 overflow-hidden border-2 border-zinc-600 dark:border-zinc-300 sm:min-w-[480px]">
-                        <a href={item.frontmatter.link}>
-                            <img
-                                src={imagesObj[item.frontmatter.image.src].src}
-                                alt={item.frontmatter.image.alt}
-                                class="block h-full w-full transform cursor-pointer object-cover object-top transition-all duration-1000 hover:scale-110"
-                            />
-                        </a>
+                        <Imagefull
+                            src={imagesObj[item.frontmatter.image.src].src}
+                            alt={item.frontmatter.image.alt}
+                            class="project-img block h-full w-full transform cursor-pointer"
+                            client:load
+                        />
                     </div>
                     <div class="my-4 flex flex-col lg:px-8">
                         <a href={item.frontmatter.link}>
@@ -70,9 +70,7 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
                                 {item.frontmatter.name}
                             </h3>
                         </a>
-                        <p class="mt-3 text-zinc-800 dark:text-zinc-200">
-                            {item.frontmatter.description}
-                        </p>
+                        <p class="mt-3 text-zinc-800 dark:text-zinc-200">{item.frontmatter.description}</p>
                         <div class="mb-2 mt-7 flex lg:mb-5">
                             {item.frontmatter.links.website && (
                                 <div class="mr-4">
