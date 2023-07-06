@@ -33,14 +33,24 @@ export default class Imagefull extends Component<ImageProps, ImageState> {
 
         const overlayClasses = ["fixed", "inset-0", "z-40", "bg-black", "bg-opacity-80"].join(" ");
 
-        const baseClasses = `${className} fullsize-image ${isFullsize ? "" : "object-cover object-left-top"}`;
-        const imgClasses = `${baseClasses} ${isFullsize ? fullsizeImageClasses : ""}`;
+        const fullsizeImgClasses = `${className} fullsize-image ${fullsizeImageClasses}`;
         const overlayClass = `overlay ${isFullsize ? overlayClasses : ""}`;
 
         return (
             <>
-                <img src={src} alt={alt} class={imgClasses} onClick={this.handleImageClick} role="button" />
-                <div class={overlayClass} onClick={this.handleImageClick} aria-hidden="true"></div>
+                <img src={src} alt={alt} class={className} onClick={this.handleImageClick} role="button" />
+                {isFullsize && (
+                    <>
+                        <img
+                            src={src}
+                            alt={alt}
+                            class={fullsizeImgClasses}
+                            onClick={this.handleImageClick}
+                            role="button"
+                        />
+                        <div class={overlayClass} onClick={this.handleImageClick} aria-hidden="true"></div>
+                    </>
+                )}
             </>
         );
     }
