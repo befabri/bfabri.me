@@ -1,6 +1,6 @@
 ---
 import { Icon } from "astro-icon";
-import Link from "@components/ui/link.astro";
+import Button from "@components/ui/button.astro";
 import Imagefull from "./ui/imagefull";
 
 interface Frontmatter {
@@ -120,12 +120,12 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
                                 />
                             </a>
                             <div class="text-center lg:hidden">
-                                <Link
+                                <Button
                                     style="muted"
                                     href={item.frontmatter.link}
                                     class="mt-4 inline-block rounded px-4 py-2">
                                     En savoir plus
-                                </Link>
+                                </Button>
                             </div>
                         </div>
                     </div>
