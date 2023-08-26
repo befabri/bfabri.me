@@ -26,6 +26,13 @@ const projectCollection = defineCollection({
         }),
         link: z.string(),
         tag: z.array(z.string()),
+        imageFolder: z.string(),
+        images: z.array(
+            z.object({
+                src: z.string(),
+                alt: z.string(),
+            })
+        ),
     }),
 });
 

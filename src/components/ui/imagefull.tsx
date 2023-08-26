@@ -14,7 +14,14 @@ export default class Imagefull extends Component<ImageProps, ImageState> {
     state: ImageState = { isFullsize: false };
 
     handleImageClick = () => {
-        this.setState((prevState) => ({ isFullsize: !prevState.isFullsize }));
+        this.setState((prevState) => {
+            if (prevState.isFullsize) {
+                document.body.style.overflow = "";
+            } else {
+                document.body.style.overflow = "hidden";
+            }
+            return { isFullsize: !prevState.isFullsize };
+        });
     };
 
     render({ src, alt, class: className }: ImageProps, { isFullsize }: ImageState) {
@@ -33,7 +40,7 @@ export default class Imagefull extends Component<ImageProps, ImageState> {
 
         const overlayClasses = ["fixed", "inset-0", "z-40", "bg-black", "bg-opacity-80"].join(" ");
 
-        const baseClasses = `${className} fullsize-image ${isFullsize ? "" : "object-cover object-left-top"}`;
+        const baseClasses = `${className} m-0  fullsize-image ${isFullsize ? "" : "object-cover object-left-top"}`;
         const fullsizeImgClasses = `${baseClasses} ${fullsizeImageClasses}`;
         const overlayClass = `overlay ${isFullsize ? overlayClasses : ""}`;
 

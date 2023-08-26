@@ -1,7 +1,6 @@
 ---
 import { Icon } from "astro-icon";
 import Button from "@components/ui/button.astro";
-import Imagefull from "./ui/imagefull";
 
 interface Frontmatter {
     [x: string]: any;
@@ -29,12 +28,25 @@ interface Frontmatter {
     tag: string[];
 }
 
+interface Image {
+    default?: any; 
+    src: string;
+    width: number;
+    height: number;
+    format: string;
+}
+
+interface ImageCollection {
+    [key: string]: Image & { id: string };
+}
+
 const projects = await Astro.glob<Frontmatter>("../content/project/*.mdx");
 
-const images = await Astro.glob("../assets/project/*").then((files) => {
+const imageProject = await Astro.glob<Image>("../assets/project/*.jpg").then((files) => {
     return files.map((file) => file.default);
 });
-const imagesObj = images.reduce((imageCollection, image) => {
+
+const imagesProjectCollection: ImageCollection  = imageProject.reduce((imageCollection, image) => {
     const parts = image.src.split("/");
     const fileNameWithExtension = parts[parts.length - 1];
     const fileNameWithoutExtension = fileNameWithExtension.split(".")[0];
@@ -57,13 +69,14 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
             <div class="">
                 <div class="m-auto flex flex-col py-8 sm:m-0 sm:w-auto sm:py-2 lg:my-8 lg:flex-row">
                     <div class="h-[280px] min-w-0 overflow-hidden border-2 border-zinc-600 dark:border-zinc-300 sm:min-w-[480px]">
-                        <Imagefull
-                            src={imagesObj[item.frontmatter.image.src].src}
-                            alt={item.frontmatter.image.alt}
-                            class="project-img block h-full w-full transform cursor-pointer"
-                            client:load
-                        />
-                    </div>
+                        <a href={item.frontmatter.link}>
+                            <img
+                                src={imagesProjectCollection[item.frontmatter.image.src].src}
+                                alt={item.frontmatter.image.alt}
+                                class="block h-full w-full transform cursor-pointer object-cover object-top transition-all duration-1000 hover:scale-110"
+                            />
+                        </a>
+                        </div>
                     <div class="my-4 flex flex-col lg:px-8">
                         <a href={item.frontmatter.link}>
                             <h3 class="flex items-center text-3xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-200">

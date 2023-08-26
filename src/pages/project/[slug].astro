@@ -3,6 +3,19 @@ import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/container.astro";
 import Link from "@components/ui/button.astro";
+import Imagefull from "@components/ui/imagefull";
+
+interface Image {
+    default?: any; 
+    src: string;
+    width: number;
+    height: number;
+    format: string;
+}
+
+interface ImageCollection {
+    [key: string]: Image & { id: string };
+}
 
 export async function getStaticPaths() {
     const projectEntries = await getCollection("project");
@@ -14,6 +27,22 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+const imageSlug = await Astro.glob<Image>("../../assets/slug/*/*.jpg").then((files) => {
+    return files.map((file) => file.default);
+});
+const imageSlugCollection: ImageCollection = imageSlug.reduce((imageCollection, image) => {
+    const parts = image.src.split("/");
+    const fileNameWithExtension = parts[parts.length - 1];
+    const fileNameWithoutExtension = fileNameWithExtension.split(".")[0];
+
+    imageCollection[fileNameWithoutExtension] = {
+        ...image,
+        id: fileNameWithoutExtension,
+    };
+
+    return imageCollection;
+}, {});
 ---
 
 <Layout title={entry.data.name}>
@@ -22,9 +51,29 @@ const { Content } = await entry.render();
             <div
                 class="prose prose-lg mx-auto mt-6 max-w-3xl text-base text-zinc-800 dark:prose-invert dark:text-zinc-300">
                 <Content />
-            </div>
-            <div class="mt-8 text-center">
-                <Link style="muted" href="/#project" class="mt-4 inline-block rounded px-4 py-2">← Retour</Link>
+                {
+                    entry.data.images.map((image) => (
+                        <>
+                            <>
+                                <div class="border-2 border-zinc-600 dark:border-zinc-300">
+                                    <Imagefull
+                                        src={imageSlugCollection[image.src].src}
+                                        alt={imageSlugCollection[image.src].id}
+                                        class="project-img block h-full w-full transform cursor-pointer"
+                                        client:load
+                                    />
+                                </div>
+                                <div class="text-center">{image.alt}</div>
+                            </>
+                            <br />
+                        </>
+                    ))
+                }
+                <div class="mt-8 text-center">
+                    <Link style="muted" href="/#project" class="mt-4 inline-block rounded px-4 py-2">
+                        ← Retour
+                    </Link>
+                </div>
             </div>
         </div>
     </Container>
