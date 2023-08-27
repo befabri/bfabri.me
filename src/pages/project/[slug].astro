@@ -6,7 +6,7 @@ import Link from "@components/ui/button.astro";
 import Imagefull from "@components/ui/imagefull";
 
 interface Image {
-    default?: any; 
+    default?: any;
     src: string;
     width: number;
     height: number;
@@ -59,7 +59,7 @@ const imageSlugCollection: ImageCollection = imageSlug.reduce((imageCollection, 
                                     <Imagefull
                                         src={imageSlugCollection[image.src].src}
                                         alt={imageSlugCollection[image.src].id}
-                                        class="project-img block h-full w-full transform cursor-pointer"
+                                        class="project-img block h-full w-full transform cursor-zoom-in"
                                         client:load
                                     />
                                 </div>
