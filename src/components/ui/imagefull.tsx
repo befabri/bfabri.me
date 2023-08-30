@@ -13,20 +13,12 @@ type ImageState = {
 export default class Imagefull extends Component<ImageProps, ImageState> {
     state: ImageState = { isFullsize: false };
 
-    preventTouchMove = (e) => {
-        if (e.touches.length === 1) {
-            e.preventDefault();
-        }
-    };
-
     handleImageClick = () => {
         this.setState((prevState) => {
             if (prevState.isFullsize) {
                 document.body.style.overflow = "";
-                document.removeEventListener("touchmove", this.preventTouchMove);
             } else {
                 document.body.style.overflow = "hidden";
-                document.addEventListener("touchmove", this.preventTouchMove, { passive: false });
             }
             return { isFullsize: !prevState.isFullsize };
         });
