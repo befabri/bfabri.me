@@ -10,33 +10,23 @@ type ImageState = {
     isFullsize: boolean;
 };
 
-let scrollPosition = 0;
-
-const lockBodyScroll = () => {
-    scrollPosition = window.scrollY;
-    document.body.style.overflow = "hidden";
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${scrollPosition}px`;
-    document.body.style.width = "100%";
-};
-
-const unlockBodyScroll = () => {
-    document.body.style.removeProperty("overflow");
-    document.body.style.removeProperty("position");
-    document.body.style.removeProperty("top");
-    document.body.style.removeProperty("width");
-    window.scrollTo(0, scrollPosition);
-};
-
 export default class Imagefull extends Component<ImageProps, ImageState> {
     state: ImageState = { isFullsize: false };
+
+    preventTouchMove = (e) => {
+        if (e.touches.length === 1) {
+            e.preventDefault();
+        }
+    };
 
     handleImageClick = () => {
         this.setState((prevState) => {
             if (prevState.isFullsize) {
-                unlockBodyScroll();
+                document.body.style.overflow = "";
+                document.removeEventListener("touchmove", this.preventTouchMove);
             } else {
-                lockBodyScroll();
+                document.body.style.overflow = "hidden";
+                document.addEventListener("touchmove", this.preventTouchMove, { passive: false });
             }
             return { isFullsize: !prevState.isFullsize };
         });
