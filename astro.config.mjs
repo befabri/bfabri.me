@@ -7,16 +7,17 @@ import image from "@astrojs/image";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://bfabri.me",
-  outDir: "public",
-  publicDir: "static",
-  integrations: [
-    tailwind(),
-    image({
-      serviceEntryPoint: "@astrojs/image/sharp",
-    }),
-    preact(),
-    sitemap(),
-    mdx(),
-  ],
+    site: "https://bfabri.me",
+    outDir: "public",
+    publicDir: "static",
+    trailingSlash: "never",
+    integrations: [
+        tailwind(),
+        image({
+            serviceEntryPoint: "@astrojs/image/sharp",
+        }),
+        preact(),
+        sitemap(),
+        mdx(),
+    ],
 });
