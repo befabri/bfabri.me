@@ -10,7 +10,6 @@ export default defineConfig({
     site: "https://bfabri.me",
     outDir: "public",
     publicDir: "static",
-    trailingSlash: "never",
     integrations: [
         tailwind(),
         image({
