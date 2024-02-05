@@ -1,22 +1,14 @@
-import { defineConfig } from "astro/config";
+import { defineConfig } from 'astro/config';
+import icon from "astro-icon";
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import preact from "@astrojs/preact";
 import mdx from "@astrojs/mdx";
-import image from "@astrojs/image";
 
 // https://astro.build/config
 export default defineConfig({
-    site: "https://bfabri.me",
-    outDir: "public",
-    publicDir: "static",
-    integrations: [
-        tailwind(),
-        image({
-            serviceEntryPoint: "@astrojs/image/sharp",
-        }),
-        preact(),
-        sitemap(),
-        mdx(),
-    ],
+  site: "https://bfabri.me",
+  outDir: "public",
+  publicDir: "static",
+  integrations: [icon(), tailwind(), sitemap(), preact(), mdx()]
 });

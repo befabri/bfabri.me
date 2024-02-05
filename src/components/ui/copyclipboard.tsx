@@ -1,4 +1,3 @@
-import { h, Fragment } from "preact";
 import { useState } from "preact/hooks";
 
 export default function CopyClipboard({ text }) {

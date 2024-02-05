@@ -1,5 +1,5 @@
 ---
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
 import Button from "@components/ui/button.astro";
 
 interface Frontmatter {
@@ -29,7 +29,7 @@ interface Frontmatter {
 }
 
 interface Image {
-    default?: any; 
+    default?: any;
     src: string;
     width: number;
     height: number;
@@ -46,7 +46,7 @@ const imageProject = await Astro.glob<Image>("../assets/project/*.jpg").then((fi
     return files.map((file) => file.default);
 });
 
-const imagesProjectCollection: ImageCollection  = imageProject.reduce((imageCollection, image) => {
+const imagesProjectCollection: ImageCollection = imageProject.reduce((imageCollection, image) => {
     const parts = image.src.split("/");
     const fileNameWithExtension = parts[parts.length - 1];
     const fileNameWithoutExtension = fileNameWithExtension.split(".")[0];
@@ -76,7 +76,7 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
                                 class="block h-full w-full transform cursor-pointer object-cover object-top transition-all duration-1000 hover:scale-110"
                             />
                         </a>
-                        </div>
+                    </div>
                     <div class="my-4 flex flex-col lg:px-8">
                         <a href={item.frontmatter.link}>
                             <h3 class="flex items-center text-3xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-200">
@@ -129,7 +129,7 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
                                 class="hidden lg:block ">
                                 <Icon
                                     class="h-10 w-10 text-zinc-800 dark:text-zinc-400 dark:hover:text-sky-200"
-                                    name="mdi:arrow-right"
+                                    name="arrow-right"
                                 />
                             </a>
                             <div class="text-center lg:hidden">

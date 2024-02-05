@@ -51,10 +51,10 @@ const imageSlugCollection: ImageCollection = imageSlug.reduce((imageCollection, 
             <div
                 class="prose prose-lg mx-auto mt-6 max-w-3xl text-base text-zinc-800 dark:prose-invert dark:text-zinc-300">
                 <Content />
-                {
-                    entry.data.images.map((image) => (
-                        <>
-                            <>
+                <div class="flex flex-col gap-10">
+                    {
+                        entry.data.images.map((image) => (
+                            <div class="flex flex-col gap-2">
                                 <div class="border-2 border-zinc-600 dark:border-zinc-300">
                                     <Imagefull
                                         src={imageSlugCollection[image.src].src}
@@ -64,11 +64,10 @@ const imageSlugCollection: ImageCollection = imageSlug.reduce((imageCollection, 
                                     />
                                 </div>
                                 <div class="text-center">{image.alt}</div>
-                            </>
-                            <br />
-                        </>
-                    ))
-                }
+                            </div>
+                        ))
+                    }
+                </div>
                 <div class="mt-8 text-center">
                     <Link style="muted" href="/#project" class="mt-4 inline-block rounded px-4 py-2">
                         ← Retour
