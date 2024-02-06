@@ -1,6 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
-import ToggleTheme from "./ui/toggleTheme.astro";
+import ToggleTheme from "./ui/toggleTheme.tsx";
 const { showToggleTheme = true } = Astro.props;
 const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1);
@@ -39,6 +39,6 @@ const isHomepage = currentPath === "";
             <Icon class="h-5 w-5" name="gitlab-fill" /></a
         >
 
-        {showToggleTheme && <ToggleTheme iconClass="w-5 h-5" />}
+        {showToggleTheme && <ToggleTheme client:load />}
     </div>
 </header>

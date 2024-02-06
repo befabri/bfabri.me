@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import Button from "@components/ui/button.astro";
+import { Image } from "astro:assets";
 
 interface Frontmatter {
     [x: string]: any;
@@ -36,29 +37,8 @@ interface Image {
     format: string;
 }
 
-interface ImageCollection {
-    [key: string]: Image & { id: string };
-}
-
 const projects = await Astro.glob<Frontmatter>("../content/project/*.mdx");
-
-const imageProject = await Astro.glob<Image>("../assets/project/*.jpg").then((files) => {
-    return files.map((file) => file.default);
-});
-
-const imagesProjectCollection: ImageCollection = imageProject.reduce((imageCollection, image) => {
-    const parts = image.src.split("/");
-    const fileNameWithExtension = parts[parts.length - 1];
-    const fileNameWithoutExtension = fileNameWithExtension.split(".")[0];
-
-    imageCollection[fileNameWithoutExtension] = {
-        ...image,
-        id: fileNameWithoutExtension,
-    };
-
-    return imageCollection;
-}, {});
-
+const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/project/*.{jpeg,jpg,png,gif}");
 projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
 ---
 
@@ -70,8 +50,8 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
                 <div class="m-auto flex flex-col py-8 sm:m-0 sm:w-auto sm:py-2 lg:my-8 lg:flex-row">
                     <div class="h-[280px] min-w-0 overflow-hidden border-2 border-zinc-600 dark:border-zinc-300 sm:min-w-[480px]">
                         <a href={item.frontmatter.link}>
-                            <img
-                                src={imagesProjectCollection[item.frontmatter.image.src].src}
+                            <Image
+                                src={images[item.frontmatter.image.src]()}
                                 alt={item.frontmatter.image.alt}
                                 class="block h-full w-full transform cursor-pointer object-cover object-top transition-all duration-1000 hover:scale-110"
                             />
