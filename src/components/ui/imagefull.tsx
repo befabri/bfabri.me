@@ -36,10 +36,10 @@ export default class Imagefull extends Component<ImageProps, ImageState> {
             "transform",
             "translate-x-[-50%]",
             "translate-y-[-50%]",
-            " cursor-zoom-out",
+            "cursor-zoom-out",
         ].join(" ");
 
-        const overlayClasses = ["fixed", "inset-0", "z-40", "bg-black", "bg-opacity-80"].join(" ");
+        const overlayClasses = ["fixed", "inset-0", "z-40", "bg-black", "bg-opacity-100"].join(" ");
 
         const baseClasses = `${className} m-0  fullsize-image ${isFullsize ? "" : "object-cover object-left-top"}`;
         const fullsizeImgClasses = `${baseClasses} ${fullsizeImageClasses}`;
