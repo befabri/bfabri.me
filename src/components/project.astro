@@ -101,6 +101,13 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
                                 </div>
                             )}
                         </div>
+                        <div class="flex justify-start my-4 lg:mt-2 lg:justify-start">
+                            {item.frontmatter.tag.map((t) => (
+                                <span class=" text-zinc-800 dark:text-zinc-200 text-xs font-medium me-2 px-2.5 py-0.5 rounded  border border-zinc-600 dark:border-zinc-300 select-none">
+                                    {t}
+                                </span>
+                            ))}
+                        </div>
                         <div class="flex justify-center lg:mt-9 lg:justify-end">
                             <a
                                 href={item.frontmatter.link}
