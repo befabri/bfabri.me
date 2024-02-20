@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/container.astro";
 import Link from "@components/ui/button.astro";
+import { Image, type LocalImageProps, type RemoteImageProps } from "astro:assets";
 import Imagefull from "@components/ui/imagefull";
 
 interface Image {
@@ -11,10 +12,6 @@ interface Image {
     width: number;
     height: number;
     format: string;
-}
-
-interface ImageCollection {
-    [key: string]: Image & { id: string };
 }
 
 export async function getStaticPaths() {
@@ -28,21 +25,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
-const imageSlug = await Astro.glob<Image>("../../assets/slug/*/*.jpg").then((files) => {
-    return files.map((file) => file.default);
-});
-const imageSlugCollection: ImageCollection = imageSlug.reduce((imageCollection, image) => {
-    const parts = image.src.split("/");
-    const fileNameWithExtension = parts[parts.length - 1];
-    const fileNameWithoutExtension = fileNameWithExtension.split(".")[0];
-
-    imageCollection[fileNameWithoutExtension] = {
-        ...image,
-        id: fileNameWithoutExtension,
-    };
-
-    return imageCollection;
-}, {});
+const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/slug/*/*.{jpeg,jpg,png,gif,webp}");
 ---
 
 <Layout title={entry.data.name}>
@@ -57,8 +40,8 @@ const imageSlugCollection: ImageCollection = imageSlug.reduce((imageCollection, 
                             <div class="flex flex-col gap-2">
                                 <div class="border-2 border-zinc-600 dark:border-zinc-300">
                                     <Imagefull
-                                        src={imageSlugCollection[image.src].src}
-                                        alt={imageSlugCollection[image.src].id}
+                                        src={image.src}
+                                        alt={image.alt}
                                         class="project-img block h-full w-full transform cursor-zoom-in"
                                         client:load
                                     />
