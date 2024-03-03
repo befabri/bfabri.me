@@ -23,7 +23,7 @@ const { Content } = await entry.render();
             <div
                 class="prose prose-lg mx-auto mt-6 max-w-3xl text-base text-zinc-800 dark:prose-invert dark:text-zinc-300">
                 <Content />
-                <div id="images" class="flex flex-col gap-10">
+                <div class="flex flex-col gap-10">
                     {
                         entry.data.images.map((image) => (
                             <div class="flex flex-col gap-2">
