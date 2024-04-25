@@ -4,6 +4,7 @@ import Layout from "@layouts/Layout.astro";
 import Container from "@components/container.astro";
 import Link from "@components/ui/button.astro";
 import Imagefull from "@components/ui/imagefull";
+import { Icon } from "astro-icon/components";
 
 export async function getStaticPaths() {
     const projectEntries = await getCollection("project");
@@ -22,27 +23,34 @@ const { Content } = await entry.render();
         <div class="mt-3 px-5">
             <div
                 class="prose prose-lg mx-auto mt-6 max-w-3xl text-base text-zinc-800 dark:prose-invert dark:text-zinc-300">
-                <Content />
-                <div class="flex flex-col gap-10">
-                    {
-                        entry.data.images.map((image) => (
-                            <div class="flex flex-col gap-2">
-                                <div class="border-2 border-zinc-600 dark:border-zinc-300">
-                                    <Imagefull
-                                        src={image.src}
-                                        alt={image.alt}
-                                        class="project-img block h-full w-full transform cursor-zoom-in"
-                                        client:load
-                                    />
+                <article>
+                    <Content />
+                    <div class="flex flex-col gap-10">
+                        {
+                            entry.data.images.map((image) => (
+                                <div class="flex flex-col gap-2">
+                                    <div class="border-2 border-zinc-600 dark:border-zinc-300">
+                                        <Imagefull
+                                            src={image.src}
+                                            alt={image.alt}
+                                            class="project-img block h-full w-full transform cursor-zoom-in"
+                                            client:load
+                                        />
+                                    </div>
+                                    <div class="text-center">{image.alt}</div>
                                 </div>
-                                <div class="text-center">{image.alt}</div>
-                            </div>
-                        ))
-                    }
-                </div>
+                            ))
+                        }
+                    </div>
+                </article>
                 <div class="mt-8 text-center">
-                    <Link style="muted" href="/#project" class="mt-4 inline-block rounded px-4 py-2">
-                        ← Retour
+                    <Link
+                        style="muted"
+                        href="/#project"
+                        size="md"
+                        class="inline-flex items-center gap-2 no-underline">
+                        <Icon class="h-5 w-5" name="arrow-left-thin" />
+                        <span>Retour</span>
                     </Link>
                 </div>
             </div>
