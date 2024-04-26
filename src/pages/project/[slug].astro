@@ -14,15 +14,33 @@ export async function getStaticPaths() {
     }));
 }
 
+export async function sortItem() {
+    const projectEntries = await getCollection("project");
+    const projects = projectEntries.map((entry) => ({
+        id: entry.id,
+        link: entry.data.link,
+        order: entry.data.order,
+    }));
+    const sortedProjects = projects.sort((a, b) => a.order - b.order);
+    return sortedProjects;
+}
+
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+const sortedProjects = await sortItem();
+const currentProjectIndex = sortedProjects.findIndex((project) => project.id === entry.id);
+const nextProject = sortedProjects[currentProjectIndex + 1] || sortedProjects[0];
+const previousProject =
+    currentProjectIndex > 0
+        ? sortedProjects[currentProjectIndex - 1]
+        : sortedProjects[sortedProjects.length - 1];
 ---
 
 <Layout title={entry.data.name}>
     <Container>
         <div class="mt-3 px-5">
             <div
-                class="prose prose-lg mx-auto mt-6 max-w-3xl text-base text-zinc-800 dark:prose-invert dark:text-zinc-300">
+                class="prose prose-lg mx-auto mt-6 max-w-3xl text-base text-zinc-800 dark:prose-invert dark:text-zinc-300 flex flex-col gap-24">
                 <article>
                     <Content />
                     <div class="flex flex-col gap-10">
@@ -43,14 +61,22 @@ const { Content } = await entry.render();
                         }
                     </div>
                 </article>
-                <div class="mt-8 text-center">
+                <div class="flex flex-row gap-10 justify-center">
                     <Link
-                        style="muted"
-                        href="/#project"
+                        style="primary"
+                        href={previousProject.link}
                         size="md"
                         class="inline-flex items-center gap-2 no-underline">
-                        <Icon class="h-5 w-5" name="arrow-left-thin" />
-                        <span>Retour</span>
+                        <Icon class="h-5 w-5" name="arrow-left" />
+                        <span>Précédent</span>
+                    </Link>
+                    <Link
+                        style="primary"
+                        href={nextProject.link}
+                        size="md"
+                        class="inline-flex items-center gap-2 no-underline">
+                        <span>Suivant</span>
+                        <Icon class="h-5 w-5" name="arrow-right" />
                     </Link>
                 </div>
             </div>
