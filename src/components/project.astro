@@ -42,7 +42,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/project
 projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
 ---
 
-<div id="project" class="mt-24 px-5">
+<div id="project" class="px-5">
     <h2 class="mb-2 text-3xl font-bold text-sky-700 dark:text-sky-500">PROJETS</h2>
     {
         projects.map((item) => (
@@ -69,7 +69,7 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
                                 <div class="mr-4">
                                     <a
                                         href={item.frontmatter.links.website}
-                                        class="underline dark:hover:text-sky-200"
+                                        class="underline hover:text-sky-600 dark:hover:text-sky-200"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         aria-label="Lien vers le site web du projet"
@@ -82,7 +82,7 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
                                 <div>
                                     <a
                                         href={item.frontmatter.links.project}
-                                        class="underline dark:hover:text-sky-200"
+                                        class="underline hover:text-sky-600 dark:hover:text-sky-200"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         aria-label="Lien vers le dépôt Git">
@@ -94,7 +94,7 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
                                 <div>
                                     <a
                                         href={`${item.frontmatter.link}#liens`}
-                                        class="underline dark:hover:text-sky-200"
+                                        class="underline hover:text-sky-600 dark:hover:text-sky-200"
                                         aria-label="Lien vers la page du projet contenant les liens des différents dépôts Git">
                                         Git Repos ↗︎
                                     </a>
@@ -115,7 +115,7 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
                                 title="Cliquez pour voir le projet"
                                 class="hidden lg:block ">
                                 <Icon
-                                    class="h-10 w-10 text-zinc-800 dark:text-zinc-400 dark:hover:text-sky-200"
+                                    class="h-10 w-10 text-zinc-800 dark:text-zinc-400 hover:text-sky-600 dark:hover:text-sky-200"
                                     name="arrow-right"
                                 />
                             </a>
