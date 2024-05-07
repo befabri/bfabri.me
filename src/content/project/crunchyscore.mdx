@@ -31,20 +31,21 @@ images: [
 
 ## Description du projet
 
-L'extension ajoute les scores de MyAnimeList sous chaque anime ainsi que sur la page du lecteur vidéo de Crunchyroll. Les scores sont récupérés depuis une API développée en Fastify Node.js qui est connectée à l'API de MyAnimeList.
+Extension Google chrome pour le site Crunchyroll intégrant les scores de notation de MyAnimeList et AniList des animes.
 
-L'utilisateur a la possibilité de personnaliser son affichage avec diverses options, à savoir :
+## Fonctionnalités Clés
 
--   L'ordre de tri des animés
--   La couleur du texte de la note
--   L'étiquette du score
--   La précision des décimales
+-	Récupération des scores via une API conçue en Fastify et Node.js, connectée à l'API de MyAnimeList/AniList.
+-	Web scraping avec Puppeteer afin de faire la correspondance entre les identifiants de Crunchyroll et ceux de MyAnimeList.
+-	Automatisation via cronjob du web scraping et des scores, assurant la mise à jour régulière des données.
+-	Configuration de l'extension accessible par un popup, permettant aux utilisateurs de personnaliser leurs paramètres.
+-	Récupération des scores auprès d'un worker Cloudflare, depuis le stockage KV et les renvoie au client (extension).
 
 ## Développé avec
 
--   **Frontend:** AstroJs, JavaScript, Vite, Tailwind CSS
--   **Backend:** Node.js, Fastify, TypeScript, Prisma, MySQL
--   **Extension:** JavaScript, HTML5, CSS3
+-   **Frontend:** AstroJs, JavaScript, Tailwind CSS
+-   **Backend:** Node.js, Fastify, TypeScript, Prisma, MySQL, Puppeteer, Worker Cloudflare, Cloudflare KV
+-   **Extension:** TypeScript, Javascript, Vite, Tailwind CSS
 
 ## Liens
 
