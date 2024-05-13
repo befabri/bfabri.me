@@ -2,32 +2,7 @@
 import { Icon } from "astro-icon/components";
 import Button from "@components/ui/button.astro";
 import { Image } from "astro:assets";
-
-interface Frontmatter {
-    [x: string]: any;
-    order: number;
-    name: string;
-    description: string;
-    image: {
-        src: string;
-        alt: string;
-    };
-    stack: {
-        frontend?: string[];
-        backend?: string[];
-        project?: string[];
-    };
-    links: {
-        frontend?: string;
-        backend?: string;
-        extensionStore?: string;
-        project?: string;
-        website?: string;
-        extension?: string;
-    };
-    link: string;
-    tag: string[];
-}
+import { getProjects } from "@utils/fetchers";
 
 interface Image {
     default?: any;
@@ -37,38 +12,41 @@ interface Image {
     format: string;
 }
 
-const projects = await Astro.glob<Frontmatter>("../content/project/*.mdx");
+const projects = await getProjects();
+
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/project/*.{jpeg,jpg,png,gif}");
-projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
+projects.sort((a, b) => a.data.order - b.data.order);
 ---
 
 <main id="projects" class="px-5">
     <h2 class="mb-2 text-3xl font-bold text-sky-700 dark:text-sky-500">PROJETS</h2>
     {
-        projects.map((item) => (
-            <div class="">
+        projects.map((project) => (
+            <div id={project.slug}>
                 <div class="m-auto flex flex-col py-8 sm:m-0 sm:w-auto sm:py-2 lg:my-8 lg:flex-row">
-                    <div class="h-[280px] min-w-0 overflow-hidden border-2 border-zinc-600 dark:border-zinc-300 sm:min-w-[480px]">
-                        <a href={item.frontmatter.link}>
+                    <div
+                        class="h-[280px] min-w-0 overflow-hidden sm:min-w-[480px] border-2 border-zinc-600 dark:border-zinc-800"
+                        transition:name={"img-" + project.slug}>
+                        <a href={project.data.link}>
                             <Image
-                                src={images[item.frontmatter.image.src]()}
-                                alt={item.frontmatter.image.alt}
+                                src={images[project.data.image.src]()}
+                                alt={project.data.image.alt}
                                 class="block h-full w-full transform cursor-pointer object-cover object-top transition-all duration-1000 hover:scale-110"
                             />
                         </a>
                     </div>
                     <div class="my-4 flex flex-col lg:px-8">
-                        <a href={item.frontmatter.link}>
-                            <h3 class="flex items-center text-3xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-200">
-                                {item.frontmatter.name}
+                        <a href={project.data.link}>
+                            <h3 class="flex projects-center text-3xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-200">
+                                {project.data.name}
                             </h3>
                         </a>
-                        <p class="mt-3 text-zinc-800 dark:text-zinc-200">{item.frontmatter.description}</p>
+                        <p class="mt-3 text-zinc-800 dark:text-zinc-200">{project.data.description}</p>
                         <div class="mb-2 mt-7 flex lg:mb-5">
-                            {item.frontmatter.links.website && (
+                            {project.data.links.website && (
                                 <div class="mr-4">
                                     <a
-                                        href={item.frontmatter.links.website}
+                                        href={project.data.links.website}
                                         class="underline hover:text-sky-600 dark:hover:text-sky-200"
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -78,10 +56,10 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
                                     </a>
                                 </div>
                             )}
-                            {item.frontmatter.links.project && (
+                            {project.data.links.project && (
                                 <div>
                                     <a
-                                        href={item.frontmatter.links.project}
+                                        href={project.data.links.project}
                                         class="underline hover:text-sky-600 dark:hover:text-sky-200"
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -90,10 +68,10 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
                                     </a>
                                 </div>
                             )}
-                            {!item.frontmatter.links.project && (
+                            {!project.data.links.project && (
                                 <div>
                                     <a
-                                        href={`${item.frontmatter.link}#liens`}
+                                        href={`${project.data.link}#liens`}
                                         class="underline hover:text-sky-600 dark:hover:text-sky-200"
                                         aria-label="Lien vers la page du projet contenant les liens des différents dépôts Git">
                                         Git Repos ↗︎
@@ -102,7 +80,7 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
                             )}
                         </div>
                         <div class="flex justify-start my-4 lg:mt-2 lg:justify-start">
-                            {item.frontmatter.tag.map((t) => (
+                            {project.data.tag.map((t) => (
                                 <span class=" text-zinc-800 dark:text-zinc-200 text-xs font-medium me-2 px-2.5 py-0.5 rounded  border border-zinc-600 dark:border-zinc-300 select-none">
                                     {t}
                                 </span>
@@ -110,7 +88,7 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
                         </div>
                         <div class="flex justify-center lg:mt-9 lg:justify-end">
                             <a
-                                href={item.frontmatter.link}
+                                href={project.data.link}
                                 aria-label="Lien vers la page du projet"
                                 title="Cliquez pour voir le projet"
                                 class="hidden lg:block ">
@@ -122,7 +100,7 @@ projects.sort((a, b) => a.frontmatter.order - b.frontmatter.order);
                             <div class="text-center lg:hidden">
                                 <Button
                                     style="primary"
-                                    href={item.frontmatter.link}
+                                    href={project.data.link}
                                     class="mt-4 inline-block rounded px-4 py-2">
                                     En savoir plus
                                 </Button>
