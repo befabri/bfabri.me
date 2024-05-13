@@ -1,15 +1,15 @@
 ---
 import Container from "@layouts/common/Container.astro";
-import Layout from "@layouts/Layout.astro";
-import Hero from "@components/hero.astro";
-import Project from "@components/project.astro";
-import Cta from "@components/cta.astro";
+import Contact from "@components/Contact.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Hero from "@components/Hero.astro";
+import Project from "@components/Project.astro";
 ---
 
-<Layout title="">
+<BaseLayout title="">
     <Container>
         <Hero />
         <Project />
-        <Cta />
+        <Contact />
     </Container>
-</Layout>
+</BaseLayout>

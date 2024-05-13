@@ -1,0 +1,57 @@
+---
+import "@styles/global.css";
+import { SEO } from "astro-seo";
+import { ViewTransitions } from "astro:transitions";
+
+export interface Props {
+    title: string;
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+
+const resolvedImageWithDomain = new URL("/opengraph.jpg", Astro.site).toString();
+
+const { title } = Astro.props;
+const makeTitle = title ? title + " | " + "Benjamin Fabri" : "Benjamin Fabri";
+---
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="/favicon.png" />
+    <script defer data-domain="bfabri.me" src="https://pl.bfabri.me/js/script.js"></script>
+    <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+        const setDarkMode = () => {
+            if (localStorage.getItem("color-scheme") === "dark") {
+                document.querySelector("html").dataset.theme = "dark";
+            }
+            if (localStorage.getItem("color-scheme") === "light") {
+                document.querySelector("html").dataset.theme = "light";
+            }
+            if (!localStorage.getItem("color-scheme")) {
+                let theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+                localStorage.setItem("color-scheme", theme);
+            }
+        };
+        setDarkMode();
+        document.addEventListener("astro:after-swap", setDarkMode);
+    </script>
+    <SEO
+        title={makeTitle}
+        description="Portfolio of Benjamin Fabri"
+        canonical={canonicalURL}
+        openGraph={{
+            basic: {
+                url: canonicalURL,
+                type: "website",
+                title: `Benjamin Fabri - Portfolio`,
+                image: resolvedImageWithDomain,
+            },
+            image: {
+                alt: "Benjamin Fabri - Homepage Screenshot",
+            },
+        }}
+    />
+    <ViewTransitions />
+</head>
