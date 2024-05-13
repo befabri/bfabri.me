@@ -1,10 +1,10 @@
 ---
-import { getCollection } from "astro:content";
-import Container from "@layouts/common/Container.astro";
-import Link from "@components/ui/button.astro";
+import Button from "@components/ui/button.astro";
 import Imagefull from "@components/ui/imagefull";
-import { Icon } from "astro-icon/components";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import Container from "@layouts/common/Container.astro";
+import { Icon } from "astro-icon/components";
+import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
     const projectEntries = await getCollection("project");
@@ -62,22 +62,22 @@ const previousProject =
                     </div>
                 </article>
                 <div class="flex flex-row gap-10 justify-center">
-                    <Link
+                    <Button
                         style="primary"
                         href={previousProject.link}
                         size="md"
                         class="inline-flex items-center gap-2 no-underline">
                         <Icon class="h-5 w-5" name="arrow-left" />
                         <span>Précédent</span>
-                    </Link>
-                    <Link
+                    </Button>
+                    <Button
                         style="primary"
                         href={nextProject.link}
                         size="md"
                         class="inline-flex items-center gap-2 no-underline">
                         <span>Suivant</span>
                         <Icon class="h-5 w-5" name="arrow-right" />
-                    </Link>
+                    </Button>
                 </div>
             </div>
         </div>
