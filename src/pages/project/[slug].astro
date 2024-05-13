@@ -4,31 +4,12 @@ import Imagefull from "@components/ui/imagefull";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Container from "@layouts/common/Container.astro";
 import { Icon } from "astro-icon/components";
-import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
-
-export async function getStaticPaths() {
-    const projectEntries = await getCollection("project");
-    return projectEntries.map((entry) => ({
-        params: { slug: entry.slug },
-        props: { entry },
-    }));
-}
-
-export async function sortItem() {
-    const projectEntries = await getCollection("project");
-    const projects = projectEntries.map((entry) => ({
-        id: entry.id,
-        link: entry.data.link,
-        order: entry.data.order,
-    }));
-    const sortedProjects = projects.sort((a, b) => a.order - b.order);
-    return sortedProjects;
-}
+import { getProjectsSorted } from "@utils/fetchers";
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-const sortedProjects = await sortItem();
+const sortedProjects = await getProjectsSorted();
 const currentProjectIndex = sortedProjects.findIndex((project) => project.id === entry.id);
 const nextProject = sortedProjects[currentProjectIndex + 1] || sortedProjects[0];
 const previousProject =
