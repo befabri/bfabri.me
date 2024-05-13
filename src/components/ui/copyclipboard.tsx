@@ -1,6 +1,11 @@
 import { useState } from "preact/hooks";
 
-export default function CopyClipboard({ text }) {
+interface Props {
+    text: string;
+}
+
+
+export default function CopyClipboard({ text }: Props) {
     const [isCopied, setIsCopied] = useState(false);
 
     const copyText = () => {
