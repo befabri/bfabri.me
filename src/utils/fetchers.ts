@@ -17,10 +17,3 @@ export async function getProjectsSorted() {
     return sortedProjects;
 }
 
-export async function getProjectsStaticPaths() {
-    const projectEntries = await getCollection("project");
-    return projectEntries.map((entry) => ({
-        params: { slug: entry.slug },
-        props: { entry },
-    }));
-}

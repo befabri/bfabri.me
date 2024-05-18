@@ -6,6 +6,15 @@ import Container from "@layouts/common/Container.astro";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import { getProjectsSorted } from "@utils/fetchers";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+    const projectEntries = await getCollection("project");
+    return projectEntries.map((entry) => ({
+        params: { slug: entry.slug },
+        props: { entry },
+    }));
+}
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
