@@ -40,7 +40,7 @@ export default function ImageFullScreen({ children }: ImageProps) {
                         {children}
                         <button
                             onClick={handleCloseButtonClick}
-                            class="absolute top-3 left-3.5 z-50 p-1.5 bg-black text-white hover:bg-neutral-900 rounded-full bg-opacity-70 border-none cursor-pointer"
+                            class="absolute top-3 left-3.5 z-50 p-1.5 bg-black text-zinc-100 hover:bg-neutral-800 dark:hover:bg-neutral-900 rounded-full bg-opacity-70 border-none cursor-pointer"
                             aria-label="Close full screen">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -60,8 +60,8 @@ export default function ImageFullScreen({ children }: ImageProps) {
                     </div>
                     <div
                         class={clsx(
-                            "fixed inset-0 z-40 bg-black transition-opacity duration-300 cursor-default ease-in-out",
-                            isFullsize ? "bg-opacity-100 sm:bg-opacity-70" : "bg-opacity-0"
+                            "fixed inset-0 z-40 bg-black dark:bg-black transition-opacity duration-300 cursor-default ease-in-out",
+                            isFullsize ? "bg-opacity-100 sm:bg-opacity-90 dark:sm:bg-opacity-70" : "bg-opacity-0"
                         )}
                         onClick={handleImageClick}
                         aria-hidden="true"></div>
