@@ -4,7 +4,6 @@ interface Props {
     text: string;
 }
 
-
 export default function CopyClipboard({ text }: Props) {
     const [isCopied, setIsCopied] = useState(false);
 

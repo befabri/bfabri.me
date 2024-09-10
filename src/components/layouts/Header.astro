@@ -1,6 +1,6 @@
 ---
+import ToggleTheme from "@components/ui/ToggleTheme";
 import { Icon } from "astro-icon/components";
-import ToggleTheme from "../ui/ToggleTheme.tsx";
 const { showToggleTheme = true } = Astro.props;
 const pathname = new URL(Astro.request.url).pathname;
 const pathSegments = pathname.split("/").filter((segment) => segment !== "");
