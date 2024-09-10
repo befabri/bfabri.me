@@ -1,12 +1,12 @@
 ---
 import Button from "@components/ui/button.astro";
-import Imagefull from "@components/ui/imagefull";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Container from "@layouts/common/Container.astro";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import { getProjectsSorted } from "@utils/fetchers";
 import { getCollection } from "astro:content";
+import ImageFullScreen from "@components/ui/ImageFullScreen";
 
 export async function getStaticPaths() {
     const projectEntries = await getCollection("project");
@@ -22,11 +22,12 @@ const sortedProjects = await getProjectsSorted();
 const currentProjectIndex = sortedProjects.findIndex((project) => project.id === entry.id);
 const nextProject = sortedProjects[currentProjectIndex + 1] || sortedProjects[0];
 const previousProject =
-    currentProjectIndex > 0
-        ? sortedProjects[currentProjectIndex - 1]
-        : sortedProjects[sortedProjects.length - 1];
+    currentProjectIndex > 0 ? sortedProjects[currentProjectIndex - 1] : sortedProjects[sortedProjects.length - 1];
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/project/*.{jpeg,jpg,png,gif}");
+const projectImages = import.meta.glob<{ default: ImageMetadata }>(
+    "/src/assets/project/*/*.{jpeg,jpg,png,gif,webp}"
+);
 ---
 
 <BaseLayout title={entry.data.name}>
@@ -59,12 +60,17 @@ const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/project
                             entry.data.images.map((image: { src: string; alt: string }) => (
                                 <div class="flex flex-col gap-2">
                                     <div class="border-2 border-zinc-600 dark:border-zinc-800">
-                                        <Imagefull
-                                            src={image.src}
-                                            alt={image.alt}
-                                            class="project-img block h-full w-full transform cursor-zoom-in"
-                                            client:load
-                                        />
+                                        <ImageFullScreen client:load>
+                                            <Image
+                                                src={projectImages[image.src]()}
+                                                alt={image.alt}
+                                                format="avif"
+                                                loading="lazy"
+                                                width={1920}
+                                                height={1080}
+                                                class="block h-full w-full transform cursor-zoom-in object-contain m-0"
+                                            />
+                                        </ImageFullScreen>
                                     </div>
                                     <div class="text-center">{image.alt}</div>
                                 </div>
