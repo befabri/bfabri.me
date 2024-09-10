@@ -1,8 +1,7 @@
 import { getCollection } from "astro:content";
 
 export async function getProjects() {
-    const projects = (await getCollection("project"))
-        .filter(project => !project.data.draft)
+    const projects = (await getCollection("project")).filter((project) => !project.data.draft);
     return projects;
 }
 
@@ -16,4 +15,3 @@ export async function getProjectsSorted() {
     const sortedProjects = projects.sort((a, b) => a.order - b.order);
     return sortedProjects;
 }
-
