@@ -13,13 +13,29 @@ const resolvedImageWithDomain = new URL("/opengraph.jpg", Astro.site).toString()
 
 const { title } = Astro.props;
 const makeTitle = title ? title + " | " + "Benjamin Fabri" : "Benjamin Fabri";
+const description = "Benjamin Fabri - Portfolio";
 ---
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="/favicon.png" />
-    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="canonical" href={canonicalURL} />
+    <title>{makeTitle}</title>
+    <meta name="title" content={makeTitle} />
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={resolvedImageWithDomain} />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={resolvedImageWithDomain} />
     <script is:inline>
         const setDarkMode = () => {
             if (localStorage.getItem("color-scheme") === "dark") {
@@ -36,21 +52,5 @@ const makeTitle = title ? title + " | " + "Benjamin Fabri" : "Benjamin Fabri";
         setDarkMode();
         document.addEventListener("astro:after-swap", setDarkMode);
     </script>
-    <SEO
-        title={makeTitle}
-        description="Portfolio of Benjamin Fabri"
-        canonical={canonicalURL}
-        openGraph={{
-            basic: {
-                url: canonicalURL,
-                type: "website",
-                title: `Benjamin Fabri - Portfolio`,
-                image: resolvedImageWithDomain,
-            },
-            image: {
-                alt: "Benjamin Fabri - Homepage Screenshot",
-            },
-        }}
-    />
     <ViewTransitions />
 </head>
