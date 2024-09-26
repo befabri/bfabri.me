@@ -7,6 +7,6 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<BaseLayout title="Erreur 505">
+<BaseLayout title={`${t("Erreur")} 505`}>
     <Errors code={505} message={t("Version HTTP non prise en charge")} />
 </BaseLayout>

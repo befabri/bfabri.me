@@ -7,6 +7,6 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<BaseLayout title="404 Non trouvée">
+<BaseLayout title={`404  ${t("Non trouvée")}`}>
     <Errors code={404} message={t("Page non trouvée")} />
 </BaseLayout>
