@@ -2,12 +2,12 @@
 import ToggleTheme from "@components/ui/ToggleTheme";
 import { Icon } from "astro-icon/components";
 import { getLangFromUrl, useTranslatedPath, useTranslations } from "@i18n/utils";
+import { defaultLang } from "@i18n/ui";
 const { showToggleTheme = true } = Astro.props;
 const pathname = new URL(Astro.request.url).pathname;
 const pathSegments = pathname.split("/").filter((segment) => segment !== "");
 const lastSegment = pathSegments[pathSegments.length - 1];
-const isHomepage = lastSegment === undefined;
-
+const isHomepage = lastSegment === undefined || lastSegment === "en";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
@@ -28,7 +28,14 @@ const translatePath = useTranslatedPath(lang);
             </a>
         )
     }
-    <div>
+    <div class="flex flex-row items-center">
+        <a
+            href={lang === defaultLang ? "/en" + pathname : pathname.replace("/en/", "/")}
+            aria-label={lang == defaultLang ? "Basculer en Anglais" : "Switch to French"}
+            title={lang === defaultLang ? "Basculer en Anglais" : "Switch to French"}
+            class="text-muted inline-flex items-center rounded-lg p-2.5 text-sm hover:bg-gray-200 hover:text-sky-600 dark:hover:text-sky-200 focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900">
+            {lang === defaultLang ? "EN" : "FR"}
+        </a>
         <a
             href="mailto:contact@bfabri.me"
             target="_blank"
@@ -45,7 +52,6 @@ const translatePath = useTranslatedPath(lang);
             class="text-muted inline-flex items-center rounded-lg p-2.5 text-sm hover:bg-gray-200 hover:text-sky-600 dark:hover:text-sky-200 focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900">
             <Icon class="h-5 w-5" name="github" /></a
         >
-
         {showToggleTheme && <ToggleTheme client:load />}
     </div>
 </header>
