@@ -1,7 +1,6 @@
 ---
 import Errors from "@components/Errors.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import Container from "@layouts/common/Container.astro";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
@@ -9,7 +8,5 @@ const t = useTranslations(lang);
 ---
 
 <BaseLayout title="404 Non trouvée">
-    <Container>
-        <Errors code={404} message={t("Page non trouvée")} />
-    </Container>
+    <Errors code={404} message={t("Page non trouvée")} />
 </BaseLayout>

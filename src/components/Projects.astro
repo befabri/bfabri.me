@@ -22,7 +22,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/project
 projects.sort((a, b) => a.data.order - b.data.order);
 ---
 
-<main id="projects" class="px-5">
+<div id="projects" class="px-5">
     <h2 class="mb-2 text-3xl font-bold text-sky-700 dark:text-sky-500">{t("PROJETS")}</h2>
     {
         projects.map((project) => (
@@ -121,4 +121,4 @@ projects.sort((a, b) => a.data.order - b.data.order);
             </div>
         ))
     }
-</main>
+</div>

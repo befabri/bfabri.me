@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import Container from "@layouts/common/Container.astro";
 import { getProjectsSorted } from "@utils/fetchers";
 import { getCollection } from "astro:content";
 import Project from "@components/Project.astro";
@@ -24,7 +23,5 @@ const previousProject =
 ---
 
 <BaseLayout title={page.data.name}>
-    <Container>
-        <Project project={page} nextProject={nextProject} previousProject={previousProject} />
-    </Container>
+    <Project project={page} nextProject={nextProject} previousProject={previousProject} />
 </BaseLayout>

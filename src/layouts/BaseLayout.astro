@@ -3,6 +3,7 @@ import Footer from "@components/layouts/Footer.astro";
 import Head from "@components/layouts/Head.astro";
 import Header from "@components/layouts/Header.astro";
 import { SITE } from "@utils/config.js";
+import Container from "./common/Container.astro";
 
 interface Props {
     title: string;
@@ -17,7 +18,9 @@ const { language = "en" } = SITE;
     <Head title={title} />
     <body class="antialiased bg-white text-zinc-800 dark:bg-neutral-900 dark:text-zinc-300">
         <Header />
-        <slot />
+        <Container>
+            <slot />
+        </Container>
         <Footer />
         <style is:global>
             /* Improve Page speed */
