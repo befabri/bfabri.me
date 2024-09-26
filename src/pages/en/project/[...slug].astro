@@ -2,7 +2,7 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getProjectsSorted } from "@utils/fetchers";
 import { getCollection } from "astro:content";
-import Project from "@components/Project.astro";
+import ProjectDescription from "@components/ProjectDescription.astro";
 
 export async function getStaticPaths() {
     const pages = await getCollection("project");
@@ -23,5 +23,5 @@ const previousProject =
 ---
 
 <BaseLayout title={page.data.name}>
-    <Project project={page} nextProject={nextProject} previousProject={previousProject} />
+    <ProjectDescription project={page} nextProject={nextProject} previousProject={previousProject} />
 </BaseLayout>

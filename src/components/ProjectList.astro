@@ -1,0 +1,127 @@
+---
+import { Icon } from "astro-icon/components";
+import Button from "@components/ui/Button.astro";
+import { Image } from "astro:assets";
+import { getProjects } from "@utils/fetchers";
+import { getLangFromUrl, useTranslatedPath, useTranslations } from "@i18n/utils";
+
+interface Image {
+    default?: any;
+    src: string;
+    width: number;
+    height: number;
+    format: string;
+}
+
+const lang = getLangFromUrl(Astro.url);
+const projects = await getProjects(lang);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/project/*.{jpeg,jpg,png,gif}");
+projects.sort((a, b) => a.data.order - b.data.order);
+---
+
+<div id="projects" class="px-5 flex flex-col gap-8">
+    <h2 class="text-3xl font-bold text-sky-700 dark:text-sky-500">{t("PROJETS")}</h2>
+    <div class="flex flex-col gap-20 lg:gap-20">
+        {
+            projects.map((project) => (
+                <div id={project.slug} class="m-auto flex flex-col sm:m-0 sm:w-auto lg:flex-row gap-10 lg:gap-8">
+                    <div
+                        class="h-[280px] min-w-0 overflow-hidden sm:min-w-[480px] border-2 border-zinc-600 dark:border-zinc-800"
+                        transition:name={"img-" + project.slug}>
+                        <a href={translatePath(project.data.link)}>
+                            <Image
+                                src={images[project.data.image.src]()}
+                                alt={project.data.image.alt}
+                                width={850}
+                                height={425}
+                                loading="lazy"
+                                class="block h-full w-full transform cursor-pointer object-cover object-top transition-all duration-1000 hover:scale-110"
+                            />
+                        </a>
+                    </div>
+                    <div class="flex flex-col w-full justify-between gap-10 lg:gap-0">
+                        <div class="flex flex-col w-full gap-6 lg:pt-4">
+                            <div class="flex flex-col gap-4">
+                                <a href={translatePath(project.data.link)}>
+                                    <h3 class="flex projects-center text-3xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-200">
+                                        {project.data.name}
+                                    </h3>
+                                </a>
+                                <p class="text-zinc-800 dark:text-zinc-200">{project.data.description}</p>
+                            </div>
+                            <div class="flex">
+                                {project.data.links.website && (
+                                    <div class="mr-4">
+                                        <a
+                                            href={translatePath(project.data.links.website)}
+                                            class="underline hover:text-sky-600 dark:hover:text-sky-200"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label={t("Lien vers le site web du projet")}
+                                            title={t("Cliquez pour voir le site web")}>
+                                            {t("Site web")} ↗︎
+                                        </a>
+                                    </div>
+                                )}
+                                {project.data.links.project && (
+                                    <div>
+                                        <a
+                                            href={translatePath(project.data.links.project)}
+                                            class="underline hover:text-sky-600 dark:hover:text-sky-200"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label={t("Lien vers le dépôt Git")}>
+                                            {t("Git Repos")} ↗︎
+                                        </a>
+                                    </div>
+                                )}
+                                {!project.data.links.project && (
+                                    <div>
+                                        <a
+                                            href={translatePath(project.data.link)}
+                                            class="underline hover:text-sky-600 dark:hover:text-sky-200"
+                                            aria-label={t(
+                                                "Lien vers la page du projet contenant les liens des différents dépôts Git"
+                                            )}>
+                                            {t("Git Repos")} ↗︎
+                                        </a>
+                                    </div>
+                                )}
+                            </div>
+                            <div class="flex flex-wrap justify-start lg:justify-start flex-row">
+                                {project.data.tag.map((t) => (
+                                    <span class="text-zinc-800 dark:text-zinc-200 text-xs font-medium me-2 px-2.5 rounded border border-zinc-600 dark:border-zinc-300 select-none">
+                                        {t}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                        <div class="flex justify-center lg:justify-end">
+                            <a
+                                href={translatePath(project.data.link)}
+                                aria-label={t("Lien vers la page du projet")}
+                                title={t("Cliquez pour voir le projet")}
+                                class="hidden lg:block ">
+                                <Icon
+                                    class="h-10 w-10 text-zinc-800 dark:text-zinc-400 hover:text-sky-600 dark:hover:text-sky-200"
+                                    name="arrow-right"
+                                />
+                            </a>
+                            <div class="text-center lg:hidden">
+                                <Button
+                                    style="primary"
+                                    href={translatePath(project.data.link)}
+                                    class="inline-block rounded px-4">
+                                    {t("En savoir plus")}
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+</div>

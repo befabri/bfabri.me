@@ -6,11 +6,11 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<div id="cta" class="px-5">
-    <h2 class="mb-2 text-3xl font-bold text-sky-700 dark:text-sky-500">{t("POUR ME CONTACTER")}</h2>
-    <p class="py-5 sm:m-0 sm:py-2 lg:my-5">
+<div id="cta" class="px-5 flex flex-col gap-8">
+    <h2 class="text-3xl font-bold text-sky-700 dark:text-sky-500">{t("POUR ME CONTACTER")}</h2>
+    <p>
         {t("Envoyez moi un email à")}
-        <span class="font-semibold">
+        <span class="font-semibold inline-flex gap-1">
             contact@bfabri.me
             <CopyClipboard text="contact@bfabri.me" client:load /></span
         >
