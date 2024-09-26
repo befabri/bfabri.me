@@ -9,9 +9,6 @@
     "preview": "astro preview",
     "astro": "astro"
   },
-  "engines": {
-    "node": "18.17.1"
-  },
   "dependencies": {
     "@astrojs/check": "^0.6.0",
     "@astrojs/mdx": "^3.0.0",

@@ -10,6 +10,10 @@ export default defineConfig({
     site: "https://bfabri.me",
     outDir: "public",
     publicDir: "static",
+    i18n: {
+        defaultLocale: "fr",
+        locales: ["fr", "en"],
+    },
     integrations: [
         icon(),
         tailwind(),
