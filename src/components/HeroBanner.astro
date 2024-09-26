@@ -1,5 +1,8 @@
 ---
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <div class="flex justify-center">
@@ -7,6 +10,8 @@
         <h1 class="text-7xl md:text-8xl font-bold tracking-tight text-sky-700 dark:text-sky-500">
             Benjamin <br />Fabri
         </h1>
-        <h2 class="mt-1 text-2xl tracking-tight text-zinc-800 dark:text-zinc-200">Développeur web full stack</h2>
+        <h2 class="mt-1 text-2xl tracking-tight text-zinc-800 dark:text-zinc-200">
+            {t("Développeur web full stack")}
+        </h2>
     </div>
 </div>

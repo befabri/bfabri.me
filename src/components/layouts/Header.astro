@@ -1,11 +1,16 @@
 ---
 import ToggleTheme from "@components/ui/ToggleTheme";
 import { Icon } from "astro-icon/components";
+import { getLangFromUrl, useTranslatedPath, useTranslations } from "@i18n/utils";
 const { showToggleTheme = true } = Astro.props;
 const pathname = new URL(Astro.request.url).pathname;
 const pathSegments = pathname.split("/").filter((segment) => segment !== "");
 const lastSegment = pathSegments[pathSegments.length - 1];
 const isHomepage = lastSegment === undefined;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <header
@@ -14,10 +19,11 @@ const isHomepage = lastSegment === undefined;
     {
         !isHomepage && (
             <a
-                href={"/#" + lastSegment}
-                class="tracking-tight text-sm text-zinc-800 hover:bg-gray-200 hover:text-sky-600 dark:hover:text-sky-200  dark:hover:bg-gray-700 rounded p-2.5 focus:outline-none focus:ring-4 focus:ring-white dark:focus:ring-neutral-900 dark:text-zinc-400">
+                href={translatePath(`/#${lastSegment}`)}
+                class="tracking-tight text-sm text-zinc-800 hover:bg-gray-200 hover:text-sky-600 dark:hover:text-sky-200 dark:hover:bg-gray-700 rounded p-2.5 focus:outline-none focus:ring-4 focus:ring-white dark:focus:ring-neutral-900 dark:text-zinc-400">
                 <div class="flex items-center gap-2">
-                    <Icon class="h-5 w-5" name="arrow-left" /> Retour
+                    <Icon class="h-5 w-5" name="arrow-left" />
+                    {t("Retour")}
                 </div>
             </a>
         )
@@ -27,7 +33,7 @@ const isHomepage = lastSegment === undefined;
             href="mailto:contact@bfabri.me"
             target="_blank"
             aria-label="Link to send me an email"
-            title="Me contacter par email"
+            title={t("Me contacter par email")}
             class="text-muted inline-flex items-center rounded-lg p-2.5 text-sm hover:bg-gray-200 hover:text-sky-600 dark:hover:text-sky-200 focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900">
             <Icon class="h-5 w-5" name="round-mail" /></a
         >
@@ -35,7 +41,7 @@ const isHomepage = lastSegment === undefined;
             href="https://github.com/befabri"
             target="_blank"
             aria-label="Link to github account"
-            title="Voir mon github"
+            title={t("Voir mon github")}
             class="text-muted inline-flex items-center rounded-lg p-2.5 text-sm hover:bg-gray-200 hover:text-sky-600 dark:hover:text-sky-200 focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900">
             <Icon class="h-5 w-5" name="github" /></a
         >

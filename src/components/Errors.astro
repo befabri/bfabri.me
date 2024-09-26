@@ -1,0 +1,27 @@
+---
+import Button from "@components/ui/Button.astro";
+import { getLangFromUrl, useTranslatedPath, useTranslations } from "@i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+interface Props {
+    code: number;
+    message: string;
+}
+
+const { code, message } = Astro.props;
+---
+
+<div class="flex min-h-[calc(100vh-16rem)] items-center justify-center">
+    <div class="mt-16 text-center">
+        <h1 class="text-4xl font-bold text-zinc-500 dark:text-zinc-200 lg:text-5xl lg:tracking-tight">
+            {code}
+        </h1>
+        <p class="mt-4 text-lg text-zinc-500 dark:text-zinc-200">{message}</p>
+        <Button style="muted" href={translatePath(`/`)} class="mt-4 inline-block rounded px-4 py-2">
+            {t("Retour sur la page principale")}
+        </Button>
+    </div>
+</div>

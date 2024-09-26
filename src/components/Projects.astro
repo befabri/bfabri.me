@@ -3,6 +3,7 @@ import { Icon } from "astro-icon/components";
 import Button from "@components/ui/Button.astro";
 import { Image } from "astro:assets";
 import { getProjects } from "@utils/fetchers";
+import { getLangFromUrl, useTranslatedPath, useTranslations } from "@i18n/utils";
 
 interface Image {
     default?: any;
@@ -12,14 +13,17 @@ interface Image {
     format: string;
 }
 
-const projects = await getProjects();
+const lang = getLangFromUrl(Astro.url);
+const projects = await getProjects(lang);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/project/*.{jpeg,jpg,png,gif}");
 projects.sort((a, b) => a.data.order - b.data.order);
 ---
 
 <main id="projects" class="px-5">
-    <h2 class="mb-2 text-3xl font-bold text-sky-700 dark:text-sky-500">PROJETS</h2>
+    <h2 class="mb-2 text-3xl font-bold text-sky-700 dark:text-sky-500">{t("PROJETS")}</h2>
     {
         projects.map((project) => (
             <div id={project.slug}>
@@ -27,7 +31,7 @@ projects.sort((a, b) => a.data.order - b.data.order);
                     <div
                         class="h-[280px] min-w-0 overflow-hidden sm:min-w-[480px] border-2 border-zinc-600 dark:border-zinc-800"
                         transition:name={"img-" + project.slug}>
-                        <a href={project.data.link}>
+                        <a href={translatePath(project.data.link)}>
                             <Image
                                 src={images[project.data.image.src]()}
                                 alt={project.data.image.alt}
@@ -40,7 +44,7 @@ projects.sort((a, b) => a.data.order - b.data.order);
                         </a>
                     </div>
                     <div class="my-4 flex flex-col lg:px-8">
-                        <a href={project.data.link}>
+                        <a href={translatePath(project.data.link)}>
                             <h3 class="flex projects-center text-3xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-200">
                                 {project.data.name}
                             </h3>
@@ -50,35 +54,37 @@ projects.sort((a, b) => a.data.order - b.data.order);
                             {project.data.links.website && (
                                 <div class="mr-4">
                                     <a
-                                        href={project.data.links.website}
+                                        href={translatePath(project.data.links.website)}
                                         class="underline hover:text-sky-600 dark:hover:text-sky-200"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        aria-label="Lien vers le site web du projet"
-                                        title="Cliquez pour voir le site web ">
-                                        Site web ↗︎
+                                        aria-label={t("Lien vers le site web du projet")}
+                                        title={t("Cliquez pour voir le site web")}>
+                                        {t("Site web")} ↗︎
                                     </a>
                                 </div>
                             )}
                             {project.data.links.project && (
                                 <div>
                                     <a
-                                        href={project.data.links.project}
+                                        href={translatePath(project.data.links.project)}
                                         class="underline hover:text-sky-600 dark:hover:text-sky-200"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        aria-label="Lien vers le dépôt Git">
-                                        Git Repos ↗︎
+                                        aria-label={t("Lien vers le dépôt Git")}>
+                                        {t("Git Repos")} ↗︎
                                     </a>
                                 </div>
                             )}
                             {!project.data.links.project && (
                                 <div>
                                     <a
-                                        href={`${project.data.link}#liens`}
+                                        href={translatePath(project.data.link)}
                                         class="underline hover:text-sky-600 dark:hover:text-sky-200"
-                                        aria-label="Lien vers la page du projet contenant les liens des différents dépôts Git">
-                                        Git Repos ↗︎
+                                        aria-label={t(
+                                            "Lien vers la page du projet contenant les liens des différents dépôts Git"
+                                        )}>
+                                        {t("Git Repos")} ↗︎
                                     </a>
                                 </div>
                             )}
@@ -92,9 +98,9 @@ projects.sort((a, b) => a.data.order - b.data.order);
                         </div>
                         <div class="flex justify-center lg:mt-9 lg:justify-end">
                             <a
-                                href={project.data.link}
-                                aria-label="Lien vers la page du projet"
-                                title="Cliquez pour voir le projet"
+                                href={translatePath(project.data.link)}
+                                aria-label={t("Lien vers la page du projet")}
+                                title={t("Cliquez pour voir le projet")}
                                 class="hidden lg:block ">
                                 <Icon
                                     class="h-10 w-10 text-zinc-800 dark:text-zinc-400 hover:text-sky-600 dark:hover:text-sky-200"
@@ -104,9 +110,9 @@ projects.sort((a, b) => a.data.order - b.data.order);
                             <div class="text-center lg:hidden">
                                 <Button
                                     style="primary"
-                                    href={project.data.link}
+                                    href={translatePath(project.data.link)}
                                     class="mt-4 inline-block rounded px-4 py-2">
-                                    En savoir plus
+                                    {t("En savoir plus")}
                                 </Button>
                             </div>
                         </div>

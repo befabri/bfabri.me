@@ -1,7 +1,11 @@
 import { getCollection } from "astro:content";
+import { ui } from "@i18n/ui";
+import { getLangFromSlug } from "@i18n/utils";
 
-export async function getProjects() {
-    const projects = (await getCollection("project")).filter((project) => !project.data.draft);
+export async function getProjects(lang: keyof typeof ui) {
+    const projects = (await getCollection("project")).filter(
+        (project) => !project.data.draft && getLangFromSlug(project.slug) === lang
+    );
     return projects;
 }
 

@@ -1,6 +1,5 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "exclude": ["public"],
   "compilerOptions": {
     "strictNullChecks": true,
     "baseUrl": "src",
@@ -22,10 +21,14 @@
       ],
       "@styles/*": [
         "styles/*"
+      ],
+      "@i18n/*": [
+        "i18n/*"
       ]
     },
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
   },
+  "exclude": ["public"],
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.astro"],
 }

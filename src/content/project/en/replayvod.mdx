@@ -1,0 +1,60 @@
+---
+draft: false
+order: 1
+name: "Replay VOD"
+description: "A single-page application (SPA) for managing missed Twitch live replays, aimed at viewers."
+image: {"src":"/src/assets/project/replayvod.jpg", "alt":"Replay Vod"}
+techStack: {
+frontend: ["React", "TypeScript", "Vite", "Tailwind CSS"],
+backend: ["Node.js", "Fastify", "TypeScript", "Prisma", "MySQL"],
+}
+links: {
+frontend: "https://github.com/replayvod/replayvod-web",
+backend: "https://github.com/replayvod/replayvod-api",
+website: "",
+}
+link: "/project/replayvod/"
+tag: ["Node.js", "Fastify", "TypeScript", "Prisma", "React"]
+imageFolder: "vod"
+images: [
+    {src: "/src/assets/project/vod/video.webp", alt: "Videos page"},
+    {src: "/src/assets/project/vod/watch.webp", alt: "Watching page"},
+    {src: "/src/assets/project/vod/category.webp", alt: "Categories page"},
+    {src: "/src/assets/project/vod/category_detail.webp", alt: "Videos by category view"},
+    {src: "/src/assets/project/vod/channel.webp", alt: "Followed channels page"},
+    {src: "/src/assets/project/vod/schedule.webp", alt: "Adding a download schedule with error handling"},
+    {src: "/src/assets/project/vod/schedule_edit.webp", alt: "Editing a schedule in a modal"},
+    {src: "/src/assets/project/vod/history.webp", alt: "Download history page"}
+    ]
+---
+
+> {frontmatter.description}
+
+## Project description
+
+{frontmatter.name} is a project currently in development. It allows automatic downloading of Twitch replays from live streams and organizes missed streams from the week. 
+You can schedule automatic downloads from a channel based on certain criteria. Additionally, it offers the ability to watch videos directly from the site and manage them.
+
+## Key Features
+
+- Integration of the Twitch API, authentication via OAuth, and setup of EventSub via webhook for receiving real-time events.
+- Design of a dashboard with features such as:
+- Video viewing and management
+- Advanced download scheduling
+- Task management
+- Queue visualization.
+
+
+## Developed with
+
+-   **Frontend:** React, TypeScript, Vite, Tailwind CSS, TanStack Query, React Hook Form, React Router
+-   **Backend:** Node.js, Fastify, TypeScript, Prisma, MySQL
+
+## Links
+
+### Source Code
+
+-   [Frontend](https://github.com/replayvod/replayvod-web)
+-   [Backend](https://github.com/replayvod/replayvod-api)
+
+## Images

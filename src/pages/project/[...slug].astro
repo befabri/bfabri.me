@@ -1,0 +1,28 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Container from "@layouts/common/Container.astro";
+import { getProjectsSorted } from "@utils/fetchers";
+import { getCollection } from "astro:content";
+import Project from "@components/Project.astro";
+
+export async function getStaticPaths() {
+    const projectEntries = await getCollection("project");
+    return projectEntries.map((entry) => ({
+        params: { slug: entry.slug },
+        props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const sortedProjects = await getProjectsSorted();
+const currentProjectIndex = sortedProjects.findIndex((project) => project.id === entry.id);
+const nextProject = sortedProjects[currentProjectIndex + 1] || sortedProjects[0];
+const previousProject =
+    currentProjectIndex > 0 ? sortedProjects[currentProjectIndex - 1] : sortedProjects[sortedProjects.length - 1];
+---
+
+<BaseLayout title={entry.data.name}>
+    <Container>
+        <Project project={entry} nextProject={nextProject} previousProject={previousProject} />
+    </Container>
+</BaseLayout>

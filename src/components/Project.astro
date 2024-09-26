@@ -1,0 +1,91 @@
+---
+import Button from "@components/ui/Button.astro";
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import ImageFullScreen from "@components/ui/ImageFullScreen";
+import { getLangFromUrl, useTranslatedPath, useTranslations } from "@i18n/utils";
+const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/project/*.{jpeg,jpg,png,gif}");
+const projectImages = import.meta.glob<{ default: ImageMetadata }>(
+    "/src/assets/project/*/*.{jpeg,jpg,png,gif,webp}"
+);
+
+interface Props {
+    project: any;
+    nextProject: any;
+    previousProject: any;
+}
+
+const { project, nextProject, previousProject } = Astro.props;
+const { Content } = await project.render();
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<div class="mt-3 px-5 flex flex-col">
+    <div class="mx-auto">
+        <div
+            class="border-2 border-zinc-600 dark:border-zinc-800 rounded-lg overflow-hidden"
+            transition:name={"img-" + project.slug}>
+            <Image
+                src={images[project.data.image.src]()}
+                alt={project.data.image.alt}
+                width={850}
+                height={425}
+                format="avif"
+                loading="eager"
+                class="block h-full w-full"
+            />
+        </div>
+    </div>
+    <div
+        class="prose prose-lg mx-auto mt-6 max-w-3xl text-base text-zinc-800 dark:prose-invert dark:text-zinc-300 flex flex-col gap-24">
+        <article>
+            <h1 class="font-heading my-4 text-4xl text-hn-text-primary">
+                {project.data.name}
+            </h1>
+            <Content />
+            <div class="flex flex-col gap-10">
+                {
+                    project.data.images.map((image: { src: string; alt: string }) => (
+                        <div class="flex flex-col gap-2">
+                            <div class="border-2 border-zinc-600 dark:border-zinc-800">
+                                <ImageFullScreen client:load>
+                                    <Image
+                                        src={projectImages[image.src]()}
+                                        alt={image.alt}
+                                        format="avif"
+                                        loading="lazy"
+                                        width={1920}
+                                        height={1080}
+                                        class="block h-full w-full transform object-contain m-0"
+                                    />
+                                </ImageFullScreen>
+                            </div>
+                            <div class="text-center">{image.alt}</div>
+                        </div>
+                    ))
+                }
+            </div>
+        </article>
+        <div class="flex flex-row gap-10 justify-center">
+            <Button
+                style="primary"
+                href={translatePath(`${previousProject.link}`)}
+                size="md"
+                class="inline-flex items-center gap-2 no-underline">
+                <Icon class="h-5 w-5" name="arrow-left" />
+                <span>{t("Précédent")}</span>
+            </Button>
+            <Button
+                style="primary"
+                href={translatePath(`${nextProject.link}`)}
+                size="md"
+                class="inline-flex items-center gap-2 no-underline">
+                <span>{t("Suivant")}</span>
+                <Icon class="h-5 w-5" name="arrow-right" />
+            </Button>
+        </div>
+    </div>
+</div>

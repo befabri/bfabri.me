@@ -1,0 +1,59 @@
+---
+draft: false
+order: 2
+name: "Crunchyscore"
+description: "CrunchyScore is a Chrome extension that integrates MyAnimeList scores into Crunchyroll."
+image: {"src":"/src/assets/project/crunchyscore.jpg", "alt":"crunchyscore"}
+techStack: {
+frontend: ["AstroJs", "JavaScript", "Vite", "Tailwind CSS"],
+backend: ["Node.js", "Fastify", "TypeScript", "Prisma", "MySQL", "Puppeteer"],
+extension: ["TypeScript", "HTML5", "CSS3"],
+}
+links: {
+website: "https://crunchyscore.app",
+extensionStore: "https://chrome.google.com/webstore/detail/crunchyscore-mal-score-on/coiidbjimmeojgdkclafjccnhgenmmbi",
+frontend: "https://github.com/befabri/crunchyscore.app",
+backend: "",
+extension: "https://github.com/befabri/crunchyscore"
+}
+link: "/project/crunchyscore/"
+tag: ["Node.js", "Fastify", "TypeScript", "Prisma", "Puppeteer"]
+imageFolder: "crunchyscore"
+images: [
+    {src: "/src/assets/project/crunchyscore/chromestore.jpg", alt: "Extension on the Chrome Web Store"},
+    {src: "/src/assets/project/crunchyscore/config.webp", alt: "Extension configuration"}
+    ]
+---
+
+> {frontmatter.description}
+
+## Project description
+
+A Google Chrome extension for the Crunchyroll website that integrates anime rating scores from MyAnimeList and AniList.
+
+## Key Features
+
+- Fetching scores through an API built with Fastify and Node.js, connected to the MyAnimeList/AniList API.
+- Web scraping using Puppeteer to match Crunchyroll IDs with those from MyAnimeList.
+- Automation of web scraping and score updates via cronjob, ensuring regular data updates.
+- Extension configuration accessible via a popup, allowing users to customize their settings.
+- Retrieving scores from a Cloudflare worker, pulling data from KV storage, and sending it to the client (extension).
+
+## Developed with
+
+-   **Frontend:** AstroJs, JavaScript, Tailwind CSS
+-   **Backend:** Node.js, Fastify, TypeScript, Prisma, MySQL, Puppeteer, Worker Cloudflare, Cloudflare KV
+-   **Extension:** TypeScript, Javascript, Vite, Tailwind CSS
+
+## Links
+
+-   [Site web](https://crunchyscore.app)
+-   [Chrome store](https://chrome.google.com/webstore/detail/crunchyscore-mal-score-on/coiidbjimmeojgdkclafjccnhgenmmbi)
+
+### Codes Sources
+
+-   [Extension](https://github.com/befabri/crunchyscore)
+-   [Site web](https://github.com/befabri/crunchyscore.app)
+-   **Backend Privé**
+
+## Images

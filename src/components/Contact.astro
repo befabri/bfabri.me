@@ -1,11 +1,15 @@
 ---
 import CopyClipboard from "./ui/CopyClipboard";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <div id="cta" class="px-5">
-    <h2 class="mb-2 text-3xl font-bold text-sky-700 dark:text-sky-500">POUR ME CONTACTER</h2>
+    <h2 class="mb-2 text-3xl font-bold text-sky-700 dark:text-sky-500">{t("POUR ME CONTACTER")}</h2>
     <p class="py-5 sm:m-0 sm:py-2 lg:my-5">
-        Envoyez moi un email à
+        {t("Envoyez moi un email à")}
         <span class="font-semibold">
             contact@bfabri.me
             <CopyClipboard text="contact@bfabri.me" client:load /></span
