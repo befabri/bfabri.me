@@ -18,7 +18,18 @@ export default defineConfig({
         icon(),
         tailwind(),
         sitemap({
-            filter: (page) => page !== "https://bfabri.me/505/",
+            i18n: {
+                defaultLocale: "fr",
+                locales: {
+                    fr: "fr",
+                    en: "en",
+                },
+            },
+            filter: (page) =>
+                page !== "https://bfabri.me/404/" &&
+                page !== "https://bfabri.me/505/" &&
+                page !== "https://bfabri.me/en/404/" &&
+                page !== "https://bfabri.me/en/505/",
         }),
         preact(),
         mdx(),
