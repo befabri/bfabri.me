@@ -99,14 +99,14 @@ projects.sort((a, b) => a.data.order - b.data.order);
                                 ))}
                             </div>
                         </div>
-                        <div class="flex justify-center lg:justify-end">
+                        <div class="flex justify-center lg:justify-end mr-2">
                             <a
                                 href={translatePath(project.data.link)}
                                 aria-label={t("Lien vers la page du projet")}
                                 title={t("Cliquez pour voir le projet")}
-                                class="hidden lg:block ">
+                                class="hidden lg:block group">
                                 <Icon
-                                    class="h-10 w-10 text-zinc-800 dark:text-zinc-400 hover:text-sky-600 dark:hover:text-sky-200"
+                                    class="h-10 w-10 text-zinc-800 dark:text-zinc-400 hover:text-sky-600 dark:hover:text-sky-200 transition-transform duration-300 group-hover:translate-x-2"
                                     name="arrow-right"
                                 />
                             </a>
