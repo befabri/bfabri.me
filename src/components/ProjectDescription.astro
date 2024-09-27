@@ -4,18 +4,19 @@ import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import ImageFullScreen from "@components/ui/ImageFullScreen";
 import { getLangFromUrl, useTranslatedPath, useTranslations } from "@i18n/utils";
+import type { Project } from "content/config";
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/project/*.{jpeg,jpg,png,gif}");
 const projectImages = import.meta.glob<{ default: ImageMetadata }>(
     "/src/assets/project/*/*.{jpeg,jpg,png,gif,webp}"
 );
 
 interface Props {
-    project: any;
-    nextProject: any;
-    previousProject: any;
+    project: Project;
+    nextProjectLink: string;
+    previousProjectLink: string;
 }
 
-const { project, nextProject, previousProject } = Astro.props;
+const { project, nextProjectLink, previousProjectLink } = Astro.props;
 const { Content } = await project.render();
 
 const lang = getLangFromUrl(Astro.url);
@@ -72,7 +73,7 @@ const translatePath = useTranslatedPath(lang);
         <div class="flex flex-row gap-10 justify-center">
             <Button
                 style="primary"
-                href={translatePath(`${previousProject.link}`)}
+                href={translatePath(`${previousProjectLink}`)}
                 size="md"
                 class="inline-flex items-center gap-2 no-underline">
                 <Icon class="h-5 w-5" name="arrow-left" />
@@ -80,7 +81,7 @@ const translatePath = useTranslatedPath(lang);
             </Button>
             <Button
                 style="primary"
-                href={translatePath(`${nextProject.link}`)}
+                href={translatePath(`${nextProjectLink}`)}
                 size="md"
                 class="inline-flex items-center gap-2 no-underline">
                 <span>{t("Suivant")}</span>

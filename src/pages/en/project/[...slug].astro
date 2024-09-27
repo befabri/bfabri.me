@@ -1,8 +1,9 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { getProjectsSorted } from "@utils/fetchers";
 import { getCollection } from "astro:content";
 import ProjectDescription from "@components/ProjectDescription.astro";
+import { getLangFromUrl } from "@i18n/utils";
+import { getAdjacentProjects, getProjects } from "@utils/fetchers";
 
 export async function getStaticPaths() {
     const pages = await getCollection("project");
@@ -15,13 +16,15 @@ export async function getStaticPaths() {
 }
 
 const page = Astro.props;
-const sortedProjects = await getProjectsSorted();
-const currentProjectIndex = sortedProjects.findIndex((project) => project.id === page.id);
-const nextProject = sortedProjects[currentProjectIndex + 1] || sortedProjects[0];
-const previousProject =
-    currentProjectIndex > 0 ? sortedProjects[currentProjectIndex - 1] : sortedProjects[sortedProjects.length - 1];
+const lang = getLangFromUrl(Astro.url);
+const projects = await getProjects(lang);
+const { nextProject, previousProject } = getAdjacentProjects(projects, page.id);
 ---
 
 <BaseLayout title={page.data.name}>
-    <ProjectDescription project={page} nextProject={nextProject} previousProject={previousProject} />
+    <ProjectDescription
+        project={page}
+        nextProjectLink={nextProject.data.link}
+        previousProjectLink={previousProject.data.link}
+    />
 </BaseLayout>
