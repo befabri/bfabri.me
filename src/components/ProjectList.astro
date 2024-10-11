@@ -27,7 +27,7 @@ projects.sort((a, b) => a.data.order - b.data.order);
     <div class="flex flex-col gap-20 lg:gap-20">
         {
             projects.map((project) => (
-                <div id={project.slug} class="m-auto flex flex-col sm:m-0 sm:w-auto lg:flex-row gap-10 lg:gap-8">
+                <div id={project.data.id} class="m-auto flex flex-col sm:m-0 sm:w-auto lg:flex-row gap-10 lg:gap-8">
                     <div
                         class="h-[280px] min-w-0 overflow-hidden sm:min-w-[480px] border-2 border-zinc-600 dark:border-zinc-800"
                         transition:name={"img-" + project.slug}>

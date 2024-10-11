@@ -4,6 +4,7 @@ const projectCollection = defineCollection({
     schema: z.object({
         draft: z.boolean(),
         order: z.number(),
+        id: z.string(),
         name: z.string(),
         description: z.string(),
         image: z.object({
