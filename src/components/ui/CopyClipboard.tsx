@@ -22,7 +22,7 @@ export default function CopyClipboard({ text }: Props) {
     return (
         <>
             <button onClick={copyText} aria-label="Copy to clipboard">
-                <div class="flex hover:text-sky-700 dark:hover:text-sky-200">
+                <div class="flex hover:text-blue_dark dark:hover:text-blue_light">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
                         <path
                             fill="currentColor"

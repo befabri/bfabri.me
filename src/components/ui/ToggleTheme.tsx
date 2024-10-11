@@ -10,7 +10,7 @@ export default function ToggleTheme({}) {
             <button
                 onClick={toggleDark}
                 type="button"
-                class="text-muted dark:text-zinc-400 hover:text-sky-600 dark:hover:text-sky-200 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-white dark:focus:ring-neutral-900 rounded-lg text-sm p-2.5 inline-flex items-center"
+                class="text-muted dark:text-zinc-400 hover:text-blue_dark dark:hover:text-blue_light hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-white dark:focus:ring-neutral-900 rounded-lg text-sm p-2.5 inline-flex items-center"
                 aria-label="Changer entre un thème sombre ou lumineux">
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24">
                     <g fill="none">

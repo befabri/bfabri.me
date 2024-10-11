@@ -43,7 +43,7 @@ const translatePath = useTranslatedPath(lang);
     <div
         class="prose prose-lg mx-auto mt-6 max-w-3xl text-base text-zinc-800 dark:prose-invert dark:text-zinc-300 flex flex-col gap-24">
         <article>
-            <h1 class="font-heading my-4 text-4xl text-hn-text-primary">
+            <h1>
                 {project.data.name}
             </h1>
             <Content />
@@ -75,7 +75,7 @@ const translatePath = useTranslatedPath(lang);
                 style="primary"
                 href={translatePath(`${previousProjectLink}`)}
                 size="md"
-                class="inline-flex items-center gap-2 no-underline">
+                class="inline-flex items-center gap-2 justify-center no-underline w-[120px]">
                 <Icon class="h-5 w-5" name="arrow-left" />
                 <span>{t("Précédent")}</span>
             </Button>
@@ -83,7 +83,7 @@ const translatePath = useTranslatedPath(lang);
                 style="primary"
                 href={translatePath(`${nextProjectLink}`)}
                 size="md"
-                class="inline-flex items-center gap-2 no-underline">
+                class="inline-flex items-center gap-2 justify-center no-underline w-[120px]">
                 <span>{t("Suivant")}</span>
                 <Icon class="h-5 w-5" name="arrow-right" />
             </Button>

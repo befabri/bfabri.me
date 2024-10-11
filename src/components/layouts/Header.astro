@@ -20,7 +20,7 @@ const translatePath = useTranslatedPath(lang);
         !isHomepage && (
             <a
                 href={translatePath(`/#${lastSegment}`)}
-                class="tracking-tight text-sm text-zinc-800 hover:bg-gray-200 hover:text-sky-600 dark:hover:text-sky-200 dark:hover:bg-gray-700 rounded p-2.5 focus:outline-none focus:ring-4 focus:ring-white dark:focus:ring-neutral-900 dark:text-zinc-400">
+                class="tracking-tight text-sm text-zinc-800 hover:bg-gray-200 hover:text-blue_dark dark:hover:text-blue_light dark:hover:bg-gray-700 rounded p-2.5 focus:outline-none focus:ring-4 focus:ring-white dark:focus:ring-neutral-900 dark:text-zinc-400">
                 <div class="flex items-center gap-2">
                     <Icon class="h-5 w-5" name="arrow-left" />
                     {t("Retour")}
@@ -33,7 +33,7 @@ const translatePath = useTranslatedPath(lang);
             href={lang === defaultLang ? "/en" + pathname : pathname.replace("/en/", "/")}
             aria-label={lang == defaultLang ? "Basculer en Anglais" : "Switch to French"}
             title={lang === defaultLang ? "Basculer en Anglais" : "Switch to French"}
-            class="text-muted inline-flex items-center rounded-lg p-2.5 text-sm hover:bg-gray-200 hover:text-sky-600 dark:hover:text-sky-200 focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900">
+            class="text-muted inline-flex items-center rounded-lg p-2.5 text-sm hover:bg-gray-200 hover:text-blue_dark dark:hover:text-blue_light focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900">
             {lang === defaultLang ? "FR" : "EN"}
         </a>
         <a
@@ -41,7 +41,7 @@ const translatePath = useTranslatedPath(lang);
             target="_blank"
             aria-label="Link to send me an email"
             title={t("Me contacter par email")}
-            class="text-muted inline-flex items-center rounded-lg p-2.5 text-sm hover:bg-gray-200 hover:text-sky-600 dark:hover:text-sky-200 focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900">
+            class="text-muted inline-flex items-center rounded-lg p-2.5 text-sm hover:bg-gray-200 hover:text-blue_dark dark:hover:text-blue_light focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900">
             <Icon class="h-5 w-5" name="round-mail" /></a
         >
         <a
@@ -49,7 +49,7 @@ const translatePath = useTranslatedPath(lang);
             target="_blank"
             aria-label="Link to github account"
             title={t("Voir mon github")}
-            class="text-muted inline-flex items-center rounded-lg p-2.5 text-sm hover:bg-gray-200 hover:text-sky-600 dark:hover:text-sky-200 focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900">
+            class="text-muted inline-flex items-center rounded-lg p-2.5 text-sm hover:bg-gray-200 hover:text-blue_dark dark:hover:text-blue_light focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900">
             <Icon class="h-5 w-5" name="github" /></a
         >
         {showToggleTheme && <ToggleTheme client:load />}
