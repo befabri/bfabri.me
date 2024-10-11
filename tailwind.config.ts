@@ -9,6 +9,7 @@ export default {
             colors: {
                 blue_light: "#5BC0EB",
                 blue_dark: "#445E93",
+                white: "#FEFEFF",
             },
             animation: {
                 appear: "appear 0.2s ease-in-out",
