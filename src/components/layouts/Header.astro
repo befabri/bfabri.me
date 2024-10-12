@@ -3,7 +3,6 @@ import ToggleTheme from "@components/ui/ToggleTheme";
 import { Icon } from "astro-icon/components";
 import { getLangFromUrl, useTranslatedPath, useTranslations } from "@i18n/utils";
 import { defaultLang } from "@i18n/ui";
-const { showToggleTheme = true } = Astro.props;
 const pathname = new URL(Astro.request.url).pathname;
 const pathSegments = pathname.split("/").filter((segment) => segment !== "");
 const lastSegment = pathSegments[pathSegments.length - 1];
@@ -14,8 +13,8 @@ const translatePath = useTranslatedPath(lang);
 ---
 
 <header
-    class={`flex flex-row max-w-screen-xl mx-auto items-center 
-    ${isHomepage ? "justify-end" : "justify-between"} md:px-5 px-2 my-5`}>
+    class={`flex flex-row max-w-screen-xl mx-auto items-center h-10
+    ${isHomepage ? "justify-end" : "justify-between"} md:px-5 px-2 py-10`}>
     {
         !isHomepage && (
             <a
@@ -28,12 +27,12 @@ const translatePath = useTranslatedPath(lang);
             </a>
         )
     }
-    <div class="flex flex-row items-center">
+    <div class="flex flex-row items-center gap-1 h-10 w-[172px]">
         <a
             href={lang === defaultLang ? "/en" + pathname : pathname.replace("/en/", "/")}
             aria-label={lang == defaultLang ? "Basculer en Anglais" : "Switch to French"}
             title={lang === defaultLang ? "Basculer en Anglais" : "Switch to French"}
-            class="text-muted inline-flex items-center rounded-lg p-2.5 text-sm hover:bg-gray-200 hover:text-blue_dark dark:hover:text-blue_light focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900">
+            class="text-muted inline-flex size-10 items-center rounded-lg p-2.5 text-sm hover:bg-gray-200 hover:text-blue_dark dark:hover:text-blue_light focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900">
             {lang === defaultLang ? "FR" : "EN"}
         </a>
         <a
@@ -41,7 +40,7 @@ const translatePath = useTranslatedPath(lang);
             target="_blank"
             aria-label="Link to send me an email"
             title={t("Me contacter par email")}
-            class="text-muted inline-flex items-center rounded-lg p-2.5 text-sm hover:bg-gray-200 hover:text-blue_dark dark:hover:text-blue_light focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900">
+            class="text-muted size-10 inline-flex items-center rounded-lg p-2.5 text-sm hover:bg-gray-200 hover:text-blue_dark dark:hover:text-blue_light focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900">
             <Icon class="h-5 w-5" name="round-mail" /></a
         >
         <a
@@ -49,9 +48,9 @@ const translatePath = useTranslatedPath(lang);
             target="_blank"
             aria-label="Link to github account"
             title={t("Voir mon github")}
-            class="text-muted inline-flex items-center rounded-lg p-2.5 text-sm hover:bg-gray-200 hover:text-blue_dark dark:hover:text-blue_light focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900">
+            class="text-muted inline-flex size-10 items-center rounded-lg p-2.5 text-sm hover:bg-gray-200 hover:text-blue_dark dark:hover:text-blue_light focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900">
             <Icon class="h-5 w-5" name="github" /></a
         >
-        {showToggleTheme && <ToggleTheme client:load />}
+        <ToggleTheme client:only="preact" />
     </div>
 </header>
