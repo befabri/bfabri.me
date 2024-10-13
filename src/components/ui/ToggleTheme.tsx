@@ -1,3 +1,4 @@
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { useEffect, useState } from "preact/hooks";
 
 const Theme = {
@@ -8,6 +9,13 @@ const Theme = {
 
 export default function ToggleTheme({}) {
     const [theme, setTheme] = useState(Theme.UNSET);
+    const currentUrl = new URL(window.location.href);
+    const lang = getLangFromUrl(currentUrl);
+    const t = useTranslations(lang);
+
+    const getThemeTitle = () => {
+        return theme === Theme.DARK ? t("Passer en mode clair") : t("Passer en mode sombre");
+    };
 
     useEffect(() => {
         const htmlElement = document.querySelector("html");
@@ -27,8 +35,9 @@ export default function ToggleTheme({}) {
             <button
                 onClick={toggleTheme}
                 type="button"
-                class="text-muted dark:text-zinc-400 size-10 hover:text-blue_dark dark:hover:text-blue_light hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-white dark:focus:ring-neutral-900 rounded-lg text-sm p-2.5 inline-flex items-center"
-                aria-label="Change between dark/light mode">
+                class="text-muted inline-flex size-10 items-center justify-center rounded-lg text-sm hover:bg-gray-200 hover:text-blue_dark dark:hover:text-blue_light focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900"
+                aria-label="Switch between light and dark mode"
+                title={getThemeTitle()}>
                 {(theme === Theme.LIGHT || theme === Theme.UNSET) && (
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24">
                         <g fill="none">

@@ -35,6 +35,8 @@ export const ui = {
         "Version HTTP non prise en charge": "Version HTTP non prise en charge",
         Erreur: "Erreur",
         "Non trouvée": "Non trouvée",
+        "Passer en mode sombre": "Passer en mode sombre",
+        "Passer en mode clair": "Passer en mode clair",
     },
     en: {
         Retour: "Back",
@@ -63,5 +65,7 @@ export const ui = {
         "Version HTTP non prise en charge": "Unsupported HTTP version",
         Erreur: "Error",
         "Non trouvée": "Not found",
+        "Passer en mode sombre": "Switch to Dark Mode",
+        "Passer en mode clair": "Switch to Light Mode",
     },
 } as const;
