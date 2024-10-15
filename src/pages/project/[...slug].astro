@@ -22,7 +22,7 @@ const { nextProject, previousProject } = getAdjacentProjects(projects, entry.id)
 <BaseLayout title={entry.data.name}>
     <ProjectDescription
         project={entry}
-        nextProjectLink={nextProject.data.link}
-        previousProjectLink={previousProject.data.link}
+        nextProjectLink={`/project/${nextProject.slug}`}
+        previousProjectLink={`/project/${previousProject.slug}`}
     />
 </BaseLayout>
