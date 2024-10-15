@@ -34,7 +34,7 @@ export default function ImageFullScreen({ children }: ImageProps) {
                         class={clsx(
                             "fixed top-1/2 left-1/2 w-full h-full z-50 transform transition-all duration-300 cursor-default ease-in-out",
                             "translate-x-[-50%] translate-y-[-50%]",
-                            isFullsize ? "scale-100 opacity-100" : "scale-90 opacity-0"
+                            isFullsize ? "scale-100 opacity-100 md:py-8 lg:px-8" : "scale-90 opacity-0"
                         )}
                         role="button">
                         {children}
