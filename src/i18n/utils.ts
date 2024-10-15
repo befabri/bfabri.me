@@ -21,6 +21,7 @@ export function useTranslations(lang: keyof typeof ui) {
 
 export function useTranslatedPath(lang: keyof typeof ui) {
     return function translatePath(path: string, l: string = lang) {
-        return !showDefaultLang && l === defaultLang ? path : `/${l}${path}`;
+        const newPath = path.includes('/en/') ? path.replace('/en/', '/') : path;
+        return !showDefaultLang && l === defaultLang ? newPath : `/${l}${newPath}`;
     };
 }
