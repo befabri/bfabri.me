@@ -4,6 +4,7 @@ import Button from "@components/ui/Button.astro";
 import { Image } from "astro:assets";
 import { getProjects } from "@utils/fetchers";
 import { getLangFromUrl, useTranslatedPath, useTranslations } from "@i18n/utils";
+import Link from "./ui/Link.astro";
 
 interface Image {
     default?: any;
@@ -54,48 +55,35 @@ projects.sort((a, b) => a.data.order - b.data.order);
                                 </a>
                                 <p class="text-zinc-800 dark:text-zinc-200">{project.data.description}</p>
                             </div>
-                            <div class="flex">
+                            <div class="flex gap-4">
                                 {project.data.links.website && (
-                                    <div class="mr-4">
-                                        <a
-                                            href={translatePath(project.data.links.website)}
-                                            class="underline hover:text-blue_dark dark:hover:text-blue_light"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            aria-label={t("Lien vers le site web du projet")}
-                                            title={t("Cliquez pour voir le site web")}>
-                                            {t("Site web")} ↗︎
-                                        </a>
-                                    </div>
+                                    <Link
+                                        href={translatePath(project.data.links.website)}
+                                        ariaLabel={t("Lien vers le site web du projet")}
+                                        title={t("Cliquez pour voir le site web")}
+                                        text={t("Site web")}
+                                    />
                                 )}
                                 {project.data.links.project && (
-                                    <div>
-                                        <a
-                                            href={translatePath(project.data.links.project)}
-                                            class="underline hover:text-blue_dark dark:hover:text-blue_light"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            aria-label={t("Lien vers le dépôt Git")}>
-                                            {t("Git Repos")} ↗︎
-                                        </a>
-                                    </div>
+                                    <Link
+                                        href={translatePath(project.data.links.project)}
+                                        ariaLabel={t("Lien vers le dépôt Git")}
+                                        text={t("Code source")}
+                                    />
                                 )}
                                 {!project.data.links.project && (
-                                    <div>
-                                        <a
-                                            href={translatePath(`/project/${project.slug}`)}
-                                            class="underline hover:text-blue_dark dark:hover:text-blue_light"
-                                            aria-label={t(
-                                                "Lien vers la page du projet contenant les liens des différents dépôts Git"
-                                            )}>
-                                            {t("Git Repos")} ↗︎
-                                        </a>
-                                    </div>
+                                    <Link
+                                        href={translatePath(`/project/${project.slug}#links`)}
+                                        ariaLabel={t(
+                                            "Lien vers la page du projet contenant les liens des différents dépôts Git"
+                                        )}
+                                        text={t("Code source")}
+                                    />
                                 )}
                             </div>
-                            <div class="flex flex-wrap justify-start lg:justify-start flex-row gap-1 sm:gap-0">
+                            <div class="flex flex-wrap justify-start lg:justify-start flex-row gap-1 sm:gap-2">
                                 {project.data.tag.map((t) => (
-                                    <span class="text-zinc-800 dark:text-zinc-200 text-xs font-medium me-2 px-2.5 rounded border border-zinc-600 dark:border-zinc-300 select-none">
+                                    <span class="text-zinc-800 dark:text-zinc-200 text-xs font-medium px-2.5 rounded border border-zinc-600 dark:border-zinc-300 select-none">
                                         {t}
                                     </span>
                                 ))}

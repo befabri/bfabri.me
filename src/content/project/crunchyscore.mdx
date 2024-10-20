@@ -14,6 +14,7 @@ images: [
     {src: "/src/assets/project/crunchyscore/config.webp", alt: "Configuration de l'extension"}
     ]
 ---
+import Link from '../../components/ui/Link.astro';
 
 ## Description du projet
 
@@ -37,13 +38,19 @@ Extension Google chrome pour le site Crunchyroll intégrant les scores de notati
 
 ## Liens
 
--   [Site web](https://crunchyscore.app)
--   [Chrome store](https://chrome.google.com/webstore/detail/crunchyscore-mal-score-on/coiidbjimmeojgdkclafjccnhgenmmbi)
+### Extension
 
-### Codes Sources
+<div class="flex flex-row gap-4">
+    <Link href="https://chrome.google.com/webstore/detail/crunchyscore-mal-score-on/coiidbjimmeojgdkclafjccnhgenmmbi" text="Chrome store"  />
+    <Link href="https://github.com/befabri/crunchyscore" text="Code source"  />
+</div>
 
--   [Extension](https://github.com/befabri/crunchyscore)
--   [Site web](https://github.com/befabri/crunchyscore.app)
--   **Backend Privé**
+### Landing Page
+<div class="flex flex-row gap-4">
+    <Link href="https://crunchyscore.app" text="Site web"  />
+    <Link href="https://github.com/befabri/crunchyscore.app" text="Code source"  />
+</div>
+
+### Backend Privé
 
 ## Images

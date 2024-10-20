@@ -14,6 +14,7 @@ images: [
     {src: "/src/assets/project/crunchyscore/config.webp", alt: "Final website - Clash of Dev"}
     ]
 ---
+import Link from '../../../components/ui/Link.astro';
 
 ## Project description
 
@@ -23,8 +24,8 @@ The event is broadcast live on Twitch and evaluated by a panel of recognized pro
 Participants were required to implement mockups provided on Figma, created specifically for the event.
 
 **Jury:**
-- **@[LLCoolChris_](https://x.com/LLCoolChris_)**, a developer renowned for his technical expertise
-- **[@maislina_](https://x.com/maislina_)**, Product Designer and creator of the mockups to be implemented
+- **[@LLCoolChris_](https://x.com/LLCoolChris_)** a developer renowned for his technical expertise
+- **[@maislina_](https://x.com/maislina_)** product Designer and creator of the mockups to be implemented
 
 **Competition Phases:**
 1. **The Pool** (first round) - Mockup unveiled on September 17, 2024; projects submitted by September 23, 2024
@@ -32,44 +33,31 @@ Participants were required to implement mockups provided on Figma, created speci
 
 Participants are judged according to a rigorous scale, evaluating both design and code quality.
 
-### Evaluation Criteria for The Pool:
-- **Design Compliance**: 6 points
-- **Code Cleanliness**: 6 points  
-  - Lighthouse score: 2 points  
-  - Code organization: 2 points  
-  - HTML semantics: 2 points
+### Evaluation Criteria and Results - The Pool
+
+- **Design Compliance**: : 5.5/6 points
+- **Code Cleanliness**: 6/6 points  
+  - Lighthouse score
+  - Code organization
+  - HTML semantics
 - **Responsive Design**: 2 points
-- **Motion**: 3 points  
-  - Originality: 1.5 points  
-  - Consistency with the design: 1.5 points
-- **Easter Egg**: 3 points
-
-### Evaluation Criteria for The Final:
-- **Design Compliance**: 8 points
-- **Code Cleanliness**: 3 points  
-  - Functionality / Core features / Bugs: 2 points  
-  - Mobile compatibility: 1 point
-- **Motion**: 3 points  
-  - Originality: 1.5 points  
-  - Consistency with the design: 1.5 points
-- **Risk-Taking**: 6 points
-
-### My Results:
-
-**The Pool:**
-- Design: 5.5 points  
-- Development: 6 points  
-- Responsive Design: 1.5 points  
-- Motion: 2.25 points  
-- Easter Egg: 1 point  
+- **Motion**: 2.25/3 points   
+  - Originality
+  - Consistency with the design
+- **Easter Egg**: 1/3 points
 
 **Total**: 16.25/20 - 4th place out of 50 participants
 
-**The Final:**
-- Code: 2.75 points  
-- Design: 7.95 points  
-- Motion: 1.75 points  
-- Risk-Taking: 3 points  
+### Evaluation Criteria and Results - The Final
+
+- **Design Compliance**: 7.95/8 points
+- **Code Cleanliness**: 2.75/3 points  
+  - Functionality / Core features / Bugs
+  - Mobile compatibility
+- **Motion**: 1.75/3 points
+  - Originality
+  - Consistency with the design
+- **Risk-Taking**: 3/6 points
 
 **Total**: 15.45/20 - 4th place out of 6 participants
 
@@ -81,13 +69,21 @@ Participants are judged according to a rigorous scale, evaluating both design an
 
 ## Links
 
--   [Pool](https://clashofdev.bfabri.me/)
--   [Final](https://clashofdevfinal.bfabri.me/)
--   [Figma](https://www.figma.com/community/file/1428494308483445852/clash-of-dev)
+### Piscine
 
-### Codes Sources
+<div class="flex flex-row gap-4">
+  <Link href="https://clashofdev.bfabri.me/" text="Website"  />
+  <Link href="https://github.com/befabri/clashofdev" text="Source code"  />
+</div>
 
--   [Pool](https://github.com/befabri/clashofdev)
--   [Final](https://github.com/befabri/clashofdevfinal)
+### Finale
+
+<div class="flex flex-row gap-4">
+  <Link href="https://clashofdevfinal.bfabri.me/" text="Website"  />
+  <Link href="https://github.com/befabri/clashofdevfinal" text="Source code"  />
+</div>
+
+### Figma
+<Link href="https://www.figma.com/community/file/1428494308483445852/clash-of-dev" text="Figma"  />
 
 ## Images

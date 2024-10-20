@@ -37,6 +37,7 @@ export const ui = {
         "Non trouvée": "Non trouvée",
         "Passer en mode sombre": "Passer en mode sombre",
         "Passer en mode clair": "Passer en mode clair",
+        "Code source": "Code source",
     },
     en: {
         Retour: "Back",
@@ -67,5 +68,6 @@ export const ui = {
         "Non trouvée": "Not found",
         "Passer en mode sombre": "Switch to Dark Mode",
         "Passer en mode clair": "Switch to Light Mode",
+        "Code source": "Source code",
     },
 } as const;
