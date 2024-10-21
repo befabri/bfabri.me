@@ -6,19 +6,26 @@ type ImageProps = {
 };
 
 export default function ImageFullScreen({ children }: ImageProps) {
-    const [isFullsize, setIsFullsize] = useState(false);
+    const [isFullSize, setIsFullSize] = useState(false);
 
     const handleImageClick = () => {
-        setIsFullsize((prevIsFullsize) => {
-            document.body.style.overflow = prevIsFullsize ? "" : "hidden";
-            return !prevIsFullsize;
+        setIsFullSize((prevIsFullSize) => {
+            if (!prevIsFullSize) {
+                document.body.style.overflow = "hidden";
+                document.documentElement.style.overflow = "hidden";
+            } else {
+                document.body.style.overflow = "";
+                document.documentElement.style.overflow = "";
+            }
+            return !prevIsFullSize;
         });
     };
 
     const handleCloseButtonClick = (event: MouseEvent) => {
-        event.stopPropagation(); // Prevent click from bubbling up
-        setIsFullsize(false);
-        document.body.style.overflow = ""; // Reset the overflow
+        event.stopPropagation();
+        setIsFullSize(false);
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
     };
 
     return (
@@ -27,14 +34,14 @@ export default function ImageFullScreen({ children }: ImageProps) {
                 {children}
             </div>
 
-            {isFullsize && (
+            {isFullSize && (
                 <>
                     <div
                         onClick={handleImageClick}
                         class={clsx(
                             "fixed top-1/2 left-1/2 w-full h-full z-50 transform transition-all duration-300 cursor-default ease-in-out",
                             "translate-x-[-50%] translate-y-[-50%]",
-                            isFullsize ? "scale-100 opacity-100 md:py-8 lg:px-8" : "scale-90 opacity-0"
+                            isFullSize ? "scale-100 opacity-100 md:py-8 lg:px-8" : "scale-90 opacity-0"
                         )}
                         role="button">
                         {children}
@@ -61,7 +68,7 @@ export default function ImageFullScreen({ children }: ImageProps) {
                     <div
                         class={clsx(
                             "fixed inset-0 z-40 bg-black dark:bg-black transition-opacity duration-300 cursor-default ease-in-out",
-                            isFullsize ? "bg-opacity-100 sm:bg-opacity-90 dark:sm:bg-opacity-70" : "bg-opacity-0"
+                            isFullSize ? "bg-opacity-100 sm:bg-opacity-90 dark:sm:bg-opacity-70" : "bg-opacity-0"
                         )}
                         onClick={handleImageClick}
                         aria-hidden="true"></div>
