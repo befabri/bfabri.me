@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-icon/components";
+
 interface Props {
     href: string;
     text: string;
@@ -10,10 +12,11 @@ const { href, text, ariaLabel = text, title } = Astro.props;
 
 <a
     href={href}
-    class="underline hover:text-blue_dark dark:hover:text-blue_light"
+    class="hover:text-blue_dark dark:hover:text-blue_light inline-flex items-center border-b border-current leading-5"
     target="_blank"
     rel="noopener noreferrer"
     aria-label={ariaLabel}
     title={title}>
-    {text + " ↗︎"}
+    {text}
+    <Icon name="arrow-link" />
 </a>
