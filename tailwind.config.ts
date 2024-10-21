@@ -3,12 +3,28 @@ export default {
     content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
     theme: {
         extend: {
+            typography: (theme) => ({
+                DEFAULT: {
+                    css: {
+                        "li::marker": {
+                            color: theme("colors.zinc.800"),
+                        },
+                    },
+                },
+                invert: {
+                    css: {
+                        "li::marker": {
+                            color: theme("colors.zinc.200"),
+                        },
+                    },
+                },
+            }),
             screens: {
                 xs: "450px",
             },
             colors: {
                 blue_light: "#5BC0EB",
-                blue_dark: "#445E93",
+                blue_dark: "#5473B1",
                 white: "#FEFEFF",
             },
             animation: {
