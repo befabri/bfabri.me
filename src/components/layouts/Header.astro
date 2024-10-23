@@ -32,7 +32,7 @@ const translatePath = useTranslatedPath(lang);
             href={lang === defaultLang ? "/en" + pathname : pathname.replace("/en/", "/")}
             aria-label={lang == defaultLang ? "Basculer en Anglais" : "Switch to French"}
             title={lang === defaultLang ? "Basculer en Anglais" : "Switch to French"}
-            class="text-muted inline-flex size-10 items-center justify-center rounded-lg text-sm hover:bg-gray-200 hover:text-blue_dark dark:hover:text-blue_light focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900">
+            class="text-muted inline-flex size-10 font-medium items-center justify-center rounded-lg text-sm hover:bg-gray-200 hover:text-blue_dark dark:hover:text-blue_light focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900">
             {lang === defaultLang ? "FR" : "EN"}
         </a>
         <a
