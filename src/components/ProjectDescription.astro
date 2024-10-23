@@ -32,11 +32,12 @@ const translatePath = useTranslatedPath(lang);
             <Image
                 src={images[project.data.image.src]()}
                 alt={project.data.image.alt}
-                width={850}
-                height={425}
                 format="avif"
-                loading="eager"
-                class="block h-full w-full"
+                loading="lazy"
+                decoding="async"
+                width="850"
+                height="425"
+                class="block h-full w-full transform object-cover"
             />
         </div>
     </div>
@@ -59,8 +60,8 @@ const translatePath = useTranslatedPath(lang);
                                         alt={image.alt}
                                         format="avif"
                                         loading="lazy"
-                                        width={1920}
-                                        height={1080}
+                                        width="1920"
+                                        height="1080"
                                         class="block h-full w-full transform object-contain m-0"
                                     />
                                 </ImageFullScreen>
@@ -77,16 +78,16 @@ const translatePath = useTranslatedPath(lang);
                 href={translatePath(`${previousProjectLink}`)}
                 size="md"
                 class="inline-flex items-center gap-2 justify-center no-underline w-[120px]">
-                <Icon class="h-5 w-5" name="arrow-left" />
+                <Icon class="size-5 flex-shrink-0" name="arrow-left" />
                 <span>{t("Précédent")}</span>
             </Button>
             <Button
                 style="primary"
                 href={translatePath(`${nextProjectLink}`)}
                 size="md"
-                class="inline-flex items-center gap-2 justify-center no-underline w-[120px]">
+                class="flex items-center gap-2 justify-center no-underline w-[120px]">
                 <span>{t("Suivant")}</span>
-                <Icon class="h-5 w-5" name="arrow-right" />
+                <Icon class="size-5 flex-shrink-0" name="arrow-right" />
             </Button>
         </div>
     </div>

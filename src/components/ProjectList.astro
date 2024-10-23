@@ -30,16 +30,18 @@ projects.sort((a, b) => a.data.order - b.data.order);
             projects.map((project) => (
                 <div id={project.data.id} class="m-auto flex flex-col sm:m-0 sm:w-auto lg:flex-row gap-8">
                     <div
-                        class=" overflow-hidden border-2 border-zinc-600 dark:border-zinc-800"
+                        class="overflow-hidden border-2 border-zinc-600 dark:border-zinc-800"
                         transition:name={"img-" + project.slug}>
                         <a href={translatePath(`/project/${project.slug}`)}>
                             <Image
                                 src={images[project.data.image.src]()}
                                 alt={project.data.image.alt}
-                                width={850}
-                                height={425}
+                                format="avif"
                                 loading="lazy"
-                                class="block transform cursor-pointer object-contain object-top transition-all duration-1000 hover:scale-110"
+                                decoding="async"
+                                width="850"
+                                height="425"
+                                class="block transform cursor-pointer object-cover object-top transition-all duration-1000 hover:scale-110"
                             />
                         </a>
                     </div>
