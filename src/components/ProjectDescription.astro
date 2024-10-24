@@ -77,7 +77,7 @@ const translatePath = useTranslatedPath(lang);
                 style="primary"
                 href={translatePath(`${previousProjectLink}`)}
                 size="md"
-                class="inline-flex items-center gap-2 justify-center no-underline w-[120px]">
+                class="flex items-center justify-between no-underline w-[120px]">
                 <Icon class="size-5 flex-shrink-0" name="arrow-left" />
                 <span>{t("Précédent")}</span>
             </Button>
@@ -85,7 +85,7 @@ const translatePath = useTranslatedPath(lang);
                 style="primary"
                 href={translatePath(`${nextProjectLink}`)}
                 size="md"
-                class="flex items-center gap-2 justify-center no-underline w-[120px]">
+                class="flex items-center justify-between no-underline w-[120px]">
                 <span>{t("Suivant")}</span>
                 <Icon class="size-5 flex-shrink-0" name="arrow-right" />
             </Button>
