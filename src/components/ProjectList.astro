@@ -32,7 +32,7 @@ projects.sort((a, b) => a.data.order - b.data.order);
                     <div
                         class="overflow-hidden border-2 border-zinc-600 dark:border-zinc-800"
                         transition:name={"img-" + project.slug}>
-                        <a href={translatePath(`/project/${project.slug}`)}>
+                        <a href={translatePath(`/project/${project.slug}/`)}>
                             <Image
                                 src={images[project.data.image.src]()}
                                 alt={project.data.image.alt}
@@ -48,7 +48,7 @@ projects.sort((a, b) => a.data.order - b.data.order);
                     <div class="flex flex-col w-full justify-between gap-10 lg:gap-0">
                         <div class="flex flex-col w-full gap-6 lg:pt-4">
                             <div class="flex flex-col gap-4">
-                                <a href={translatePath(`/project/${project.slug}`)}>
+                                <a href={translatePath(`/project/${project.slug}/`)}>
                                     <h3 class="flex projects-center text-3xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-200">
                                         {project.data.name}
                                     </h3>
@@ -73,7 +73,7 @@ projects.sort((a, b) => a.data.order - b.data.order);
                                 )}
                                 {!project.data.links.project && (
                                     <Link
-                                        href={translatePath(`/project/${project.slug}#links`)}
+                                        href={translatePath(`/project/${project.slug}/#${t("links")}`)}
                                         ariaLabel={t(
                                             "Lien vers la page du projet contenant les liens des différents dépôts Git"
                                         )}
@@ -91,7 +91,7 @@ projects.sort((a, b) => a.data.order - b.data.order);
                         </div>
                         <div class="flex justify-center lg:justify-end mr-2">
                             <a
-                                href={translatePath(`/project/${project.slug}`)}
+                                href={translatePath(`/project/${project.slug}/`)}
                                 aria-label={t("Lien vers la page du projet")}
                                 title={t("Cliquez pour voir le projet")}
                                 class="hidden lg:block group">
@@ -103,7 +103,7 @@ projects.sort((a, b) => a.data.order - b.data.order);
                             <div class="text-center lg:hidden">
                                 <Button
                                     style="primary"
-                                    href={translatePath(`/project/${project.slug}`)}
+                                    href={translatePath(`/project/${project.slug}/`)}
                                     class="inline-block rounded px-4">
                                     {t("En savoir plus")}
                                 </Button>

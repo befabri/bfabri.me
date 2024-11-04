@@ -75,7 +75,7 @@ const translatePath = useTranslatedPath(lang);
         <div class="flex flex-row gap-10 justify-center">
             <Button
                 style="primary"
-                href={translatePath(`${previousProjectLink}`)}
+                href={translatePath(`${previousProjectLink}/`)}
                 size="md"
                 class="flex items-center justify-between no-underline w-[120px]">
                 <Icon class="size-5 flex-shrink-0" name="arrow-left" />
@@ -83,7 +83,7 @@ const translatePath = useTranslatedPath(lang);
             </Button>
             <Button
                 style="primary"
-                href={translatePath(`${nextProjectLink}`)}
+                href={translatePath(`${nextProjectLink}/`)}
                 size="md"
                 class="flex items-center justify-between no-underline w-[120px]">
                 <span>{t("Suivant")}</span>
