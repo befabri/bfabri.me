@@ -21,6 +21,7 @@ export default {
             }),
             screens: {
                 xs: "450px",
+                lg: "952px",
             },
             colors: {
                 blue_light: "#5BC0EB",
