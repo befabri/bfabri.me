@@ -50,19 +50,17 @@ const translatePath = useTranslatedPath(lang);
                 {
                     project.data.images.map((image: { src: string; alt: string }) => (
                         <figure class="flex flex-col gap-2 m-0">
-                            <div class="border-2 border-zinc-600 dark:border-zinc-800 bg-gray-300">
-                                <ImageFullScreen client:load>
-                                    <Image
-                                        src={projectImages[image.src]()}
-                                        alt={image.alt}
-                                        format="webp"
-                                        loading="lazy"
-                                        width="1700"
-                                        height="940"
-                                        class="block h-full w-full transform object-contain m-0"
-                                    />
-                                </ImageFullScreen>
-                            </div>
+                            <ImageFullScreen client:load>
+                                <Image
+                                    src={projectImages[image.src]()}
+                                    alt={image.alt}
+                                    format="webp"
+                                    loading="lazy"
+                                    width="1700"
+                                    height="940"
+                                    class="object-contain w-full h-full border-2 border-zinc-600 dark:border-zinc-800 rounded-lg m-0"
+                                />
+                            </ImageFullScreen>
                             <figcaption class="text-center text-zinc-800 dark:text-zinc-200 m-0">
                                 {image.alt}
                             </figcaption>

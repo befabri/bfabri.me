@@ -1,5 +1,6 @@
 import { useState } from "preact/hooks";
 import clsx from "clsx";
+import { cloneElement, isValidElement } from "preact";
 
 type ImageProps = {
     children: any;
@@ -28,6 +29,21 @@ export default function ImageFullScreen({ children }: ImageProps) {
         document.documentElement.style.overflow = "";
     };
 
+    const modifyChildClasses = (child: any) => {
+        if (isValidElement(child)) {
+            const { props } = child as { props: { value?: string } };
+            if (props.value && typeof props.value === "string") {
+                const newValue = props.value.replace(/\bborder-2\b/, "");
+                return cloneElement(child, { value: newValue });
+            }
+        }
+        return child;
+    };
+
+    const childrenWithModifiedClasses = Array.isArray(children)
+        ? children.map(modifyChildClasses)
+        : modifyChildClasses(children);
+
     return (
         <>
             <div onClick={handleImageClick} class="cursor-pointer" role="button">
@@ -44,10 +60,10 @@ export default function ImageFullScreen({ children }: ImageProps) {
                             isFullSize ? "scale-100 opacity-100 md:py-8 lg:px-8" : "scale-90 opacity-0"
                         )}
                         role="button">
-                        {children}
+                        {childrenWithModifiedClasses}
                         <button
                             onClick={handleCloseButtonClick}
-                            class="absolute top-3 left-3.5 z-50 p-1.5 bg-black text-zinc-100 hover:bg-neutral-800 dark:hover:bg-neutral-900 rounded-full bg-opacity-70 border-none cursor-pointer"
+                            class="absolute top-3 right-3.5 z-50 p-1.5 bg-black text-zinc-100 hover:bg-neutral-800 dark:hover:bg-neutral-900 rounded-full bg-opacity-70 border-none cursor-pointer"
                             aria-label="Close full screen">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
