@@ -29,23 +29,22 @@ projects.sort((a, b) => a.data.order - b.data.order);
         {
             projects.map((project, index) => (
                 <div id={project.data.id} class="m-auto flex flex-col sm:m-0 sm:w-auto lg:flex-row gap-8 py-4">
-                    <a href={translatePath(`/project/${project.slug}/`)} transition:name={"img-" + project.slug}>
-                        <Image
-                            src={images[project.data.image.src]()}
-                            alt={project.data.image.alt}
-                            format="webp"
-                            loading={index === 0 ? "eager" : "lazy"}
-                            decoding="async"
-                            width="850"
-                            height="496"
-                            class="cursor-pointer object-cover object-top w-full h-full border-2 border-zinc-600 dark:border-zinc-800 rounded-lg"
-                        />
-                    </a>
+                    <Image
+                        src={images[project.data.image.src]()}
+                        alt={project.data.image.alt}
+                        format="webp"
+                        loading={index === 0 ? "eager" : "lazy"}
+                        decoding="async"
+                        width="850"
+                        height="496"
+                        transition:name={"img-" + project.slug}
+                        class="object-contain object-top w-full lg:w-5/12 h-full border-2 border-zinc-600 dark:border-zinc-800 rounded-lg"
+                    />
                     <div class="flex flex-col w-full justify-between gap-10 lg:gap-0">
-                        <div class="flex flex-col w-full gap-6 lg:pt-4">
+                        <div class="flex flex-col w-full gap-6">
                             <div class="flex flex-col gap-4">
                                 <a href={translatePath(`/project/${project.slug}/`)}>
-                                    <h3 class="flex projects-center text-3xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-200">
+                                    <h3 class="flex projects-center text-3xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-200 hover:text-blue_dark dark:hover:text-blue_light">
                                         {project.data.name}
                                     </h3>
                                 </a>
