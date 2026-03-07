@@ -1,0 +1,40 @@
+---
+draft: false
+order: 0
+id: "trpcgo"
+name: "trpcgo"
+description: "Une implémentation Go du protocole tRPC permettant la sûreté de typage de bout en bout entre un backend Go et un frontend TypeScript."
+image: {"src":"/src/assets/project/trpcgo.jpg", "alt":"trpcgo"}
+links: {
+project: "https://github.com/befabri/trpcgo",
+}
+tag: ["Go", "TypeScript", "tRPC", "Code Generation", "Zod"]
+images: []
+---
+import Link from '../../components/ui/Link.astro';
+
+## Description du projet
+
+trpcgo est une librairie Go implémentant le protocole [tRPC](https://trpc.io) qui apporte la sûreté de typage de bout en bout aux applications full-stack. Il permet de définir les types d'API une seule fois en Go et génère automatiquement un `AppRouter` TypeScript entièrement typé. Le frontend utilise directement `@trpc/client` et `@trpc/react-query` sans aucune modification : le backend Go est totalement transparent et interchangeable avec un backend tRPC TypeScript classique.
+
+## Fonctionnalités Clés
+
+- Support des queries, mutations et subscriptions (streaming SSE) avec typage des entrées/sorties.
+- Génération automatique de types TypeScript et de schémas Zod à partir du code Go via analyse statique et réflexion.
+- Middleware global et par procédure, avec composition via des base procedures.
+- CLI avec mode watch pour la régénération en temps réel pendant le développement, offrant la même expérience développeur que tRPC en TypeScript.
+- Aucune dépendance de framework, basé sur `net/http` standard.
+- Validation des entrées compatible avec go-playground/validator.
+- Gestion d'erreurs conforme au protocole tRPC.
+- Support des requêtes batch.
+
+## Développé avec
+
+**Go:** net/http, golang.org/x/tools, fsnotify
+
+**TypeScript:** @trpc/client, @trpc/react-query, Zod
+
+## Liens
+
+<Link href="https://github.com/befabri/trpcgo" text="Code source"  />
+
