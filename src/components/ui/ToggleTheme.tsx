@@ -1,4 +1,5 @@
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import type { ComponentChildren } from "preact";
 import { useEffect, useState } from "preact/hooks";
 
 const Theme = {
@@ -7,7 +8,12 @@ const Theme = {
     UNSET: "",
 };
 
-export default function ToggleTheme(props: any) {
+interface Props {
+    sun?: ComponentChildren;
+    moon?: ComponentChildren;
+}
+
+export default function ToggleTheme(props: Props) {
     const [theme, setTheme] = useState(Theme.UNSET);
     const currentUrl = new URL(window.location.href);
     const lang = getLangFromUrl(currentUrl);
@@ -31,16 +37,14 @@ export default function ToggleTheme(props: any) {
     };
 
     return (
-        <>
-            <button
-                onClick={toggleTheme}
-                type="button"
-                class="text-muted inline-flex size-10 items-center justify-center rounded-lg text-sm hover:bg-gray-200 hover:text-blue_dark dark:hover:text-blue_light focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900"
-                aria-label="Switch between light and dark mode"
-                title={getThemeTitle()}>
-                {(theme === Theme.LIGHT || theme === Theme.UNSET) && props.sun}
-                {theme === Theme.DARK && props.moon}
-            </button>
-        </>
+        <button
+            onClick={toggleTheme}
+            type="button"
+            class="text-muted inline-flex size-10 items-center justify-center rounded-lg text-sm hover:bg-gray-200 hover:text-blue_dark dark:hover:text-blue_light focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900"
+            aria-label="Switch between light and dark mode"
+            title={getThemeTitle()}>
+            {(theme === Theme.LIGHT || theme === Theme.UNSET) && props.sun}
+            {theme === Theme.DARK && props.moon}
+        </button>
     );
 }

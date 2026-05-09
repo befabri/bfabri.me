@@ -1,7 +1,7 @@
 import { getCollection } from "astro:content";
-import { ui } from "@i18n/ui";
+import type { ui } from "@i18n/ui";
 import { getLangFromSlug } from "@i18n/utils";
-import type { Project } from "content/config";
+import type { Project } from "../content.config";
 
 interface AdjacentProjects {
     nextProject: Project;
@@ -11,7 +11,7 @@ interface AdjacentProjects {
 export async function getProjects(lang: keyof typeof ui): Promise<Project[]> {
     const projects = await getCollection("project");
     return projects
-        .filter((project) => !project.data.draft && getLangFromSlug(project.slug) === lang)
+        .filter((project) => !project.data.draft && getLangFromSlug(project.id) === lang)
         .sort((a, b) => a.data.order - b.data.order);
 }
 

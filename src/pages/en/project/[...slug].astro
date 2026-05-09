@@ -7,15 +7,15 @@ import { getAdjacentProjects, getProjects } from "@utils/fetchers";
 
 export async function getStaticPaths() {
     const pages = await getCollection("project");
-    const paths = pages.map((page) => {
-        const [lang, ...slug] = page.slug.split("/");
-        return { params: { lang, slug: slug.join("/") || undefined }, props: page };
-    });
-
-    return paths;
+    return pages
+        .filter((page) => !page.data.draft && page.id.startsWith("en/"))
+        .map((page) => ({
+            params: { slug: page.id.replace(/^en\//, "") },
+            props: { page },
+        }));
 }
 
-const page = Astro.props;
+const { page } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const projects = await getProjects(lang);
 const { nextProject, previousProject } = getAdjacentProjects(projects, page.id);
@@ -24,7 +24,7 @@ const { nextProject, previousProject } = getAdjacentProjects(projects, page.id);
 <BaseLayout title={page.data.name}>
     <ProjectDescription
         project={page}
-        nextProjectLink={`/project/${nextProject.slug}`}
-        previousProjectLink={`/project/${previousProject.slug}`}
+        nextProjectLink={`/project/${nextProject.id}`}
+        previousProjectLink={`/project/${previousProject.id}`}
     />
 </BaseLayout>

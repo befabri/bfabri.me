@@ -26,6 +26,7 @@
         "i18n/*"
       ]
     },
+    "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
   },

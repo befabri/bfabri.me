@@ -1,6 +1,6 @@
 ---
 import "@styles/global.css";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 
 export interface Props {
     title: string;
@@ -11,7 +11,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 const resolvedImageWithDomain = new URL("/opengraph.jpg", Astro.site).toString();
 
 const { title } = Astro.props;
-const makeTitle = title ? title + " | " + "Benjamin Fabri" : "Benjamin Fabri";
+const makeTitle = title ? `${title} | Benjamin Fabri` : "Benjamin Fabri";
 const description = "Benjamin Fabri - Portfolio";
 ---
 
@@ -23,7 +23,7 @@ const description = "Benjamin Fabri - Portfolio";
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="canonical" href={canonicalURL} />
     <link rel="alternate" hreflang="fr" href={Astro.site} />
-    <link rel="alternate" hreflang="en" href={Astro.site + "en/"} />
+    <link rel="alternate" hreflang="en" href={`${Astro.site}en/`} />
     <title>{makeTitle}</title>
     <meta name="title" content={makeTitle} />
     <meta name="description" content={description} />
@@ -46,12 +46,12 @@ const description = "Benjamin Fabri - Portfolio";
                 document.querySelector("html").dataset.theme = "light";
             }
             if (!localStorage.getItem("color-scheme")) {
-                let theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+                const theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
                 localStorage.setItem("color-scheme", theme);
             }
         };
         setDarkMode();
         document.addEventListener("astro:after-swap", setDarkMode);
     </script>
-    <ViewTransitions />
+    <ClientRouter />
 </head>

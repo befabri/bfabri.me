@@ -1,6 +1,39 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --breakpoint-xs: 450px;
+  --breakpoint-lg: 952px;
+  --color-blue_light: #5BC0EB;
+  --color-blue_dark: #5473B1;
+  --color-white: #FEFEFF;
+  --font-sans: "Changa Variable", sans-serif;
+  --animate-appear: appear 0.2s ease-in-out;
+
+  @keyframes appear {
+    0% {
+      opacity: 0;
+      transform: translateX(-1px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+@layer components {
+  .prose li::marker {
+    color: var(--color-zinc-800);
+  }
+
+  .prose-invert li::marker {
+    color: var(--color-zinc-200);
+  }
+}
 
 /* changa-latin-wght-normal */
 @font-face {
@@ -8,7 +41,7 @@
   font-style: normal;
   font-display: auto;
   font-weight: 200 800;
-  src: url(@fontsource-variable/changa/files/changa-latin-wght-normal.woff2) format('woff2-variations');
+  src: url("@fontsource-variable/changa/files/changa-latin-wght-normal.woff2") format('woff2-variations');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 

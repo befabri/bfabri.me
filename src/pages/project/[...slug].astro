@@ -1,16 +1,19 @@
 ---
 import ProjectDescription from "@components/ProjectDescription.astro";
 import { getLangFromUrl } from "@i18n/utils";
+import { defaultLang } from "@i18n/ui";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getAdjacentProjects, getProjects } from "@utils/fetchers";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
     const projectEntries = await getCollection("project");
-    return projectEntries.map((entry) => ({
-        params: { slug: entry.slug },
-        props: { entry },
-    }));
+    return projectEntries
+        .filter((entry) => !entry.data.draft && !entry.id.startsWith(`${defaultLang}/`) && !entry.id.includes("/"))
+        .map((entry) => ({
+            params: { slug: entry.id },
+            props: { entry },
+        }));
 }
 
 const { entry } = Astro.props;
@@ -22,7 +25,7 @@ const { nextProject, previousProject } = getAdjacentProjects(projects, entry.id)
 <BaseLayout title={entry.data.name}>
     <ProjectDescription
         project={entry}
-        nextProjectLink={`/project/${nextProject.slug}`}
-        previousProjectLink={`/project/${previousProject.slug}`}
+        nextProjectLink={`/project/${nextProject.id}`}
+        previousProjectLink={`/project/${previousProject.id}`}
     />
 </BaseLayout>

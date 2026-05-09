@@ -1,9 +1,10 @@
 import { useState } from "preact/hooks";
 import clsx from "clsx";
+import type { ComponentChild, ComponentChildren } from "preact";
 import { cloneElement, isValidElement } from "preact";
 
 type ImageProps = {
-    children: any;
+    children: ComponentChildren;
 };
 
 export default function ImageFullScreen({ children }: ImageProps) {
@@ -29,7 +30,7 @@ export default function ImageFullScreen({ children }: ImageProps) {
         document.documentElement.style.overflow = "";
     };
 
-    const modifyChildClasses = (child: any) => {
+    const modifyChildClasses = (child: ComponentChild) => {
         if (isValidElement(child)) {
             const { props } = child as { props: { value?: string } };
             if (props.value && typeof props.value === "string") {

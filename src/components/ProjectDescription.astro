@@ -1,10 +1,11 @@
 ---
 import Button from "@components/ui/Button.astro";
-import { Icon } from "astro-icon/components";
+import { ArrowLeft, ArrowRight } from "@lucide/astro";
 import { Image } from "astro:assets";
+import { render } from "astro:content";
 import ImageFullScreen from "@components/ui/ImageFullScreen";
 import { getLangFromUrl, useTranslatedPath, useTranslations } from "@i18n/utils";
-import type { Project } from "content/config";
+import type { Project } from "../content.config";
 const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/project/*.{jpeg,jpg,png,gif}");
 const projectImages = import.meta.glob<{ default: ImageMetadata }>(
     "/src/assets/project/*/*.{jpeg,jpg,png,gif,webp}"
@@ -17,7 +18,7 @@ interface Props {
 }
 
 const { project, nextProjectLink, previousProjectLink } = Astro.props;
-const { Content } = await project.render();
+const { Content } = await render(project);
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -35,18 +36,18 @@ const translatePath = useTranslatedPath(lang);
             width="850"
             height="496"
             class="object-cover object-top w-full h-full border-2 border-zinc-600 dark:border-zinc-800 rounded-lg"
-            transition:name={"img-" + project.slug}
+            transition:name={`img-${project.id}`}
         />
     </div>
     <div
         class="prose prose-lg mx-auto max-w-3xl text-base text-zinc-800 dark:prose-invert dark:text-zinc-200 flex flex-col gap-24">
         <article
-            class="hover:prose-a:text-blue_dark dark:hover:prose-a:text-blue_light prose-a:no-underline prose-headings:text-zinc-800 prose-strong:text-zinc-800 prose-a:text-zinc-800 dark:prose-headings:text-zinc-200 dark:prose-strong:text-zinc-200 dark:prose-a:text-zinc-200">
+            class="prose-a:hover:text-blue_dark dark:prose-a:hover:text-blue_light prose-a:no-underline prose-headings:text-zinc-800 prose-strong:text-zinc-800 prose-a:text-zinc-800 dark:prose-headings:text-zinc-200 dark:prose-strong:text-zinc-200 dark:prose-a:text-zinc-200">
             <h1>
                 {project.data.name}
             </h1>
             <Content />
-            <div class="flex flex-col gap-10">
+            <div class="not-prose flex flex-col gap-10">
                 {
                     project.data.images.map((image: { src: string; alt: string }) => (
                         <figure class="flex flex-col gap-2 m-0">
@@ -75,7 +76,7 @@ const translatePath = useTranslatedPath(lang);
                 href={translatePath(`${previousProjectLink}/`)}
                 size="md"
                 class="flex items-center justify-between no-underline w-[120px]">
-                <Icon class="size-5 flex-shrink-0" name="arrow-left" />
+                <ArrowLeft class="size-5 flex-shrink-0" />
                 <span>{t("Précédent")}</span>
             </Button>
             <Button
@@ -84,7 +85,7 @@ const translatePath = useTranslatedPath(lang);
                 size="md"
                 class="flex items-center justify-between no-underline w-[120px]">
                 <span>{t("Suivant")}</span>
-                <Icon class="size-5 flex-shrink-0" name="arrow-right" />
+                <ArrowRight class="size-5 flex-shrink-0" />
             </Button>
         </div>
     </div>
