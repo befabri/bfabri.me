@@ -44,13 +44,21 @@ const projectCardSides = ["left", "right", "left"] as const;
 const projectCardLayouts = [
     "min-[901px]:col-span-3 min-[901px]:row-span-2",
     "min-[901px]:col-span-3 min-[901px]:row-span-2",
-    "min-[901px]:col-span-3 min-[901px]:row-span-1 min-[901px]:[&_.sub]:hidden min-[901px]:[&_.stack]:hidden min-[901px]:[&_h3]:text-[19px] min-[901px]:[&_.top]:text-[11px]",
+    "min-[901px]:col-span-3 min-[901px]:row-span-1 min-[901px]:[&_.sub]:hidden min-[901px]:[&_.stack]:hidden min-[901px]:[&_.top]:text-[11px] min-[901px]:[&_[data-rot-content]]:justify-start min-[901px]:[&_h3]:mt-3 min-[901px]:[&_h3]:text-[clamp(20px,1.6vw,26px)] min-[901px]:[&_h3]:line-clamp-2",
 ];
 const contactLayout = "min-[901px]:col-span-3 min-[901px]:row-span-1";
 
 const getProjectHref = (project: (typeof projects)[number]) => translatePath(`/project/${project.id}/`);
 const getProjectKind = (project: (typeof projects)[number]) => (project.data.links.website ? "Live" : "Code");
 const getProjectStack = (project: (typeof projects)[number]) => project.data.tag.slice(0, 5).map((t) => t.name).join(" · ");
+const rotationData = projects.slice(1).map((p) => ({
+    kind: getProjectKind(p),
+    year: String(p.data.year),
+    name: p.data.name,
+    description: p.data.description,
+    stack: getProjectStack(p),
+    href: getProjectHref(p),
+}));
 ---
 
 <div
@@ -82,7 +90,12 @@ const getProjectStack = (project: (typeof projects)[number]) => project.data.tag
             </div>
             <h1 class="mt-1.5 text-[clamp(56px,8.4vw,144px)] font-semibold leading-[0.86] tracking-[-0.055em] max-[560px]:text-[clamp(58px,22vw,96px)]">
                 Benjamin<br />
-                <i class="not-italic font-normal tracking-[-0.06em]">Fabri</i><span class="text-portfolio-blue">.</span>
+                <i class="not-italic font-normal tracking-[-0.06em]">Fabri</i><span
+                    class="inline-block cursor-pointer select-none text-portfolio-blue transition-transform duration-150 ease-out hover:scale-110 active:scale-95"
+                    data-rotate-trigger
+                    role="button"
+                    tabindex="0"
+                    aria-label={isFr ? "Faire tourner les projets" : "Rotate projects"}>.</span>
             </h1>
             <div class="flex items-end justify-between gap-6 text-sm text-portfolio-muted max-[560px]:flex-col max-[560px]:items-start">
                 <span class="flex items-center gap-2 before:inline-block before:size-[7px] before:shrink-0 before:rounded-full before:bg-portfolio-blue before:content-['']">
@@ -129,7 +142,7 @@ const getProjectStack = (project: (typeof projects)[number]) => project.data.tag
             featured && (
                 <section class:list={[cardClass, "p-0 min-[901px]:col-span-6 min-[901px]:row-span-3"]}>
                     <a
-                        class="flex flex-1 flex-col justify-between bg-portfolio-blue px-9 py-[30px] text-white max-[900px]:min-h-[280px]"
+                        class="group flex flex-1 flex-col justify-between bg-portfolio-blue px-9 py-[30px] text-white max-[900px]:min-h-[280px]"
                         href={getProjectHref(featured)}>
                         <div class="flex items-baseline justify-between text-[13px] tracking-[-0.01em] opacity-85">
                             <span>{copy.featured}</span>
@@ -147,9 +160,12 @@ const getProjectStack = (project: (typeof projects)[number]) => project.data.tag
                             <span class="min-w-0 truncate text-[13px] tracking-[-0.01em] opacity-85">
                                 {getProjectStack(featured)}
                             </span>
-                            <span class="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap border-b-[1.5px] border-current pb-px text-[13px]">
+                            <span class="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap border-b-[1.5px] border-current pb-px text-[13px] transition-transform duration-300 ease-out group-hover:translate-x-1">
                                 {copy.openCase}
-                                <ArrowRight class="size-3.5" />
+                                <span class="relative inline-block size-3.5 overflow-hidden">
+                                    <ArrowRight class="size-3.5 transition-transform duration-300 ease-out group-hover:translate-x-full" />
+                                    <ArrowRight class="absolute inset-0 size-3.5 -translate-x-full transition-transform duration-300 ease-out group-hover:translate-x-0" />
+                                </span>
                             </span>
                         </div>
                     </a>
@@ -159,21 +175,23 @@ const getProjectStack = (project: (typeof projects)[number]) => project.data.tag
 
         {
             projectCards.map((project, index) => (
-                <a class:list={[cardClass, linkCardClass, projectCardCorners[index], projectCardLayouts[index]]} data-reveal-side={projectCardSides[index]} href={getProjectHref(project)}>
-                    <div class="top flex items-baseline justify-between gap-2 whitespace-nowrap text-xs opacity-60">
-                        <span class="truncate">{getProjectKind(project)}</span>
-                        <span class="truncate tabular-nums">{project.data.year}</span>
-                    </div>
-                    <div>
-                        <h3 class="mt-2 text-[clamp(22px,1.8vw,30px)] font-semibold leading-none tracking-[-0.03em]">
-                            {project.data.name}
-                        </h3>
-                        <p class="sub mt-2 text-pretty text-[13px] leading-[1.35] opacity-60">
-                            {project.data.description}
-                        </p>
-                    </div>
-                    <div class="stack mt-3 text-xs tracking-[-0.005em] opacity-60">
-                        {getProjectStack(project)}
+                <a class:list={[cardClass, linkCardClass, projectCardCorners[index], projectCardLayouts[index]]} data-reveal-side={projectCardSides[index]} data-rotating-card={index} href={getProjectHref(project)}>
+                    <div data-rot-content class="flex flex-1 flex-col justify-between will-change-transform">
+                        <div class="top flex items-baseline justify-between gap-2 whitespace-nowrap text-xs opacity-60">
+                            <span class="truncate" data-rot-kind>{getProjectKind(project)}</span>
+                            <span class="truncate tabular-nums" data-rot-year>{project.data.year}</span>
+                        </div>
+                        <div>
+                            <h3 class="mt-2 text-[clamp(22px,1.8vw,30px)] font-semibold leading-none tracking-[-0.03em]" data-rot-name>
+                                {project.data.name}
+                            </h3>
+                            <p class="sub mt-2 text-pretty text-[13px] leading-[1.35] opacity-60" data-rot-desc>
+                                {project.data.description}
+                            </p>
+                        </div>
+                        <div class="stack mt-3 text-xs tracking-[-0.005em] opacity-60" data-rot-stack>
+                            {getProjectStack(project)}
+                        </div>
                     </div>
                 </a>
             ))
@@ -200,3 +218,192 @@ const getProjectStack = (project: (typeof projects)[number]) => project.data.tag
         </a>
     </main>
 </div>
+
+<script define:vars={{ rotationData, projectCardLayouts }}>
+    const cards = Array.from(document.querySelectorAll("[data-rotating-card]"));
+    const trigger = document.querySelector("[data-rotate-trigger]");
+    if (cards.length === 3 && trigger && rotationData.length > cards.length) {
+        let nextIndex = cards.length % rotationData.length;
+        let isAnimating = false;
+
+        const updateData = (card, data) => {
+            card.setAttribute("href", data.href);
+            const set = (sel, val) => {
+                const el = card.querySelector(sel);
+                if (el) el.textContent = val;
+            };
+            set("[data-rot-kind]", data.kind);
+            set("[data-rot-year]", data.year);
+            set("[data-rot-name]", data.name);
+            set("[data-rot-desc]", data.description);
+            set("[data-rot-stack]", data.stack);
+        };
+
+        const readData = (card) => ({
+            href: card.getAttribute("href") || "",
+            kind: card.querySelector("[data-rot-kind]")?.textContent || "",
+            year: card.querySelector("[data-rot-year]")?.textContent || "",
+            name: card.querySelector("[data-rot-name]")?.textContent || "",
+            description: card.querySelector("[data-rot-desc]")?.textContent || "",
+            stack: card.querySelector("[data-rot-stack]")?.textContent || "",
+        });
+
+        const setWrapper = (card, opacity, transform) => {
+            const w = card.querySelector("[data-rot-content]");
+            if (w) {
+                w.style.opacity = String(opacity);
+                w.style.transform = transform;
+            }
+        };
+
+        const slideWrapper = (card, fromT, fromO, toT, toO, duration, easing) => {
+            const wrapper = card.querySelector("[data-rot-content]");
+            if (!wrapper) return Promise.resolve();
+            return new Promise((resolve) => {
+                const anim = wrapper.animate(
+                    [
+                        { transform: fromT, opacity: fromO },
+                        { transform: toT, opacity: toO },
+                    ],
+                    { duration, easing, fill: "forwards" },
+                );
+                anim.onfinish = () => {
+                    wrapper.style.transform = toT;
+                    wrapper.style.opacity = String(toO);
+                    resolve();
+                };
+            });
+        };
+
+        const cloneAt = (card) => {
+            const rect = card.getBoundingClientRect();
+            const clone = card.cloneNode(true);
+            clone.removeAttribute("data-rotating-card");
+            clone.removeAttribute("data-reveal-side");
+            clone.style.position = "fixed";
+            clone.style.margin = "0";
+            clone.style.left = `${rect.left}px`;
+            clone.style.top = `${rect.top}px`;
+            clone.style.width = `${rect.width}px`;
+            clone.style.height = `${rect.height}px`;
+            clone.style.zIndex = "100";
+            clone.style.transformOrigin = "top left";
+            clone.style.pointerEvents = "none";
+            const cw = clone.querySelector("[data-rot-content]");
+            if (cw) {
+                cw.style.opacity = "1";
+                cw.style.transform = "translate(0, 0)";
+            }
+            return { clone, rect };
+        };
+
+        const rotate = async () => {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            const slot0Data = readData(cards[0]);
+            const slot2Data = readData(cards[2]);
+            const newData = rotationData[nextIndex];
+
+            // Snapshot current state into clones (before any data updates)
+            const c0 = cloneAt(cards[0]);
+            const c1 = cloneAt(cards[1]);
+            const c2 = cloneAt(cards[2]);
+
+            // Strip slot 2's layout overrides from the clone so it inherits the default
+            // (slot 0-like) layout while it flies up — no content shift on landing.
+            projectCardLayouts[2]
+                .split(/\s+/)
+                .filter(Boolean)
+                .forEach((cls) => c2.clone.classList.remove(cls));
+
+            // Hide all source wrappers — clones take over visually
+            setWrapper(cards[0], 0, "translate(0, 0)");
+            setWrapper(cards[1], 0, "translate(0, 0)");
+            setWrapper(cards[2], 0, "translate(0, 0)");
+
+            cards[0].parentElement.appendChild(c0.clone);
+            cards[0].parentElement.appendChild(c1.clone);
+            cards[0].parentElement.appendChild(c2.clone);
+
+            // Update underlying cards immediately — they'll be revealed when clones land
+            updateData(cards[0], slot2Data);
+            updateData(cards[1], slot0Data);
+            updateData(cards[2], newData);
+
+            const duration = 600;
+            const easing = "cubic-bezier(0.4, 0, 0.2, 1)";
+
+            // Slot 0 → slot 1: morph position + size (no scale stretch on text)
+            const anim0to1 = c0.clone.animate(
+                [
+                    { left: `${c0.rect.left}px`, top: `${c0.rect.top}px`, width: `${c0.rect.width}px`, height: `${c0.rect.height}px` },
+                    { left: `${c1.rect.left}px`, top: `${c1.rect.top}px`, width: `${c1.rect.width}px`, height: `${c1.rect.height}px` },
+                ],
+                { duration, easing, fill: "forwards" },
+            );
+            // Slot 1's old content disappears downward — opacity drops fast, motion keeps full duration
+            const anim1down = c1.clone.animate(
+                [
+                    { transform: "translate(0, 0)", opacity: 1, offset: 0 },
+                    { opacity: 0, offset: 0.12 },
+                    { transform: "translate(0, 100%)", opacity: 0, offset: 1 },
+                ],
+                { duration, easing, fill: "forwards" },
+            );
+            // Slot 2 → slot 0: morph position + size (no scale stretch on text)
+            const anim2to0 = c2.clone.animate(
+                [
+                    { left: `${c2.rect.left}px`, top: `${c2.rect.top}px`, width: `${c2.rect.width}px`, height: `${c2.rect.height}px` },
+                    { left: `${c0.rect.left}px`, top: `${c0.rect.top}px`, width: `${c0.rect.width}px`, height: `${c0.rect.height}px` },
+                ],
+                { duration, easing, fill: "forwards" },
+            );
+            // New content drops into slot 2 from below (overlaps the cycle)
+            const wrapper2 = cards[2].querySelector("[data-rot-content]");
+            const animNew = wrapper2
+                ? wrapper2.animate(
+                      [
+                          { transform: "translate(0, 100%)", opacity: 0 },
+                          { transform: "translate(0, 0)", opacity: 1 },
+                      ],
+                      {
+                          duration: duration * 0.7,
+                          delay: duration * 0.3,
+                          easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+                          fill: "forwards",
+                      },
+                  )
+                : null;
+
+            await Promise.all([
+                anim0to1.finished,
+                anim1down.finished,
+                anim2to0.finished,
+                animNew ? animNew.finished : Promise.resolve(),
+            ]);
+
+            setWrapper(cards[0], 1, "translate(0, 0)");
+            setWrapper(cards[1], 1, "translate(0, 0)");
+            setWrapper(cards[2], 1, "translate(0, 0)");
+
+            // Cancel persistent animation effects so the next rotation's inline opacity:0 takes over
+            if (animNew) animNew.cancel();
+
+            c0.clone.remove();
+            c1.clone.remove();
+            c2.clone.remove();
+
+            nextIndex = (nextIndex + 1) % rotationData.length;
+            isAnimating = false;
+        };
+
+        trigger.addEventListener("click", rotate);
+        trigger.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                rotate();
+            }
+        });
+    }
+</script>
