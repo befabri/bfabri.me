@@ -11,6 +11,7 @@ keyFeatures:
   - "Capture du contexte du stream : historique titre/catégorie pendant la diffusion, plus une bande de captures que le dashboard fait défiler au survol."
   - "Navigation et lecture par catégorie, chaîne et date, avec visionnage dans le navigateur."
   - "Indicateurs live poussés via EventSub deltas, sans polling."
+  - "Relais payant optionnel (Connect) : un Worker Cloudflare avec Durable Objects + D1 reçoit les webhooks Twitch EventSub et les pousse au service self-hosted via une WebSocket sortante — pas de port forwarding, pas d'endpoint public."
   - "Interface multi-langue (FR + EN) avec i18next."
   - "Runtime léger : binaire Go unique, Postgres ou SQLite au choix, stockage S3 optionnel."
 image: {"src":"/src/assets/project/replayvod.jpg", "alt":"Replay Vod"}
@@ -28,6 +29,7 @@ tag:
   - {name: "TanStack", note: "Start + Router + Query"}
   - {name: "tRPC", note: "API typée"}
   - {name: "Postgres", note: "Base de données"}
+  - {name: "Cloudflare", note: "Durable Objects + D1"}
 images: [
     {src: "/src/assets/project/vod/watch.webp", alt: "Page de visionnage"},
     {src: "/src/assets/project/vod/category.webp", alt: "Page des catégories"},

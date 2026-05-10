@@ -11,6 +11,7 @@ keyFeatures:
   - "Captures stream context: title and category history through the broadcast, plus a snapshot strip the dashboard cycles through on hover."
   - "Browse and watch by category, channel, and date, with in-browser playback."
   - "Live indicators pushed via EventSub deltas, no polling."
+  - "Optional paid relay (Connect): a Cloudflare Worker with Durable Objects + D1 receives Twitch EventSub webhooks and pushes them to the self-hosted service over an outbound WebSocket — no port forwarding, no public endpoint."
   - "Multi-language interface (EN + FR) with i18next."
   - "Lightweight runtime: single Go binary, choice of Postgres or SQLite, optional S3-compatible storage."
 image: {"src":"/src/assets/project/replayvod.jpg", "alt":"Replay Vod"}
@@ -28,6 +29,7 @@ tag:
   - {name: "TanStack", note: "Start + Router + Query"}
   - {name: "tRPC", note: "Typed API"}
   - {name: "Postgres", note: "Database"}
+  - {name: "Cloudflare", note: "Durable Objects + D1"}
 images: [
     {src: "/src/assets/project/vod/watch.webp", alt: "Watching page"},
     {src: "/src/assets/project/vod/category.webp", alt: "Categories page"},
