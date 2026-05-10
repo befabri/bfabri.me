@@ -3,22 +3,31 @@ draft: false
 order: 3
 id: "replayvod"
 name: "Replay VOD"
-year: 2023
-description: "Une application monopage (SPA) pour la gestion des rediffusions de lives Twitch manqués destinée aux spectateurs."
-tldr: "Automatiser et organiser les rediffusions Twitch ratées, avec planification et lecture intégrée."
+year: 2026
+description: "Application self-hosted pour enregistrer, archiver et rejouer automatiquement les rediffusions de lives Twitch depuis votre homelab."
+tldr: "Enregistreur Twitch self-hosted qui capture, archive et rejoue les streams ratés depuis votre homelab."
 keyFeatures:
-  - "Intégration de l'API Twitch, authentification via OAuth et mise en place d'EventSub via webhook pour la réception d'événements en temps réel."
-  - "Dashboard avec visionnage et gestion des vidéos, planification avancée des téléchargements, gestion des tâches et visualisation de la file d'attente."
+  - "Auto-enregistrement des lives des chaînes suivies, filtré par règles : qualité, seuil de viewers, catégorie, tags."
+  - "Capture du contexte du stream : historique titre/catégorie pendant la diffusion, plus une bande de captures que le dashboard fait défiler au survol."
+  - "Navigation et lecture par catégorie, chaîne et date, avec visionnage dans le navigateur."
+  - "Indicateurs live poussés via EventSub deltas, sans polling."
+  - "Interface multi-langue (FR + EN) avec i18next."
+  - "Runtime léger : binaire Go unique, Postgres ou SQLite au choix, stockage S3 optionnel."
 image: {"src":"/src/assets/project/replayvod.jpg", "alt":"Replay Vod"}
 links: {
+website: "https://replayvod.com/",
 project: "https://github.com/befabri/replayvod",
+items: [
+    { label: "Site web", href: "https://replayvod.com/" },
+    { label: "Code source", href: "https://github.com/befabri/replayvod" },
+],
 }
 tag:
-  - {name: "Node.js", note: "Runtime"}
-  - {name: "Fastify", note: "Serveur HTTP"}
-  - {name: "TypeScript", note: "Mode strict"}
-  - {name: "Prisma", note: "ORM + migrations"}
-  - {name: "React", note: "Dashboard SPA"}
+  - {name: "Go", note: "Backend + CLI"}
+  - {name: "React 19", note: "Dashboard"}
+  - {name: "TanStack", note: "Start + Router + Query"}
+  - {name: "tRPC", note: "API typée"}
+  - {name: "Postgres", note: "Base de données"}
 images: [
     {src: "/src/assets/project/vod/watch.webp", alt: "Page de visionnage"},
     {src: "/src/assets/project/vod/category.webp", alt: "Page des catégories"},
@@ -30,4 +39,4 @@ images: [
     ]
 ---
 
-{frontmatter.name} est un projet en cours de développement. Il permet d'automatiquement télécharger une rediffusion sur Twitch d'un live et d'organiser les streams ratés de la semaine. Il est donc possible de planifier un téléchargement d'une chaine automatiquement selon certains critères. Il y a aussi la possibilité de visionner directement les vidéos depuis le site et de les gérer.
+Replay VOD est une application self-hosted pour homelab qui surveille les chaînes Twitch que vous suivez, enregistre automatiquement les streams correspondant à vos règles, les archive sur votre stockage et offre un dashboard pour parcourir et rejouer ceux que vous avez ratés.

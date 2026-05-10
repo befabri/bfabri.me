@@ -14,7 +14,7 @@ const projectCards = projects.slice(1, 4);
 const email = "contact@bfabri.me";
 const pathname = new URL(Astro.request.url).pathname;
 const languageHref = isFr ? `/en${pathname}` : pathname.replace(/^\/en\/?/, "/");
-const stackSummary = Array.from(new Set(projects.flatMap((project) => project.data.tag.map((t) => t.name)))).slice(0, 6).join(" · ");
+const stackSummary = ["Go", "TypeScript", "React", "Next.js", "Astro", "Cloudflare", "React Native"].join(" · ");
 
 const copy = {
     roleLead: isFr ? "Développeur full-stack." : "Full-stack developer.",
@@ -23,11 +23,11 @@ const copy = {
         : "I build web apps end-to-end: typed APIs, edge services, and quiet interfaces that stay useful.",
     locationCity: isFr ? "Bruxelles" : "Brussels",
     workLabel: isFr ? "travaille chez" : "working at",
-    meta: isFr ? "Web apps · APIs · UI" : "Web apps · APIs · UI",
+    meta: isFr ? "Depuis 2017" : "Since 2017",
     selected: isFr ? "Projets sélectionnés" : "Selected work",
     featured: isFr ? "À la une" : "Featured",
     openCase: isFr ? "Voir le projet" : "Open case",
-    count: isFr ? `${projects.length} projets · ${stackSummary}` : `${projects.length} projects · ${stackSummary}`,
+    count: stackSummary,
     language: isFr ? "EN" : "FR",
     contact: isFr ? "Contact" : "Contact",
     contactStatus: isFr ? "Ouvert à discuter" : "Open to chat",
@@ -72,7 +72,7 @@ const getProjectStack = (project: (typeof projects)[number]) => project.data.tag
                 cardClass,
                 "justify-between px-10 pb-8 pt-9 min-[901px]:col-span-8 min-[901px]:row-span-3 max-[900px]:min-h-[360px] max-[900px]:px-7 max-[900px]:pb-7 max-[900px]:pt-[30px] max-[560px]:p-5",
             ]}>
-            <div class="max-w-[64ch] text-[15px] leading-[1.35] tracking-[-0.01em] text-portfolio-muted">
+            <div class="text-[15px] leading-[1.35] tracking-[-0.01em] text-portfolio-muted">
                 <b class="font-medium text-portfolio-ink">{copy.roleLead}</b>
                 {" "}{copy.role}
             </div>
