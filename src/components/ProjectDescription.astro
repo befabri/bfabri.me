@@ -130,8 +130,12 @@ const sectionLabelClasses =
 
 <div class="mx-auto flex max-w-screen-xl flex-col gap-2.5 px-3.5 pb-[60px] pt-3.5 font-portfolio text-portfolio-ink antialiased [font-feature-settings:'ss01','cv11'] max-[560px]:px-2.5">
     <header class="flex items-baseline justify-between gap-4 px-1 text-sm tracking-[-0.01em] max-[560px]:items-start">
-        <a class="inline-flex items-center gap-1.5 text-portfolio-muted transition-colors hover:text-portfolio-ink" href={homepagePath}>
-            ← {copy.back}
+        <a class="group inline-flex items-center gap-1.5 text-portfolio-muted transition-colors hover:text-portfolio-ink" href={homepagePath}>
+            <span class="relative inline-block w-3.5 overflow-hidden text-center leading-none">
+                <span class="block transition-transform duration-300 ease-out group-hover:-translate-x-full">←</span>
+                <span class="absolute inset-0 block translate-x-full transition-transform duration-300 ease-out group-hover:translate-x-0">←</span>
+            </span>
+            {copy.back}
         </a>
         <div class="inline-flex items-center gap-2 whitespace-nowrap font-semibold">
             {project.data.name}<span class="text-portfolio-blue">.</span>
