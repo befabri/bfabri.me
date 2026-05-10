@@ -44,12 +44,13 @@ const projectCardSides = ["left", "right", "left"] as const;
 const projectCardLayouts = [
     "min-[901px]:col-span-3 min-[901px]:row-span-2",
     "min-[901px]:col-span-3 min-[901px]:row-span-2",
-    "min-[901px]:col-span-3 min-[901px]:row-span-1 min-[901px]:[&_.sub]:hidden min-[901px]:[&_.stack]:hidden min-[901px]:[&_.top]:text-[11px] min-[901px]:[&_[data-rot-content]]:justify-start min-[901px]:[&_h3]:mt-3 min-[901px]:[&_h3]:text-[clamp(20px,1.6vw,26px)] min-[901px]:[&_h3]:line-clamp-2",
+    "min-[901px]:col-span-3 min-[901px]:row-span-1 min-[901px]:[&_.sub]:hidden min-[901px]:[&_.stack]:hidden min-[901px]:[&_.top]:text-[11px] min-[901px]:[&_h3]:text-[clamp(20px,1.6vw,26px)] min-[901px]:[&_h3]:line-clamp-2",
 ];
 const contactLayout = "min-[901px]:col-span-3 min-[901px]:row-span-1";
 
 const getProjectHref = (project: (typeof projects)[number]) => translatePath(`/project/${project.id}/`);
-const getProjectKind = (project: (typeof projects)[number]) => (project.data.links.website ? "Live" : "Code");
+const getProjectKind = (project: (typeof projects)[number]) =>
+    project.data.kind ?? (project.data.links.website ? "Side" : "Code");
 const getProjectStack = (project: (typeof projects)[number]) => project.data.tag.slice(0, 5).map((t) => t.name).join(" · ");
 const rotationData = projects.slice(1).map((p) => ({
     kind: getProjectKind(p),

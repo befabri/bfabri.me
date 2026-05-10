@@ -11,6 +11,8 @@ const projectCollection = defineCollection({
         year: z.number(),
         description: z.string(),
         tldr: z.string().optional(),
+        kind: z.string().optional(),
+        role: z.string().optional(),
         keyFeatures: z.array(z.string()).optional(),
         image: z.object({
             src: z.string(),

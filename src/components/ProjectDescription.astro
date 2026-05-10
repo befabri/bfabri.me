@@ -47,13 +47,7 @@ const galleryGridClass =
             ? "min-[821px]:grid-cols-3"
             : "min-[821px]:grid-cols-4";
 const year = new Date().getFullYear();
-const projectMeta = project.id === "trpcgo"
-    ? isFr
-        ? "Open-source · mainteneur unique"
-        : "Open-source · sole maintainer"
-    : isFr
-      ? "Projet perso · solo"
-      : "Side project · solo";
+const projectMeta = project.data.role ?? (isFr ? "Projet perso · solo" : "Personal project · solo");
 
 const copy = {
     back: isFr ? "Index" : "Index",
