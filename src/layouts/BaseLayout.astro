@@ -46,5 +46,17 @@ const lang = getLangFromUrl(Astro.url);
                 content-visibility: auto;
             }
         </style>
+        <script>
+            const cards = document.querySelectorAll<HTMLElement>("[data-reveal-side]");
+            cards.forEach((card) => {
+                card.addEventListener("mouseenter", (event) => {
+                    const rect = card.getBoundingClientRect();
+                    const xPct = Math.max(0, Math.min(100, ((event.clientX - rect.left) / rect.width) * 100));
+                    const yPct = Math.max(0, Math.min(100, ((event.clientY - rect.top) / rect.height) * 100));
+                    card.style.setProperty("--reveal-x", `${xPct}%`);
+                    card.style.setProperty("--reveal-y", `${yPct}%`);
+                });
+            });
+        </script>
     </body>
 </html>

@@ -90,9 +90,7 @@ if (project.data.links.project) {
 
 const linkItems = project.data.links.items?.length ? project.data.links.items : fallbackLinkItems;
 const primaryLink = fallbackLinkItems[0] || linkItems[0];
-const additionalLinkItems = primaryLink
-    ? linkItems.filter((link) => link.href !== primaryLink.href)
-    : [];
+const additionalLinkItems = linkItems;
 
 const hasDetails = project.body !== undefined && project.body.trim().length > 0;
 const keyFeatures = project.data.keyFeatures ?? [];
@@ -330,19 +328,22 @@ const sectionLabelClasses =
             </div>
         </section>
 
-        <a class="flex items-center justify-between gap-6 rounded-portfolio border border-portfolio-ink bg-portfolio-ink px-12 py-10 text-portfolio-bg transition-colors hover:bg-portfolio-blue max-[560px]:items-start max-[560px]:px-6 max-[560px]:py-7" href={nextHref}>
+        <a
+            class="group relative flex items-center justify-between gap-6 overflow-hidden rounded-portfolio border border-portfolio-ink bg-portfolio-ink px-12 py-10 text-portfolio-bg [--reveal-x:0%] [--reveal-y:100%] before:pointer-events-none before:absolute before:inset-0 before:bg-portfolio-blue before:opacity-0 before:[clip-path:circle(0%_at_var(--reveal-x)_var(--reveal-y))] before:[transition:opacity_250ms_ease-out,clip-path_0ms_250ms] hover:before:opacity-100 hover:before:[clip-path:circle(150%_at_var(--reveal-x)_var(--reveal-y))] hover:before:[transition:opacity_0ms,clip-path_800ms_ease-out] [&>*]:relative max-[560px]:items-start max-[560px]:px-6 max-[560px]:py-7"
+            href={nextHref}
+            data-reveal-side="left">
             <div>
                 <div class="text-[13px] text-portfolio-bg/65">{copy.nextProject}</div>
                 <div class="mt-2 text-[clamp(32px,5vw,56px)] font-semibold leading-none tracking-[-0.04em]">
                     {nextProject.data.name}
                 </div>
             </div>
-            <ArrowRight class="size-14 -rotate-45" />
+            <ArrowRight class="size-14 -rotate-45 transition-transform duration-500 ease-out group-hover:translate-x-2 group-hover:-translate-y-2" />
         </a>
     </main>
 
     <footer class="flex justify-between gap-4 rounded-portfolio border border-portfolio-ink px-[18px] py-3.5 text-[13px] text-portfolio-muted max-[560px]:flex-col">
-        <span>Benjamin Fabri · Brussels</span>
+        <span>Benjamin Fabri · {isFr ? "Bruxelles" : "Brussels"}</span>
         <a class="hover:text-portfolio-ink" href={homepagePath}>Index</a>
         <span>© {year}</span>
     </footer>
