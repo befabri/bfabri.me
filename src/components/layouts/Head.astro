@@ -39,16 +39,12 @@ const description = "Benjamin Fabri - Portfolio";
     <meta property="twitter:image" content={resolvedImageWithDomain} />
     <script is:inline>
         const setDarkMode = () => {
-            if (localStorage.getItem("color-scheme") === "dark") {
-                document.querySelector("html").dataset.theme = "dark";
+            let stored = localStorage.getItem("color-scheme");
+            if (stored !== "dark" && stored !== "light") {
+                stored = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+                localStorage.setItem("color-scheme", stored);
             }
-            if (localStorage.getItem("color-scheme") === "light") {
-                document.querySelector("html").dataset.theme = "light";
-            }
-            if (!localStorage.getItem("color-scheme")) {
-                const theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-                localStorage.setItem("color-scheme", theme);
-            }
+            document.documentElement.dataset.theme = stored;
         };
         setDarkMode();
         document.addEventListener("astro:after-swap", setDarkMode);

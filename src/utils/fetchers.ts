@@ -12,7 +12,7 @@ export async function getProjects(lang: keyof typeof ui): Promise<Project[]> {
     const projects = await getCollection("project");
     return projects
         .filter((project) => !project.data.draft && getLangFromSlug(project.id) === lang)
-        .sort((a, b) => a.data.order - b.data.order);
+        .sort((a, b) => b.data.year - a.data.year || a.data.order - b.data.order);
 }
 
 export function getAdjacentProjects(projects: Project[], currentProjectId: string): AdjacentProjects {

@@ -7,9 +7,11 @@ import { getLangFromUrl } from "@i18n/utils";
 
 interface Props {
     title: string;
+    chrome?: "default" | "none";
 }
 
-const { title } = Astro.props;
+const { title, chrome = "default" } = Astro.props;
+const hasChrome = chrome !== "none";
 
 const lang = getLangFromUrl(Astro.url);
 ---
@@ -17,12 +19,26 @@ const lang = getLangFromUrl(Astro.url);
 <!doctype html>
 <html lang={lang}>
     <Head title={title} />
-    <body class="antialiased bg-white text-zinc-800 dark:bg-neutral-900 dark:text-zinc-300">
-        <Header />
-        <Container>
-            <slot />
-        </Container>
-        <Footer />
+    <body
+        class:list={[
+            "antialiased",
+            hasChrome
+                ? "bg-portfolio-bg text-portfolio-ink"
+                : "bg-portfolio-bg text-portfolio-ink",
+        ]}>
+        {
+            hasChrome ? (
+                <>
+                    <Header />
+                    <Container>
+                        <slot />
+                    </Container>
+                    <Footer />
+                </>
+            ) : (
+                <slot />
+            )
+        }
         <style is:global>
             /* Improve Page speed */
             /* https://css-tricks.com/almanac/properties/c/content-visibility/ */

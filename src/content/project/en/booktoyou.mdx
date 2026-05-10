@@ -3,34 +3,26 @@ draft: false
 order: 5
 id: "booktoyou"
 name: "BookToYou"
+year: 2021
 description: "A voting site like Uservoice, where users can propose book ideas and vote and/or comment on the books they want."
+tldr: "An Uservoice-inspired voting platform — propose, vote on, and comment on book ideas."
 image: {
-    "src":"/src/assets/project/booktoyou.jpg", 
+    "src":"/src/assets/project/booktoyou.jpg",
     "alt":"booktoyou",
     }
 links: {
 project: "https://github.com/befabri/book-to-you"
 }
-tag: ["PHP", "MVC", "MySQL"]
+tag:
+  - {name: "PHP", note: "Server-side"}
+  - {name: "MVC", note: "Architecture"}
+  - {name: "MySQL", note: "Database"}
+  - {name: "HTML/CSS", note: "Views"}
 images: [
-    {src: "/src/assets/project/booktoyou/homepage.webp", alt: "Homepage"},
     {src: "/src/assets/project/booktoyou/vote.webp", alt: "Idea voting page"},
     {src: "/src/assets/project/booktoyou/profil.webp", alt: "User profile"}
     ]
 ---
-import Link from '../../../components/ui/Link.astro';
-
-## Project description
 
 {frontmatter.name} is an online platform inspired by Uservoice, focused on user-submitted book ideas. Like Uservoice, Booktoyou allows users to propose book suggestions, vote for the ones they are interested in, and leave comments.  
 Administrators can manage all users and submitted ideas.
-
-## Developed with
-
-**Environment:** PHP, MVC, MySQL, HTML5, CSS3
-
-## Links
-
-<Link href="https://github.com/befabri/book-to-you" text="Source code"  />
-
-## Images

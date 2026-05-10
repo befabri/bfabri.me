@@ -3,20 +3,31 @@ draft: false
 order: 2
 id: "clashofdev"
 name: "Clash of Dev"
+year: 2024
 description: "Clash of Dev est une compétition de développement front-end d'intégration de maquettes Figma, diffusée en direct sur Twitch et évaluée par un jury de professionnels reconnus."
+tldr: "Compétition front-end d'intégration de maquettes Figma — diffusée sur Twitch, jugée par un jury pro."
 image: {"src":"/src/assets/project/clashofdev.png", "alt":"Clash of Dev"}
 links: {
 website: "https://clashofdev.bfabri.me/",
+items: [
+    { label: "Piscine", href: "https://clashofdev.bfabri.me/" },
+    { label: "Code Piscine", href: "https://github.com/befabri/clashofdev" },
+    { label: "Finale", href: "https://clashofdevfinal.bfabri.me/" },
+    { label: "Code Finale", href: "https://github.com/befabri/clashofdevfinal" },
+    { label: "Figma", href: "https://www.figma.com/community/file/1428494308483445852/clash-of-dev" },
+],
 }
-tag: ["AstroJs", "Figma", "TypeScript", "Preact", "Tailwind"]
+tag:
+  - {name: "AstroJs", note: "Site Piscine"}
+  - {name: "Figma", note: "Maquettes"}
+  - {name: "TypeScript", note: "Mode strict"}
+  - {name: "Preact", note: "Site Finale"}
+  - {name: "Tailwind", note: "Styles"}
 images: [
     {src: "/src/assets/project/clashofdev/piscine.png", alt: "Site de la Piscine - Clash of Dev"},
     {src: "/src/assets/project/clashofdev/finale.png", alt: "Site de la Finale - Clash of Dev"}
 ]
 ---
-import Link from '../../components/ui/Link.astro';
-
-## Description du projet
 
 **Clash of Dev** est une compétition de développement front-end, opposant des développeurs à travers deux rounds intenses pour décrocher le titre de "Meilleur Dev".
 L'événement est diffusé en direct sur Twitch et évalué par un jury de professionnels reconnus.
@@ -52,29 +63,3 @@ Les participants sont jugés selon un barème rigoureux, évaluant à la fois le
 - **Prise de risque** : 3/6 points
 
 **Total** : 15,45/20 - 4e place sur 6 participants
-
-## Développé avec
-
-**Piscine:** AstroJs, TypeScript, PreactJs, Tailwind CSS
-
-**Finale:** PreactJs, TypeScript, PreactJs/signals, Tailwind CSS
-
-## Liens
-
-### Piscine
-<div class="flex flex-row gap-4">
-  <Link href="https://clashofdev.bfabri.me/" text="Site web"/>
-  <Link href="https://github.com/befabri/clashofdev" text="Code source"/>
-</div>
-
-### Finale
-<div class="flex flex-row gap-4">
-  <Link href="https://clashofdevfinal.bfabri.me/" text="Site web"  />
-  <Link href="https://github.com/befabri/clashofdevfinal" text="Code source"  />
-</div>
-
-### Figma
-
-<Link href="https://www.figma.com/community/file/1428494308483445852/clash-of-dev" text="Figma"  />
-
-## Images

@@ -3,33 +3,22 @@ draft: false
 order: 6
 id: "filetransfer"
 name: "File Transfer"
+year: 2019
 description: "A server/client file transfer software based on sockets, featuring a Tkinter interface."
+tldr: "Client/server socket-based file transfer with a Tkinter UI inspired by FileZilla."
+keyFeatures:
+  - "Browse local and remote files from a FileZilla-inspired interface."
+  - "Real-time status display for file uploads and downloads."
 image: {"src":"/src/assets/project/filetransfer.jpg", "alt":"filetransfer"}
 links: {
 project: "https://github.com/befabri/file-transfer",
 }
-tag: ["Python", "socket", "tkinter.ttk", "Tkinter"]
-images: [
-    {src: "/src/assets/project/filetransfer/transfer.webp", alt: "File transfer demo"}
-    ]
+tag:
+  - {name: "Python", note: "Runtime"}
+  - {name: "socket", note: "Transport"}
+  - {name: "tkinter.ttk", note: "Themed widgets"}
+  - {name: "Tkinter", note: "GUI"}
+images: []
 ---
-import Link from '../../../components/ui/Link.astro';
-
-## Project description
 
 {frontmatter.name} is a client/server file transfer software using socket technology. {frontmatter.name} features a Tkinter interface inspired by FileZilla.
-
-## Key Features
-
-- Browsing local and remote files
-- Displaying the status of file uploads and downloads
-
-## Developed with
-
-**Environment:** Python, socket, Tkinter, Tkinter.ttk
-
-## Links
-
-<Link href="https://github.com/befabri/file-transfer" text="Source code"  />
-
-## Images

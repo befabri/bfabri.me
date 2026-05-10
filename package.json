@@ -22,6 +22,7 @@
     "@astrojs/preact": "^5.1.2",
     "@astrojs/sitemap": "^3.7.2",
     "@fontsource-variable/changa": "^5.2.8",
+    "@fontsource-variable/inter-tight": "^5.2.7",
     "@lucide/astro": "^1.14.0",
     "@tailwindcss/vite": "^4.3.0",
     "astro": "^6.3.1",

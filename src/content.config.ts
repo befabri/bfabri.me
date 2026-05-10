@@ -8,16 +8,30 @@ const projectCollection = defineCollection({
         order: z.number(),
         id: z.string(),
         name: z.string(),
+        year: z.number(),
         description: z.string(),
+        tldr: z.string().optional(),
+        keyFeatures: z.array(z.string()).optional(),
         image: z.object({
             src: z.string(),
             alt: z.string(),
-        }),
+        }).optional(),
         links: z.object({
             website: z.string().optional(),
             project: z.string().optional(),
+            items: z.array(
+                z.object({
+                    label: z.string(),
+                    href: z.string(),
+                })
+            ).optional(),
         }),
-        tag: z.array(z.string()),
+        tag: z.array(
+            z.object({
+                name: z.string(),
+                note: z.string().optional(),
+            })
+        ),
         images: z.array(
             z.object({
                 src: z.string(),

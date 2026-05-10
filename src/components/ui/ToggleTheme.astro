@@ -1,0 +1,36 @@
+---
+import { defaultLang } from "@i18n/ui";
+import { getLangFromUrl } from "@i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const isFr = lang === defaultLang;
+const label = isFr ? "Basculer le thème" : "Toggle theme";
+const dark = isFr ? "Sombre" : "Dark";
+const light = isFr ? "Clair" : "Light";
+---
+
+<button
+    type="button"
+    data-theme-toggle
+    aria-label={label}
+    title={label}
+    class="cursor-pointer text-portfolio-muted transition-colors hover:text-portfolio-ink">
+    <span class="dark:hidden">{dark}</span>
+    <span class="hidden dark:inline">{light}</span>
+</button>
+
+<script>
+    const apply = () => {
+        document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]").forEach((btn) => {
+            if (btn.dataset.themeBound) return;
+            btn.dataset.themeBound = "1";
+            btn.addEventListener("click", () => {
+                const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+                document.documentElement.dataset.theme = next;
+                localStorage.setItem("color-scheme", next);
+            });
+        });
+    };
+    apply();
+    document.addEventListener("astro:after-swap", apply);
+</script>

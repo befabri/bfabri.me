@@ -1,7 +1,6 @@
 ---
-import ToggleTheme from "@components/ui/ToggleTheme";
 import Github from "@components/icons/Github.astro";
-import { ArrowLeft, Mail, Moon, Sun } from "@lucide/astro";
+import { ArrowLeft, Mail } from "@lucide/astro";
 import { getLangFromUrl, useTranslatedPath, useTranslations } from "@i18n/utils";
 import { defaultLang } from "@i18n/ui";
 const pathname = new URL(Astro.request.url).pathname;
@@ -52,9 +51,5 @@ const translatePath = useTranslatedPath(lang);
             class="text-muted inline-flex size-10 items-center justify-center rounded-lg text-sm hover:bg-gray-200 hover:text-blue_dark dark:hover:text-blue_light focus:outline-none focus:ring-4 focus:ring-white dark:text-zinc-400 dark:hover:bg-gray-700 dark:focus:ring-neutral-900">
             <Github class="size-5" /></a
         >
-
-        <ToggleTheme client:only="preact">
-            <Sun class="size-5" slot="sun" /><Moon class="size-5" slot="moon" />
-        </ToggleTheme>
     </div>
 </header>

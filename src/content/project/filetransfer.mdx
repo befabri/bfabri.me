@@ -3,33 +3,22 @@ draft: false
 order: 6
 id: "filetransfer"
 name: "File Transfer"
+year: 2019
 description: "Logiciel de transfert de fichiers serveur/client basé sur les sockets, doté d'une interface en Tkinter."
+tldr: "Transfert de fichiers client/serveur en sockets, avec interface Tkinter inspirée de FileZilla."
+keyFeatures:
+  - "Parcours des fichiers locaux et distants depuis une interface inspirée de FileZilla."
+  - "Affichage en temps réel des statuts d'envois et de réceptions de fichiers."
 image: {"src":"/src/assets/project/filetransfer.jpg", "alt":"filetransfer"}
 links: {
 project: "https://github.com/befabri/file-transfer",
 }
-tag: ["Python", "socket", "tkinter.ttk", "Tkinter"]
-images: [
-    {src: "/src/assets/project/filetransfer/transfer.webp", alt: "Démo d'un transfère de fichiers"}
-    ]
+tag:
+  - {name: "Python", note: "Runtime"}
+  - {name: "socket", note: "Transport"}
+  - {name: "tkinter.ttk", note: "Widgets"}
+  - {name: "Tkinter", note: "GUI"}
+images: []
 ---
-import Link from '../../components/ui/Link.astro';
-
-## Description du projet
 
 {frontmatter.name} est un logiciel de transfert de fichiers client/serveur, utilisant la technologie des sockets. {frontmatter.name} possède une interface en Tkinter inspirée par FileZilla.
-
-Il a comme fonctionnalités :
-
--   Parcours des fichiers locaux et distants
--   Affichage des statuts d'envois et de réceptions de fichiers
-
-## Développé avec
-
-**Environnement:** Python, socket, Tkinter, Tkinter.ttk
-
-## Liens
-
-<Link href="https://github.com/befabri/file-transfer" text="Code source"  />
-
-## Images

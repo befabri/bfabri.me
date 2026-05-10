@@ -3,14 +3,23 @@ draft: false
 order: 3
 id: "replayvod"
 name: "Replay VOD"
+year: 2023
 description: "A single-page application (SPA) for managing missed Twitch live replays, aimed at viewers."
+tldr: "Automate and organize the Twitch replays I missed, with scheduling and built-in playback."
+keyFeatures:
+  - "Twitch API integration with OAuth and EventSub webhooks for receiving real-time events."
+  - "Dashboard with video viewing and management, advanced download scheduling, task management, and queue visualization."
 image: {"src":"/src/assets/project/replayvod.jpg", "alt":"Replay Vod"}
 links: {
 project: "https://github.com/befabri/replayvod",
 }
-tag: ["Node.js", "Fastify", "TypeScript", "Prisma", "React"]
+tag:
+  - {name: "Node.js", note: "Runtime"}
+  - {name: "Fastify", note: "HTTP server"}
+  - {name: "TypeScript", note: "Strict mode"}
+  - {name: "Prisma", note: "ORM + migrations"}
+  - {name: "React", note: "SPA dashboard"}
 images: [
-    {src: "/src/assets/project/vod/video.webp", alt: "Videos page"},
     {src: "/src/assets/project/vod/watch.webp", alt: "Watching page"},
     {src: "/src/assets/project/vod/category.webp", alt: "Categories page"},
     {src: "/src/assets/project/vod/category_detail.webp", alt: "Videos by category view"},
@@ -20,31 +29,6 @@ images: [
     {src: "/src/assets/project/vod/history.webp", alt: "Download history page"}
     ]
 ---
-import Link from '../../../components/ui/Link.astro';
-
-## Project description
 
 {frontmatter.name} is a project currently in development. It allows automatic downloading of Twitch replays from live streams and organizes missed streams from the week. 
 You can schedule automatic downloads from a channel based on certain criteria. Additionally, it offers the ability to watch videos directly from the site and manage them.
-
-## Key Features
-
-- Integration of the Twitch API, authentication via OAuth, and setup of EventSub via webhook for receiving real-time events.
-- Design of a dashboard with features such as:
-    - Video viewing and management
-    - Advanced download scheduling
-    - Task management
-    - Queue visualization.
-
-
-## Developed with
-
-**Frontend:** React, TypeScript, Vite, Tailwind CSS, TanStack Query, Tanstack Router, React Hook Form
-
-**Backend:** Node.js, Fastify, TypeScript, Prisma, MySQL
-
-## Links
-
-<Link href="https://github.com/befabri/replayvod" text="Source code"  />
-
-## Images

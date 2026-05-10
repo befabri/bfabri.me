@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "@fontsource-variable/inter-tight";
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
@@ -8,8 +9,15 @@
   --breakpoint-lg: 952px;
   --color-blue_light: #5BC0EB;
   --color-blue_dark: #5473B1;
+  --color-portfolio-blue: #5473B1;
+  --color-portfolio-bg: #FEFEFF;
+  --color-portfolio-ink: #0A0A0A;
+  --color-portfolio-muted: #6E6E73;
+  --color-portfolio-soft: #F5F5F5;
   --color-white: #FEFEFF;
   --font-sans: "Changa Variable", sans-serif;
+  --font-portfolio: "Inter Tight Variable", "Inter Tight", system-ui, sans-serif;
+  --radius-portfolio: 3px;
   --animate-appear: appear 0.2s ease-in-out;
 
   @keyframes appear {
@@ -22,6 +30,16 @@
       opacity: 1;
       transform: translateX(0);
     }
+  }
+}
+
+@layer base {
+  [data-theme="dark"] {
+    --color-portfolio-blue: #5BC0EB;
+    --color-portfolio-bg: #0A0A0A;
+    --color-portfolio-ink: #F5F5F7;
+    --color-portfolio-muted: #8E8E93;
+    --color-portfolio-soft: #1A1A1D;
   }
 }
 

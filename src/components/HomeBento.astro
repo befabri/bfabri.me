@@ -1,0 +1,197 @@
+---
+import { ArrowRight, ArrowUpRight } from "@lucide/astro";
+import ToggleTheme from "@components/ui/ToggleTheme.astro";
+import { defaultLang } from "@i18n/ui";
+import { getLangFromUrl, useTranslatedPath } from "@i18n/utils";
+import { getProjects } from "@utils/fetchers";
+
+const lang = getLangFromUrl(Astro.url);
+const isFr = lang === defaultLang;
+const translatePath = useTranslatedPath(lang);
+const projects = await getProjects(lang);
+const featured = projects[0];
+const projectCards = projects.slice(1, 4);
+const email = "contact@bfabri.me";
+const pathname = new URL(Astro.request.url).pathname;
+const languageHref = isFr ? `/en${pathname}` : pathname.replace(/^\/en\/?/, "/");
+const stackSummary = Array.from(new Set(projects.flatMap((project) => project.data.tag.map((t) => t.name)))).slice(0, 6).join(" · ");
+
+const copy = {
+    roleLead: isFr ? "Développeur full-stack." : "Full-stack developer.",
+    role: isFr
+        ? "Je construis des apps web de bout en bout : APIs typées, services edge et interfaces sobres qui restent efficaces."
+        : "I build web apps end-to-end: typed APIs, edge services, and quiet interfaces that stay useful.",
+    locationCity: isFr ? "Bruxelles" : "Brussels",
+    workLabel: isFr ? "travaille chez" : "working at",
+    meta: isFr ? "Web apps · APIs · UI" : "Web apps · APIs · UI",
+    selected: isFr ? "Projets sélectionnés" : "Selected work",
+    featured: isFr ? "À la une" : "Featured",
+    openCase: isFr ? "Voir le projet" : "Open case",
+    count: isFr ? `${projects.length} projets · ${stackSummary}` : `${projects.length} projects · ${stackSummary}`,
+    language: isFr ? "EN" : "FR",
+    contact: isFr ? "Contact" : "Contact",
+    contactStatus: isFr ? "Ouvert à discuter" : "Open to chat",
+};
+
+const cardClass =
+    "relative flex min-h-0 min-w-0 flex-col overflow-hidden rounded-portfolio border border-portfolio-ink bg-portfolio-bg";
+const linkCardClass =
+    "group justify-between px-6 py-[22px] transition duration-200 ease-out will-change-transform hover:z-[2] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-portfolio-ink hover:text-portfolio-bg hover:shadow-[4px_4px_0_0_var(--color-portfolio-ink)] max-[560px]:p-5";
+const projectCardLayouts = [
+    "min-[901px]:col-span-3 min-[901px]:row-span-2",
+    "min-[901px]:col-span-3 min-[901px]:row-span-2",
+    "min-[901px]:col-span-3 min-[901px]:row-span-1 min-[901px]:[&_.sub]:hidden min-[901px]:[&_.stack]:hidden min-[901px]:[&_h3]:text-[19px] min-[901px]:[&_.top]:text-[11px]",
+];
+const contactLayout = "min-[901px]:col-span-3 min-[901px]:row-span-1";
+
+const getProjectHref = (project: (typeof projects)[number]) => translatePath(`/project/${project.id}/`);
+const getProjectKind = (project: (typeof projects)[number]) => (project.data.links.website ? "Live" : "Code");
+const getProjectStack = (project: (typeof projects)[number]) => project.data.tag.slice(0, 5).map((t) => t.name).join(" · ");
+---
+
+<div
+    class="flex h-dvh min-h-dvh w-full flex-col gap-2.5 overflow-hidden bg-portfolio-bg p-3.5 font-portfolio text-portfolio-ink antialiased [font-feature-settings:'ss01','cv11'] max-[900px]:h-auto max-[900px]:overflow-visible max-[560px]:p-2.5">
+    <header
+        class="flex flex-none items-baseline justify-between gap-4 px-1 text-sm tracking-[-0.01em] max-[900px]:items-start">
+        <a class="whitespace-nowrap font-semibold" href={translatePath("/")} aria-label="Benjamin Fabri">
+            Benjamin Fabri<span class="text-portfolio-blue">.</span>
+        </a>
+        <nav class="flex items-baseline gap-[22px] whitespace-nowrap max-[900px]:gap-3.5 max-[900px]:text-[13px]" aria-label="Navigation principale">
+            <a class="text-portfolio-muted transition-colors hover:text-portfolio-ink" href={languageHref}>{copy.language}</a>
+            <a class="text-portfolio-muted transition-colors hover:text-portfolio-ink max-[560px]:hidden" href="https://github.com/befabri/" target="_blank" rel="noopener">GitHub</a>
+            <ToggleTheme />
+            <a class="border-b-[1.5px] border-portfolio-blue pb-px text-portfolio-ink" href={`mailto:${email}`}>{email}</a>
+        </nav>
+    </header>
+
+    <main
+        class="grid flex-1 auto-rows-[minmax(140px,auto)] grid-cols-1 gap-2.5 min-[901px]:min-h-0 min-[901px]:grid-cols-12 min-[901px]:grid-rows-6 min-[901px]:auto-rows-auto"
+        aria-label="Portfolio">
+        <section
+            class:list={[
+                cardClass,
+                "justify-between px-10 pb-8 pt-9 min-[901px]:col-span-8 min-[901px]:row-span-3 max-[900px]:min-h-[360px] max-[900px]:px-7 max-[900px]:pb-7 max-[900px]:pt-[30px] max-[560px]:p-5",
+            ]}>
+            <div class="max-w-[64ch] text-[15px] leading-[1.35] tracking-[-0.01em] text-portfolio-muted">
+                <b class="font-medium text-portfolio-ink">{copy.roleLead}</b>
+                {" "}{copy.role}
+            </div>
+            <h1 class="mt-1.5 text-[clamp(56px,8.4vw,144px)] font-semibold leading-[0.86] tracking-[-0.055em] max-[560px]:text-[clamp(58px,22vw,96px)]">
+                Benjamin<br />
+                <i class="not-italic font-normal tracking-[-0.06em]">Fabri</i><span class="text-portfolio-blue">.</span>
+            </h1>
+            <div class="flex items-end justify-between gap-6 text-sm text-portfolio-muted max-[560px]:flex-col max-[560px]:items-start">
+                <span class="flex items-center gap-2 before:inline-block before:size-[7px] before:shrink-0 before:rounded-full before:bg-portfolio-blue before:content-['']">
+                    {copy.locationCity} · {copy.workLabel}{" "}
+                    <a class="border-b-[1.5px] border-portfolio-blue pb-px text-portfolio-ink hover:text-portfolio-blue" href="https://digitalmaster.be/" target="_blank" rel="noopener">Digital Master</a>
+                </span>
+                <span>{copy.meta}</span>
+            </div>
+        </section>
+
+        <section
+            class:list={[
+                cardClass,
+                "justify-between px-[26px] py-6 min-[901px]:col-span-4 min-[901px]:row-span-3 max-[560px]:p-5",
+            ]}>
+            <div>
+                <div class="text-[13px] tracking-[-0.01em] text-portfolio-muted">{copy.selected}</div>
+                <ul class="mt-3 flex list-none flex-col">
+                    {
+                        projects.map((project) => (
+                            <li class="last:border-b last:border-portfolio-ink">
+                                <a
+                                    class="group flex items-baseline justify-between gap-3.5 border-t border-portfolio-ink py-2.5 text-[clamp(15px,1.15vw,19px)] font-medium tracking-[-0.02em] hover:text-portfolio-blue"
+                                    href={getProjectHref(project)}>
+                                    <span>{project.data.name}</span>
+                                    <span class="inline-flex min-w-0 items-baseline">
+                                        <span class="text-xs font-normal text-portfolio-muted tabular-nums group-hover:text-portfolio-blue">
+                                            {project.data.year}
+                                        </span>
+                                        <span class="ml-2.5 inline-block text-portfolio-muted transition duration-300 ease-out group-hover:translate-x-1 group-hover:text-portfolio-blue">
+                                            →
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+            <div class="mt-3 text-xs leading-[1.35] text-portfolio-muted">{copy.count}</div>
+        </section>
+
+        {
+            featured && (
+                <section class:list={[cardClass, "p-0 min-[901px]:col-span-6 min-[901px]:row-span-3"]}>
+                    <a
+                        class="flex flex-1 flex-col justify-between bg-portfolio-blue px-9 py-[30px] text-white max-[900px]:min-h-[280px]"
+                        href={getProjectHref(featured)}>
+                        <div class="flex items-baseline justify-between text-[13px] tracking-[-0.01em] opacity-85">
+                            <span>{copy.featured}</span>
+                            <span class="tabular-nums">{featured.data.year}</span>
+                        </div>
+                        <div>
+                            <h2 class="mt-2.5 text-balance text-[clamp(36px,4.2vw,68px)] font-semibold leading-[0.95] tracking-[-0.04em]">
+                                {featured.data.name}
+                            </h2>
+                            <p class="mt-4 max-w-[54ch] text-pretty text-[15px] leading-[1.4] opacity-90">
+                                {featured.data.description}
+                            </p>
+                        </div>
+                        <div class="flex items-end justify-between gap-[18px] max-[560px]:flex-col max-[560px]:items-start">
+                            <span class="min-w-0 truncate text-[13px] tracking-[-0.01em] opacity-85">
+                                {getProjectStack(featured)}
+                            </span>
+                            <span class="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap border-b-[1.5px] border-current pb-px text-[13px]">
+                                {copy.openCase}
+                                <ArrowRight class="size-3.5" />
+                            </span>
+                        </div>
+                    </a>
+                </section>
+            )
+        }
+
+        {
+            projectCards.map((project, index) => (
+                <a class:list={[cardClass, linkCardClass, projectCardLayouts[index]]} href={getProjectHref(project)}>
+                    <div class="top flex items-baseline justify-between gap-2 whitespace-nowrap text-xs opacity-60">
+                        <span class="truncate">{getProjectKind(project)}</span>
+                        <span class="truncate tabular-nums">{project.data.year}</span>
+                    </div>
+                    <div>
+                        <h3 class="mt-2 text-[clamp(22px,1.8vw,30px)] font-semibold leading-none tracking-[-0.03em]">
+                            {project.data.name}
+                        </h3>
+                        <p class="sub mt-2 text-pretty text-[13px] leading-[1.35] opacity-60">
+                            {project.data.description}
+                        </p>
+                    </div>
+                    <div class="stack mt-3 text-xs tracking-[-0.005em] opacity-60">
+                        {getProjectStack(project)}
+                    </div>
+                </a>
+            ))
+        }
+
+        <a
+            class:list={[
+                "group relative flex min-h-0 min-w-0 flex-col justify-between overflow-hidden rounded-portfolio border border-portfolio-ink bg-portfolio-ink px-6 py-[22px] text-portfolio-bg transition-colors hover:bg-portfolio-blue max-[560px]:p-5",
+                contactLayout,
+            ]}
+            href={`mailto:${email}`}
+            aria-label={copy.contact}>
+            <div class="flex items-center gap-2 text-[11px] opacity-75">
+                <span class="inline-block size-[7px] rounded-full bg-portfolio-blue group-hover:bg-portfolio-bg"></span>
+                {copy.contact} · {copy.contactStatus}
+            </div>
+            <div class="mt-2 flex items-baseline justify-between gap-2">
+                <span class="truncate text-[clamp(14px,1.3vw,18px)] font-semibold tracking-[-0.02em]">
+                    {email}
+                </span>
+                <ArrowUpRight class="size-4 shrink-0 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </div>
+        </a>
+    </main>
+</div>

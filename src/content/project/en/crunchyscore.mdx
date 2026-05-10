@@ -3,56 +3,36 @@ draft: false
 order: 4
 id: "crunchyscore"
 name: "Crunchyscore"
+year: 2023
 description: "CrunchyScore is a Chrome/Firefox extension that integrates MyAnimeList/AniList scores into Crunchyroll."
+tldr: "See MAL/AniList scores directly on Crunchyroll, without leaving the page."
+keyFeatures:
+  - "Score fetching through an API built with Fastify and Node.js, connected to the MyAnimeList/AniList API."
+  - "Web scraping with Puppeteer to match Crunchyroll IDs with MyAnimeList ones."
+  - "Automated cronjob for scraping and score updates, ensuring regular data refresh."
+  - "Extension configuration accessible via popup, letting users customize their settings."
+  - "Scores fetched from a Cloudflare Worker pulling from KV storage and returned to the client."
 image: {"src":"/src/assets/project/crunchyscore.jpg", "alt":"crunchyscore"}
 links: {
 website: "https://crunchyscore.app",
+items: [
+    { label: "Chrome store", href: "https://chrome.google.com/webstore/detail/crunchyscore-mal-score-on/coiidbjimmeojgdkclafjccnhgenmmbi" },
+    { label: "Firefox", href: "https://addons.mozilla.org/en-US/firefox/addon/crunchyscore/" },
+    { label: "Extension code", href: "https://github.com/befabri/crunchyscore" },
+    { label: "Website", href: "https://crunchyscore.app" },
+    { label: "Website code", href: "https://github.com/befabri/crunchyscore.app" },
+],
 }
-tag: ["Node.js", "Serverless", "TypeScript", "Drizzle", "Puppeteer"]
+tag:
+  - {name: "Node.js", note: "Backend runtime"}
+  - {name: "Serverless", note: "Workers + KV"}
+  - {name: "TypeScript", note: "Strict mode"}
+  - {name: "Drizzle", note: "Postgres ORM"}
+  - {name: "Puppeteer", note: "Web scraping"}
 images: [
     {src: "/src/assets/project/crunchyscore/chromestore.jpg", alt: "Extension on the Chrome Web Store"},
     {src: "/src/assets/project/crunchyscore/config.webp", alt: "Extension configuration"}
     ]
 ---
-import Link from '../../../components/ui/Link.astro';
-
-## Project description
 
 A Google Chrome and Firefox extension for the Crunchyroll website that integrates anime rating scores from MyAnimeList and AniList.
-
-## Key Features
-
-- Fetching scores through an API built with Fastify and Node.js, connected to the MyAnimeList/AniList API.
-- Web scraping using Puppeteer to match Crunchyroll IDs with those from MyAnimeList.
-- Automation of web scraping and score updates via cronjob, ensuring regular data updates.
-- Extension configuration accessible via a popup, allowing users to customize their settings.
-- Retrieving scores from a Cloudflare worker, pulling data from KV storage, and sending it to the client (extension).
-
-## Developed with
-
-**Frontend:** AstroJs, JavaScript, Tailwind CSS
-
-**Backend:** Node.js, Fastify, TypeScript, Drizzle, PostgreSQL, Puppeteer, Cloudflare Worker, Cloudflare KV
-
-**Extension:** TypeScript, Javascript, Vite, Tailwind CSS
-
-## Links
-
-### Extension
-
-<div class="flex flex-row gap-4">
-    <Link href="https://chrome.google.com/webstore/detail/crunchyscore-mal-score-on/coiidbjimmeojgdkclafjccnhgenmmbi" text="Chrome store"  />
-    <Link href="https://addons.mozilla.org/en-US/firefox/addon/crunchyscore/" text="Firefox"  />
-    <Link href="https://github.com/befabri/crunchyscore" text="Source code"  />
-</div>
-
-### Landing Page
-
-<div class="flex flex-row gap-4">
-    <Link href="https://crunchyscore.app" text="Website"  />
-    <Link href="https://github.com/befabri/crunchyscore.app" text="Source code"  />
-</div>
-
-### Private backend
-
-## Images

@@ -3,42 +3,29 @@ draft: false
 order: 1
 id: "sshkeyword"
 name: "Ssh-keyword"
+year: 2020
 description: "Software used to quickly connect to an SSH server using keywords from a terminal."
+tldr: "SSH-connect by keyword from the terminal — less copy-paste, more muscle memory."
+keyFeatures:
+  - "Assign easy-to-remember keywords to your SSH connections."
+  - "Connect to SSH hosts using keywords instead of IP addresses."
+  - "Set a default SSH connection for instant access without specifying a keyword."
+  - "Add new SSH connections with custom user, port, and keywords."
+  - "Edit or remove existing connections to update details."
+  - "List all saved connections along with their configurations."
+  - "Available for both Windows and Linux systems."
 image: {"src":"/src/assets/project/sshkeyword.png", "alt":"ssh"}
 links: {
 project: "https://github.com/befabri/ssh-keyword",
 }
-tag: ["Go", "CLI"]
+tag:
+  - {name: "Go", note: "Single binary"}
+  - {name: "CLI", note: "Cross-platform"}
 images: [
     {src: "/src/assets/project/sshkeyword/connection.jpg", alt: "Connecting to an SSH server using a keyword"},
-    {src: "/src/assets/project/sshkeyword/help.jpg", alt: "Help"},
-    {src: "/src/assets/project/sshkeyword/example.jpg", alt: "Usage example"}
+    {src: "/src/assets/project/sshkeyword/help.jpg", alt: "Help"}
     ]
 ---
-import Link from '../../../components/ui/Link.astro';
-
-## Project description
 
 {frontmatter.name} is a Go-based CLI program designed for quickly connecting via SSH from a terminal. It allows users to connect using keywords. 
 Additionally, it offers the option to set up a default SSH connection to connect without using a keyword.
-
-## Key Features
-
-- Assign easy-to-remember keywords to your SSH connections.
-- Connect to SSH hosts using keywords instead of IP addresses.
-- Set a default SSH connection for instant access without specifying a keyword.
-- Add new SSH connections with custom user, port, and keywords.
-- Edit existing connections to update details as needed.
-- Remove outdated connections effortlessly.
-- List all saved connections along with their configurations.
-- Available for both Windows and Linux systems.
-
-## Developed with
-
-**Environment:** Go
-
-## Links
-
-<Link href="https://github.com/befabri/ssh-keyword" text="Source code"  />
-
-## Images

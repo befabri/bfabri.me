@@ -18,13 +18,12 @@ export async function getStaticPaths() {
 const { page } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const projects = await getProjects(lang);
-const { nextProject, previousProject } = getAdjacentProjects(projects, page.id);
+const { nextProject } = getAdjacentProjects(projects, page.id);
 ---
 
-<BaseLayout title={page.data.name}>
+<BaseLayout title={page.data.name} chrome="none">
     <ProjectDescription
         project={page}
-        nextProjectLink={`/project/${nextProject.id}`}
-        previousProjectLink={`/project/${previousProject.id}`}
+        nextProject={nextProject}
     />
 </BaseLayout>
