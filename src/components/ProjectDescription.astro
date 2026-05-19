@@ -130,9 +130,9 @@ const sectionLabelClasses =
             </span>
             {copy.back}
         </a>
-        <div class="inline-flex items-center gap-2 whitespace-nowrap font-semibold">
-            {project.data.name}<span class="text-portfolio-blue">.</span>
-        </div>
+        <a class="whitespace-nowrap font-semibold" href={homepagePath} aria-label="Benjamin Fabri">
+            Benjamin Fabri<span class="text-portfolio-blue">.</span>
+        </a>
         <nav class="flex items-baseline gap-[22px] whitespace-nowrap max-[560px]:gap-3.5 max-[560px]:text-[13px]" aria-label="Project navigation">
             <a class="text-portfolio-muted transition-colors hover:text-portfolio-ink" href={languageHref}>{copy.language}</a>
             <a class="text-portfolio-muted transition-colors hover:text-portfolio-ink max-[560px]:hidden" href="https://github.com/befabri/" target="_blank" rel="noopener">GitHub</a>
