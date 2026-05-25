@@ -36,7 +36,7 @@ const copy = {
 const cardClass =
     "relative flex min-h-0 min-w-0 flex-col overflow-hidden rounded-portfolio border border-portfolio-ink bg-portfolio-bg";
 const linkCardClass =
-    "group justify-between px-6 py-[22px] transition-[transform,color,box-shadow] duration-500 ease-out will-change-transform hover:z-[2] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:text-portfolio-bg hover:shadow-[4px_4px_0_0_var(--color-portfolio-ink)] before:pointer-events-none before:absolute before:inset-0 before:bg-portfolio-ink before:opacity-0 before:[clip-path:circle(0%_at_var(--reveal-x)_var(--reveal-y))] before:[transition:opacity_250ms_ease-out,clip-path_0ms_250ms] hover:before:opacity-100 hover:before:[clip-path:circle(150%_at_var(--reveal-x)_var(--reveal-y))] hover:before:[transition:opacity_0ms,clip-path_800ms_ease-out] [&>*]:relative max-[560px]:p-5";
+    "group justify-between px-6 py-[22px] transition-colors duration-500 ease-out hover:text-portfolio-bg before:pointer-events-none before:absolute before:inset-0 before:bg-portfolio-ink before:opacity-0 before:[clip-path:circle(0%_at_var(--reveal-x)_var(--reveal-y))] before:[transition:opacity_250ms_ease-out,clip-path_0ms_250ms] hover:before:opacity-100 hover:before:[clip-path:circle(150%_at_var(--reveal-x)_var(--reveal-y))] hover:before:[transition:opacity_0ms,clip-path_800ms_ease-out] [&>*]:relative max-[560px]:p-5";
 const revealRight = "[--reveal-x:100%] [--reveal-y:0%]";
 const revealLeft = "[--reveal-x:0%] [--reveal-y:100%]";
 const projectCardCorners = [revealLeft, revealRight, revealLeft];
@@ -174,11 +174,11 @@ const rotationData = projects.slice(1).map((p) => ({
             projectCards.map((project, index) => (
                 <a class:list={[cardClass, linkCardClass, projectCardCorners[index], projectCardLayouts[index]]} data-reveal-side={projectCardSides[index]} data-rotating-card={index} href={getProjectHref(project)}>
                     <div data-rot-content class="flex flex-1 flex-col justify-between will-change-transform">
-                        <div class="top flex items-baseline justify-between gap-2 whitespace-nowrap text-xs opacity-60">
+                        <div class="top flex items-baseline justify-between gap-2 whitespace-nowrap text-xs opacity-60 transition-transform duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1">
                             <span class="truncate" data-rot-kind>{getProjectKind(project)}</span>
                             <span class="truncate tabular-nums" data-rot-year>{project.data.year}</span>
                         </div>
-                        <div>
+                        <div class="transition-transform duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1">
                             <h3 class="mt-2 text-[clamp(22px,1.8vw,30px)] font-semibold leading-none tracking-[-0.03em]" data-rot-name>
                                 {project.data.name}
                             </h3>
@@ -186,7 +186,7 @@ const rotationData = projects.slice(1).map((p) => ({
                                 {project.data.description}
                             </p>
                         </div>
-                        <div class="stack mt-3 text-xs tracking-[-0.005em] opacity-60" data-rot-stack>
+                        <div class="stack mt-3 text-xs tracking-[-0.005em] opacity-60 transition-transform duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1" data-rot-stack>
                             {getProjectStack(project)}
                         </div>
                     </div>
@@ -202,11 +202,11 @@ const rotationData = projects.slice(1).map((p) => ({
             data-reveal-side="right"
             href={`mailto:${email}`}
             aria-label={copy.contact}>
-            <div class="flex items-center gap-2 text-[11px] opacity-75">
+            <div class="flex items-center gap-2 text-[11px] opacity-75 transition-transform duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1">
                 {copy.contact} · {copy.contactStatus}
             </div>
             <div class="mt-2 flex items-baseline justify-between gap-2">
-                <span class="truncate text-[clamp(14px,1.3vw,18px)] font-semibold tracking-[-0.02em]">
+                <span class="truncate text-[clamp(14px,1.3vw,18px)] font-semibold tracking-[-0.02em] transition-transform duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1">
                     <!--email_off-->{email}<!--/email_off-->
                 </span>
                 <ArrowUpRight class="size-4 shrink-0 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
