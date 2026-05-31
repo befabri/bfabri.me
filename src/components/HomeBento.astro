@@ -36,11 +36,8 @@ const copy = {
 const cardClass =
     "relative flex min-h-0 min-w-0 flex-col overflow-hidden rounded-portfolio border border-portfolio-ink bg-portfolio-bg";
 const linkCardClass =
-    "group justify-between px-6 py-[22px] transition-colors duration-500 ease-out hover:text-portfolio-bg before:pointer-events-none before:absolute before:inset-0 before:bg-portfolio-ink before:opacity-0 before:[clip-path:circle(0%_at_var(--reveal-x)_var(--reveal-y))] before:[transition:opacity_250ms_ease-out,clip-path_0ms_250ms] hover:before:opacity-100 hover:before:[clip-path:circle(150%_at_var(--reveal-x)_var(--reveal-y))] hover:before:[transition:opacity_0ms,clip-path_800ms_ease-out] [&>*]:relative max-[560px]:p-5";
+    "group justify-between px-6 py-[22px] max-[560px]:p-5";
 const revealRight = "[--reveal-x:100%] [--reveal-y:0%]";
-const revealLeft = "[--reveal-x:0%] [--reveal-y:100%]";
-const projectCardCorners = [revealLeft, revealRight, revealLeft];
-const projectCardSides = ["left", "right", "left"] as const;
 const projectCardLayouts = [
     "",
     "",
@@ -172,7 +169,7 @@ const rotationData = projects.slice(1).map((p) => ({
         <div class="grid gap-2.5 min-[561px]:grid-cols-2 min-[901px]:flex-[0.35] min-[901px]:min-h-0 min-[901px]:grid-rows-[minmax(200px,2fr)_minmax(140px,1fr)]">
         {
             projectCards.map((project, index) => (
-                <a class:list={[cardClass, linkCardClass, projectCardCorners[index], projectCardLayouts[index]]} data-reveal-side={projectCardSides[index]} data-rotating-card={index} href={getProjectHref(project)}>
+                <a class:list={[cardClass, linkCardClass, projectCardLayouts[index]]} data-rotating-card={index} href={getProjectHref(project)}>
                     <div data-rot-content class="flex flex-1 flex-col justify-between will-change-transform">
                         <div class="top flex items-baseline justify-between gap-2 whitespace-nowrap text-xs opacity-60 transition-transform duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1">
                             <span class="truncate" data-rot-kind>{getProjectKind(project)}</span>
@@ -263,7 +260,6 @@ const rotationData = projects.slice(1).map((p) => ({
                 const rect = card.getBoundingClientRect();
                 const clone = card.cloneNode(true);
                 clone.removeAttribute("data-rotating-card");
-                clone.removeAttribute("data-reveal-side");
                 clone.style.position = "fixed";
                 clone.style.margin = "0";
                 clone.style.left = `${rect.left}px`;
