@@ -65,6 +65,7 @@ const copy = {
     details: isFr ? "Détails" : "Details",
     keyFeatures: isFr ? "Fonctionnalités clés" : "Key features",
     moreLinks: isFr ? "Autres liens" : "More links",
+    linkLabel: isFr ? "Lien" : "Link",
     language: isFr ? "EN" : "FR",
     toolbelt: isFr ? "Technologies" : "Toolbelt",
     nextProject: isFr ? "Projet suivant" : "Next project",
@@ -219,7 +220,7 @@ const sectionLabelClasses =
                     <div class="grid gap-2.5 min-[821px]:grid-cols-4 max-[820px]:grid-cols-2 max-[560px]:grid-cols-1">
                         {additionalLinkItems.map((link, index) => (
                             <a class="group flex flex-col border-t border-portfolio-ink pt-3.5" href={link.href} target="_blank" rel="noopener">
-                                <div class="text-xs text-portfolio-muted tabular-nums">Link {String(index + 1).padStart(2, "0")}</div>
+                                <div class="text-xs text-portfolio-muted tabular-nums">{copy.linkLabel} {String(index + 1).padStart(2, "0")}</div>
                                 <div class="mt-1 inline-flex items-center gap-1.5 text-lg font-medium tracking-[-0.02em] group-hover:text-portfolio-blue">
                                     <span class="truncate">{link.label}</span>
                                     <ArrowUpRight class="size-4 shrink-0 text-portfolio-muted transition-[color,transform] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-portfolio-blue" />
