@@ -7,13 +7,11 @@ year: 2026
 description: "Application self-hosted pour enregistrer, archiver et rejouer automatiquement les rediffusions de lives Twitch depuis votre homelab."
 tldr: "Enregistreur Twitch self-hosted qui capture, archive et rejoue les streams ratés depuis votre homelab."
 keyFeatures:
-  - "Auto-enregistrement des lives des chaînes suivies, filtré par règles : qualité, seuil de viewers, catégorie, tags."
-  - "Capture du contexte du stream : historique titre/catégorie pendant la diffusion, plus une bande de captures que le dashboard fait défiler au survol."
-  - "Navigation et lecture par catégorie, chaîne et date, avec visionnage dans le navigateur."
-  - "Indicateurs live poussés via EventSub deltas, sans polling."
-  - "Relais payant optionnel (Connect) : un Worker Cloudflare avec Durable Objects + D1 reçoit les webhooks Twitch EventSub et les pousse au service self-hosted via une WebSocket sortante — pas de port forwarding, pas d'endpoint public."
-  - "Interface multi-langue (FR + EN) avec i18next."
-  - "Runtime léger : binaire Go unique, Postgres ou SQLite au choix, stockage S3 optionnel."
+  - "Générateur maison pour l'API Twitch : parsing des références API + webhooks, puis génération du client Go typé, des modèles d'événements et de la validation."
+  - "Pipeline d'enregistrement HLS en Go : choix de variante, téléchargement parallèle des segments, détection des segments manquants, reprise après crash et remux MP4 via ffmpeg/ffprobe."
+  - "Enregistrement par règles sur les chaînes suivies : qualité, catégorie, tags, audience minimale, avec suivi des titres et catégories pendant le live."
+  - "Webhooks sortants signés pour automatiser les traitements après enregistrement."
+  - "Connect, relais payant, expose un point d'entrée public pour les webhooks Twitch sans exposer le serveur self-hosted sur Internet."
 image: {"src":"/src/assets/project/replayvod.jpg", "alt":"Replay Vod"}
 links: {
 website: "https://replayvod.com/",

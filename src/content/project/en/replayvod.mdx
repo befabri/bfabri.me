@@ -7,13 +7,11 @@ year: 2026
 description: "Self-hosted application to automatically record, archive, and replay Twitch live VODs from your homelab."
 tldr: "Self-hosted Twitch VOD recorder that captures, archives, and replays the streams you missed from your homelab."
 keyFeatures:
-  - "Auto-record live streams from followed channels, gated by per-schedule rules: quality, viewer threshold, category match, tag match."
-  - "Captures stream context: title and category history through the broadcast, plus a snapshot strip the dashboard cycles through on hover."
-  - "Browse and watch by category, channel, and date, with in-browser playback."
-  - "Live indicators pushed via EventSub deltas, no polling."
-  - "Optional paid relay (Connect): a Cloudflare Worker with Durable Objects + D1 receives Twitch EventSub webhooks and pushes them to the self-hosted service over an outbound WebSocket — no port forwarding, no public endpoint."
-  - "Multi-language interface (EN + FR) with i18next."
-  - "Lightweight runtime: single Go binary, choice of Postgres or SQLite, optional S3-compatible storage."
+  - "Custom Twitch API generator: parses API and webhook references, then emits the typed Go client, event models, and validation layer."
+  - "Go HLS recording pipeline: variant selection, parallel segment downloads, missing-segment detection, crash resume, and MP4 remuxing with ffmpeg/ffprobe."
+  - "Rule-based recording for followed channels: quality, category, tags, minimum audience, with title and category tracking during the broadcast."
+  - "Signed outbound webhooks for post-recording automation."
+  - "Connect, a paid relay, exposes a public entry point for Twitch webhooks without exposing the self-hosted server to the internet."
 image: {"src":"/src/assets/project/replayvod.jpg", "alt":"Replay Vod"}
 links: {
 website: "https://replayvod.com/",
