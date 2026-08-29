@@ -35,8 +35,9 @@ const copy = {
 
 const cardClass =
     "relative flex min-h-0 min-w-0 flex-col overflow-hidden rounded-portfolio border border-portfolio-ink bg-portfolio-bg";
-const linkCardClass =
-    "group justify-between px-6 py-[22px] max-[560px]:p-5";
+const cardPadLg = "px-9 py-8 max-[900px]:p-7 max-[560px]:p-5";
+const cardPadSm = "px-6 py-[22px] max-[560px]:p-5";
+const linkCardClass = `group justify-between ${cardPadSm}`;
 const revealRight = "[--reveal-x:100%] [--reveal-y:0%]";
 const projectCardLayouts = [
     "",
@@ -78,7 +79,8 @@ const rotationData = projects.slice(1).map((p) => ({
         <section
             class:list={[
                 cardClass,
-                "justify-between px-10 pb-8 pt-9 max-[900px]:min-h-[360px] max-[900px]:px-7 max-[900px]:pb-7 max-[900px]:pt-[30px] max-[560px]:p-5",
+                cardPadLg,
+                "justify-between max-[900px]:min-h-[360px]",
             ]}>
             <div class="text-[15px] leading-[1.35] tracking-[-0.01em] text-portfolio-muted">
                 <b class="font-medium text-portfolio-ink">{copy.roleLead}</b>
@@ -94,7 +96,7 @@ const rotationData = projects.slice(1).map((p) => ({
                     aria-label={isFr ? "Faire tourner les projets" : "Rotate projects"}>.</span>
             </h1>
             <div class="flex items-end justify-between gap-6 text-sm text-portfolio-muted max-[560px]:flex-col max-[560px]:items-start">
-                <span class="flex items-center gap-2 before:inline-block">
+                <span class="flex items-center gap-2">
                     {copy.locationCity} · {copy.workLabel}{" "}
                     <a class="border-b-[1.5px] border-portfolio-blue pb-px text-portfolio-ink hover:text-portfolio-blue" href="https://digitalmaster.be/" target="_blank" rel="noopener">Digital Master</a>
                 </span>
@@ -103,7 +105,7 @@ const rotationData = projects.slice(1).map((p) => ({
         </section>
 
         <section class:list={[cardClass]}>
-            <div class="flex flex-1 flex-col px-[26px] py-6 max-[560px]:p-5 min-[901px]:absolute min-[901px]:inset-0">
+            <div class:list={["flex flex-1 flex-col min-[901px]:absolute min-[901px]:inset-0", cardPadSm]}>
             <div class="text-[13px] tracking-[-0.01em] text-portfolio-muted">{copy.selected}</div>
             <ul class="mt-3 flex list-none flex-col min-[901px]:flex-1 min-[901px]:min-h-0 min-[901px]:overflow-y-auto min-[901px]:overflow-x-hidden min-[901px]:[scrollbar-width:thin] min-[901px]:[scrollbar-color:var(--color-portfolio-muted)_transparent]">
                     {
@@ -137,7 +139,7 @@ const rotationData = projects.slice(1).map((p) => ({
             featured && (
                 <section class:list={[cardClass, "p-0 min-[901px]:flex-[1.1]"]}>
                     <a
-                        class="group flex flex-1 flex-col justify-between bg-portfolio-blue px-9 py-[30px] text-white max-[900px]:min-h-[280px]"
+                        class:list={["group flex flex-1 flex-col justify-between bg-portfolio-blue text-white max-[900px]:min-h-[280px]", cardPadLg]}
                         href={getProjectHref(featured)}>
                         <div class="flex items-baseline justify-between text-[13px] tracking-[-0.01em] opacity-85">
                             <span>{copy.featured}</span>
@@ -195,7 +197,8 @@ const rotationData = projects.slice(1).map((p) => ({
 
         <a
             class:list={[
-                "group relative flex min-h-0 min-w-0 flex-col justify-between overflow-hidden rounded-portfolio border border-portfolio-ink bg-portfolio-ink px-6 py-[22px] text-portfolio-bg before:pointer-events-none before:absolute before:inset-0 before:bg-portfolio-blue before:opacity-0 before:[clip-path:circle(0%_at_var(--reveal-x)_var(--reveal-y))] before:[transition:opacity_250ms_ease-out,clip-path_0ms_250ms] hover:before:opacity-100 hover:before:[clip-path:circle(150%_at_var(--reveal-x)_var(--reveal-y))] hover:before:[transition:opacity_0ms,clip-path_800ms_ease-out] [&>*]:relative max-[900px]:min-h-[200px] max-[560px]:p-5",
+                "group relative flex min-h-0 min-w-0 flex-col justify-between overflow-hidden rounded-portfolio border border-portfolio-ink bg-portfolio-ink text-portfolio-bg before:pointer-events-none before:absolute before:inset-0 before:bg-portfolio-blue before:opacity-0 before:[clip-path:circle(0%_at_var(--reveal-x)_var(--reveal-y))] before:[transition:opacity_250ms_ease-out,clip-path_0ms_250ms] hover:before:opacity-100 hover:before:[clip-path:circle(150%_at_var(--reveal-x)_var(--reveal-y))] hover:before:[transition:opacity_0ms,clip-path_800ms_ease-out] [&>*]:relative max-[900px]:min-h-[200px]",
+                cardPadSm,
                 revealRight,
             ]}
             data-reveal-side="right"
