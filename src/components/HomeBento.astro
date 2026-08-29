@@ -110,14 +110,16 @@ const rotationData = projects.slice(1).map((p) => ({
                         projects.map((project) => (
                             <li class="last:border-b last:border-portfolio-ink">
                                 <a
-                                    class="group flex items-baseline justify-between gap-3.5 border-t border-portfolio-ink py-2.5 pr-2 text-[clamp(15px,1.15vw,19px)] font-medium tracking-[-0.02em] hover:text-portfolio-blue"
+                                    class="group flex items-baseline justify-between gap-3.5 border-t border-portfolio-ink py-2.5 pr-2 text-[clamp(15px,1.15vw,19px)] font-medium tracking-[-0.02em] transition-colors duration-300 hover:text-portfolio-blue focus-visible:text-portfolio-blue"
                                     href={getProjectHref(project)}>
-                                    <span>{project.data.name}</span>
-                                    <span class="inline-flex min-w-0 items-baseline">
-                                        <span class="text-xs font-normal text-portfolio-muted tabular-nums group-hover:text-portfolio-blue">
+                                    <span class="min-w-0 origin-left truncate will-change-transform transition-[scale] duration-200 ease-out group-hover:scale-[1.22] group-hover:duration-[420ms] group-hover:ease-[cubic-bezier(0.34,1.56,0.64,1)] group-focus-visible:scale-[1.22] motion-reduce:transition-none motion-reduce:group-hover:scale-100 motion-reduce:group-focus-visible:scale-100">
+                                        {project.data.name}
+                                    </span>
+                                    <span class="inline-flex shrink-0 items-baseline">
+                                        <span class="text-xs font-normal text-portfolio-muted tabular-nums transition-colors duration-300 group-hover:text-portfolio-blue group-focus-visible:text-portfolio-blue">
                                             {project.data.year}
                                         </span>
-                                        <span class="ml-2.5 inline-block text-portfolio-muted transition duration-300 ease-out group-hover:translate-x-2 group-hover:text-portfolio-blue">
+                                        <span class="ml-2.5 inline-block text-portfolio-muted transition-[translate,color] duration-200 ease-out group-hover:translate-x-2 group-hover:text-portfolio-blue group-hover:duration-[420ms] group-hover:ease-[cubic-bezier(0.34,1.56,0.64,1)] group-focus-visible:translate-x-2 group-focus-visible:text-portfolio-blue motion-reduce:transition-none">
                                             →
                                         </span>
                                     </span>
