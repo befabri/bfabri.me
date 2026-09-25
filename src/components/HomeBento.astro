@@ -39,6 +39,9 @@ const cardPadLg = "px-9 py-8 max-[900px]:p-7 max-[560px]:p-5";
 const cardPadSm = "px-6 py-[22px] max-[560px]:p-5";
 const linkCardClass = `group justify-between ${cardPadSm}`;
 const revealRight = "[--reveal-x:100%] [--reveal-y:0%]";
+const iStemClass = "inline-block [clip-path:inset(calc(50%-0.226em)_-0.2em_-0.2em_-0.2em)]";
+const iDotClass =
+    "absolute inset-x-0 top-0 bottom-[calc(50%+0.226em)] text-portfolio-blue before:absolute before:left-0 before:top-0 before:content-['i'] before:[clip-path:inset(0_-0.2em_calc(50%+0.226em)_-0.2em)]";
 const projectCardLayouts = [
     "",
     "",
@@ -64,7 +67,7 @@ const rotationData = projects.slice(1).map((p) => ({
     <header
         class="flex flex-none items-baseline justify-between gap-4 px-1 text-sm tracking-[-0.01em] max-[900px]:items-start">
         <a class="whitespace-nowrap font-semibold" href={translatePath("/")} aria-label="Benjamin Fabri">
-            Benjamin Fabri<span class="text-portfolio-blue">.</span>
+            Benjamin Fabr<span class="relative inline-block"><span class={iStemClass}>i</span><span class={iDotClass} aria-hidden="true"></span></span>
         </a>
         <nav class="flex items-baseline gap-[22px] whitespace-nowrap max-[900px]:gap-3.5 max-[900px]:text-[13px]" aria-label="Navigation principale">
             <a class="text-portfolio-muted transition-colors hover:text-portfolio-ink" href={languageHref}>{copy.language}</a>
@@ -88,12 +91,15 @@ const rotationData = projects.slice(1).map((p) => ({
             </div>
             <h1 class="mt-1.5 text-[clamp(56px,8.4vw,144px)] font-semibold leading-[0.86] tracking-[-0.055em] max-[560px]:text-[clamp(58px,22vw,96px)]">
                 Benjamin<br />
-                <i class="not-italic font-normal tracking-[-0.06em]">Fabri</i><span
-                    class="inline-block cursor-pointer select-none text-portfolio-blue transition-transform duration-150 ease-out hover:scale-110 active:scale-95"
+                <i class="not-italic font-normal tracking-[-0.06em]">Fabr<span class="relative inline-block"><span class={iStemClass}>i</span><span
+                    class:list={[
+                        iDotClass,
+                        "cursor-pointer select-none origin-[0.096em_calc(100%-0.104em)] transition-transform duration-150 ease-out after:absolute after:-inset-[0.08em] hover:scale-110 active:scale-95",
+                    ]}
                     data-rotate-trigger
                     role="button"
                     tabindex="0"
-                    aria-label={isFr ? "Faire tourner les projets" : "Rotate projects"}>.</span>
+                    aria-label={isFr ? "Faire tourner les projets" : "Rotate projects"}></span></span></i>
             </h1>
             <div class="flex items-end justify-between gap-6 text-sm text-portfolio-muted max-[560px]:flex-col max-[560px]:items-start">
                 <span class="flex items-center gap-2">
